@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
-import 'package:rive_animation/screens/entry_point.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
@@ -120,7 +119,7 @@ class _SignInFormState extends State<SignInForm> {
                 ),
               ),
               const Text(
-                "Password",
+                "Mật khẩu",
                 style: TextStyle(
                   color: Colors.black54,
                 ),
@@ -148,6 +147,7 @@ class _SignInFormState extends State<SignInForm> {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     singIn(context);
+                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF77D8E),
@@ -165,7 +165,7 @@ class _SignInFormState extends State<SignInForm> {
                     CupertinoIcons.arrow_right,
                     color: Color(0xFFFE0037),
                   ),
-                  label: const Text("Sign In"),
+                  label: const Text("Đăng nhập"),
                 ),
               ),
             ],

@@ -53,7 +53,7 @@ class _EntryPointState extends State<EntryPoint> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+        backgroundColor: Colors.white,
         elevation: 0,
         leading: GestureDetector(
           onTap: () {
@@ -92,7 +92,7 @@ class _EntryPointState extends State<EntryPoint> {
         actions: [
           Container(
             margin: const EdgeInsets.only(right: 12),
-            padding: EdgeInsets.all(8),
+            padding: const EdgeInsets.all(8),
             height: 42,
             width: 42,
             decoration: const BoxDecoration(
@@ -110,7 +110,7 @@ class _EntryPointState extends State<EntryPoint> {
           ),
         ],
       ),
-      body: HomePage(),
+      body: const HomePage(),
       bottomNavigationBar: SafeArea(
         child: Container(
           padding:

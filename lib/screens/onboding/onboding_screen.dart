@@ -68,11 +68,11 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                   children: [
                     const Spacer(),
                     SizedBox(
-                      width: 260,
+                      width: 280,
                       child: Column(
                         children: const [
                           Text(
-                            "Learn design & code",
+                            "Ezi2learn is here for you!",
                             style: TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.w700,
@@ -82,7 +82,7 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                           ),
                           SizedBox(height: 16),
                           Text(
-                            "Don’t skip design. Learn design and code, by building real apps with Flutter and Swift. Complete courses about the best tools.",
+                            "Nền tảng học tiếng Anh thông qua các trò chơi thú vị và hệ thống ngữ pháp dễ tiếp cận cho trẻ nhỏ.",
                           ),
                         ],
                       ),
@@ -114,7 +114,7 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 24),
                       child: Text(
-                          "Purchase includes access to 30+ courses, 240+ premium tutorials, 120+ hours of videos, source files and certificates."),
+                          "Gồm 10+ chủ đề từ vựng và ngữ pháp thú vị, giúp các bạn nhỏ tiếp cận với tiếng Anh theo gần gũi và tự nhiên nhất."),
                     )
                   ],
                 ),

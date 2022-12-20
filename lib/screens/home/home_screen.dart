@@ -7,71 +7,137 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Text(
-            "Courses",
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium!
-                .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
-          ),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            height: 300,
-            width: 260,
-            decoration: BoxDecoration(
-              color: Color(0xFF7553F6),
-              borderRadius: BorderRadius.all(Radius.circular(30)),
+      body: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        child: Column(
+          children: <Widget>[
+            Container(
+              decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(20))),
+              width: MediaQuery.of(context).size.width,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(12, 0, 0, 20),
+                child: Text(
+                  "Courses",
+                  style: Theme.of(context).textTheme.headlineMedium!.copyWith(
+                      color: Colors.black, fontWeight: FontWeight.bold),
+                ),
+              ),
             ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 6, right: 8),
-                    child: Column(
-                      children: [
-                        Text(
-                          "Animations in SwiftUI",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleLarge!
-                              .copyWith(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 12, bottom: 8),
-                          child: Text(
-                            "Build and animate an iOS app from scratch",
-                            style: TextStyle(
-                              color: Colors.white38,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "61 SECTIONS - 11 HOURS",
-                          style: TextStyle(
-                            color: Colors.white38,
-                          ),
-                        ),
-                        Spacer(),
-                        // CircleAvatar(
-                        //   backgroundImage: DecorationImage(),
-                        // )
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  const Text('Thử thách hôm nay',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold)),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    height: 200,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Courses(
+                            'assets/images/voca.jpg', 'Vocabulary', context),
+                        Courses(
+                            'assets/images/speaking.png', 'Speaking', context),
+                        Courses('assets/images/dictionary.jpg', 'Listening',
+                            context),
+                        Courses(
+                            'assets/images/dictionary.jpg', 'Gaming', context),
                       ],
                     ),
-                  ),
-                ),
-                SvgPicture.asset(
-                  "assets/icons/ios.svg",
-                ),
-              ],
+                  )
+                ],
+              ),
             ),
-          )
-        ],
+            const SizedBox(
+              height: 20,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Container(
+                height: 200,
+                margin: const EdgeInsets.only(right: 15),
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(30)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/grammar.jpg'),
+                      fit: BoxFit.cover),
+                ),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(30)),
+                    gradient: LinearGradient(
+                        begin: Alignment.bottomRight,
+                        stops: const [
+                          0.1,
+                          0.9
+                        ],
+                        colors: [
+                          Colors.black.withOpacity(0.8),
+                          Colors.black.withOpacity(0.1)
+                        ]),
+                  ),
+                  child: const Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Text(
+                        'Grammar',
+                        style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white),
+                      )),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+}
+
+Widget Courses(image, topic, context) {
+  return AspectRatio(
+    aspectRatio: 2.95 / 3,
+    child: Container(
+      margin: const EdgeInsets.only(right: 15),
+      decoration: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        image: DecorationImage(image: AssetImage(image), fit: BoxFit.cover),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: const BorderRadius.all(Radius.circular(30)),
+          gradient: LinearGradient(begin: Alignment.bottomRight, stops: const [
+            0.1,
+            0.9
+          ], colors: [
+            Colors.black.withOpacity(0.8),
+            Colors.black.withOpacity(0.1)
+          ]),
+        ),
+        child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Text(
+              topic,
+              style: const TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.white),
+            )),
+      ),
+    ),
+  );
 }
