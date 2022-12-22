@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/entry_point.dart';
 import 'package:rive_animation/screens/onboding/onboding_screen.dart';
-import 'package:rive_animation/screens/vocabulary/voca_topic.dart';
+import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
+import 'package:rive_animation/screens/vocabulary/widget/topic_card.dart';
 
 void main() {
   runApp(const MyEnglishApp());
@@ -30,6 +31,11 @@ class MyEnglishApp extends StatelessWidget {
         ),
       ),
       home: const VocaMainScreen(),
+      // const TopicCard(
+      //     title: 'Animals',
+      //     image: 'assets/Backgrounds/Spline.png',
+      //     progress: true,
+      //     point: 1000),
     );
   }
 }
