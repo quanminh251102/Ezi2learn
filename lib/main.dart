@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/entry_point.dart';
 import 'package:rive_animation/screens/onboding/onboding_screen.dart';
+import 'package:rive_animation/screens/vocabulary/voca_quiz.dart';
 import 'package:rive_animation/screens/vocabulary/voca_topic.dart';
 
 void main() {
@@ -29,7 +30,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: const VocaMainScreen(),
+      home: const VocaQuiz(),
     );
   }
 }
