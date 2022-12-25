@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "939199983088",
+    "project_id": "ezi2learn-badad",
+    "storage_bucket": "ezi2learn-badad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:939199983088:android:e783b277bf2fd1cd808135",
+        "android_client_info": {
+          "package_name": "com.example.rive_animation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "939199983088-il1oheklmjit7tej725dl8jgi104t31g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZjbqi5_NL6Xr3QqKPdtAyVmg5NHR5oa0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "939199983088-il1oheklmjit7tej725dl8jgi104t31g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
