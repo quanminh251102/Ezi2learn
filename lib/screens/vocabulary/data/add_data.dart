@@ -1,0 +1,45 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
+import 'package:rive_animation/screens/vocabulary/data/topic_data.dart';
+import 'package:rive_animation/screens/vocabulary/data/voca_data.dart';
+import 'package:rive_animation/screens/vocabulary/model/topic.dart';
+import 'package:rive_animation/screens/vocabulary/model/vocabulary.dart';
+import 'package:rive_animation/storage/api_services.dart';
+
+class AddData extends StatefulWidget {
+  const AddData({super.key});
+
+  @override
+  State<AddData> createState() => _AddDataState();
+}
+
+class _AddDataState extends State<AddData> {
+  @override
+  Widget build(BuildContext context) {
+    List<Topic> listTopic = allTopic;
+    List<Vocabulary> listVoca = allVoca;
+    return Scaffold(
+      body: SafeArea(
+          child: Column(
+        children: [
+          Center(
+            child: GestureDetector(
+              onTap: () {
+                for (int i = 0; i < listTopic.length; i++) {
+                  ApiServices.addTopic(tempTopic: listTopic[i]);
+                  print('click');
+                }
+              },
+              child: Container(
+                  color: Colors.blue,
+                  height: 50,
+                  width: 200,
+                  child: const Center(child: Text('Load data'))),
+            ),
+          )
+        ],
+      )),
+    );
+  }
+}
