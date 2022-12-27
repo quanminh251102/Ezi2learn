@@ -5,7 +5,7 @@ import 'package:rive_animation/screens/vocabulary/model/vocabulary.dart';
 class ApiServices {
   static Future addTopic({required Topic tempTopic}) async {
     final db = FirebaseFirestore.instance;
-    final docTopic = db.collection('topics').doc();
+    final docTopic = db.collection('topics').doc(tempTopic.title);
     final topic = Topic(
         id: docTopic.id,
         title: tempTopic.title,
@@ -20,17 +20,15 @@ class ApiServices {
   }
 
   static Future addvocabinTopic(
-      {required String? id, required List<Vocabulary> listVoca}) async {
-    for (int i = 0; i < listVoca.length; i++) {
+      {required String? id, required Vocabulary tempVoca}) async {
       final db = FirebaseFirestore.instance;
       final docVoca = db.collection('topics');
       final voca = Vocabulary(
-          text: listVoca[i].text,
-          image: listVoca[i].image,
-          spelling: listVoca[i].spelling,
-          meaning: listVoca[i].meaning);
+          text: tempVoca.text,
+          image: tempVoca.image,
+          spelling: tempVoca.spelling,
+          meaning: tempVoca.meaning);
       final json = voca.toJson();
       await docVoca.doc(id).collection('vocabularies').doc().set(json);
-    }
   }
 }
