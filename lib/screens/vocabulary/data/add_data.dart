@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:rive_animation/screens/vocabulary/data/topic_data.dart';
 import 'package:rive_animation/screens/vocabulary/data/voca_data.dart';
 import 'package:rive_animation/screens/vocabulary/model/topic.dart';
@@ -28,7 +26,13 @@ class _AddDataState extends State<AddData> {
               onTap: () {
                 for (int i = 0; i < listTopic.length; i++) {
                   ApiServices.addTopic(tempTopic: listTopic[i]);
-                  print('click');
+                }  
+                for (int i = 0; i < listVoca.length; i++) {
+                  double newIndex = i /10 ;
+                  ApiServices.addvocabinTopic(
+                    id: listTopic[newIndex.toInt()].title, 
+                    tempVoca: listVoca[i]
+                  );
                 }
               },
               child: Container(

@@ -1,5 +1,4 @@
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:firebase_core/firebase_core.dart' as firebase_core;
 
 class Storage {
   final firebase_storage.FirebaseStorage storage =
@@ -7,9 +6,9 @@ class Storage {
   Future<firebase_storage.ListResult> listFiles() async {
     firebase_storage.ListResult results =
         await storage.ref('VocabularyTopic').listAll();
-    results.items.forEach((firebase_storage.Reference ref) {
+    for (var ref in results.items) {
       print('Found file: $ref');
-    });
+    }
     return results;
   }
 }

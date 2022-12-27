@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:rive_animation/screens/vocabulary/data/topic_data.dart';
@@ -15,13 +16,21 @@ class VocaMainScreen extends StatefulWidget {
 class _VocaMainScreenState extends State<VocaMainScreen>
     with SingleTickerProviderStateMixin {
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final Storage storage = Storage();
-    List<Topic> vocaTopic = allTopic;
+    // final Storage storage = Storage();
+    final db = FirebaseFirestore.instance;
+    Future<QuerySnapshot> vocaTopic = db.collection('topics').get();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.white,
         elevation: 0,
         title: const Text(
           'Vocabulary',
@@ -80,37 +89,46 @@ class _VocaMainScreenState extends State<VocaMainScreen>
                 const SizedBox(
                   height: 20,
                 ),
-                FutureBuilder(
-                  future: storage.listFiles(),
-                  builder: ((context, snapshot) {
-                    if(snapshot.connectionState == ConnectionState.done && snapshot.hasData){
-                      return Container();
-                    }
-                    if(snapshot.connectionState == ConnectionState.waiting || !snapshot.hasData){
+                FutureBuilder<QuerySnapshot>(
+                    future: vocaTopic,
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        final List<DocumentSnapshot> documents =
+                            snapshot.data!.docs;
+                        return Expanded(
+                            child: SizedBox(
+                          child: SingleChildScrollView(
+                            child: GridView.builder(
+                              physics: const ScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              itemCount: documents.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisSpacing: 20,
+                                childAspectRatio: 1.1,
+                                mainAxisSpacing: 20,
+                                crossAxisCount: 2,
+                              ),
+                              itemBuilder: (context, index) {
+                                List<Topic> topics = documents
+                                    .map((doc) => Topic(
+                                        title: '${doc['title']}',
+                                        image: '${doc['image']}',
+                                        progress:
+                                            int.parse('${doc['progress']}'),
+                                        point: int.parse('${doc['point']}')))
+                                    .toList();
+                                return TopicCard(vocaTopic: topics[index]);
+                              },
+                            ),
+                          ),
+                        ));
+                      } else if (snapshot.hasError) {
+                        return Text('$snapshot.error');
+                      }
                       return const Center(child: CircularProgressIndicator());
-                    }
-                    return Container();
-                  })),
-                Expanded(
-                  child: SizedBox(
-                    child: SingleChildScrollView(
-                      child: GridView.builder(
-                          physics: const ScrollPhysics(),
-                          scrollDirection: Axis.vertical,
-                          shrinkWrap: true,
-                          itemCount: vocaTopic.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisSpacing: 20,
-                                  childAspectRatio: 1.1,
-                                  mainAxisSpacing: 20,
-                                  crossAxisCount: 2),
-                          itemBuilder: ((context, index) {
-                            return TopicCard(vocaTopic: vocaTopic[index]);
-                          })),
-                    ),
-                  ),
-                )
+                    }),
               ],
             ),
           ),

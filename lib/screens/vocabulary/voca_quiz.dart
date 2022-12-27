@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:group_button/group_button.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
@@ -41,16 +38,16 @@ class _VocaQuizState extends State<VocaQuiz> {
           ),
           Center(
               child: FAProgressBar(
-            backgroundColor: Color(0xffC4C4C4),
-            changeProgressColor: Color(0xffFFDA2C),
-            progressColor: Color(0xffFFDA2C),
+            backgroundColor: const Color(0xffC4C4C4),
+            changeProgressColor: const Color(0xffFFDA2C),
+            progressColor: const Color(0xffFFDA2C),
             currentValue: 80,
             displayText: '%',
             size: deviceHeight * 0.02,
           )),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
+            children: const <Widget>[
               Text(
                 'Level 3',
                 style: TextStyle(
@@ -79,11 +76,11 @@ class _VocaQuizState extends State<VocaQuiz> {
       left: -10,
       height: backButtonHeight,
       child: CircleAvatar(
-        backgroundColor: Color(0xffFFAD85),
+        backgroundColor: const Color(0xffFFAD85),
         radius: backButtonHeight,
         child: IconButton(
-          padding: EdgeInsets.all(0),
-          icon: Icon(Icons.arrow_back),
+          padding: const EdgeInsets.all(0),
+          icon: const Icon(Icons.arrow_back),
           color: Colors.black,
           onPressed: () {
             print("Click back button");
@@ -114,14 +111,14 @@ class _VocaQuizState extends State<VocaQuiz> {
       //height: 250,
       child: Column(
         children: <Widget>[
-          Center(
+          const Center(
             child: Text('here'),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               IconButton(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 autofocus: true,
                 icon: Image.asset(
                   'assets/voca_quiz/snail.png',
@@ -135,7 +132,7 @@ class _VocaQuizState extends State<VocaQuiz> {
                 },
               ),
               IconButton(
-                padding: EdgeInsets.all(0),
+                padding: const EdgeInsets.all(0),
                 icon: Image.asset(
                   'assets/voca_quiz/listen_button.png',
                   width: 200,
@@ -200,11 +197,11 @@ class _VocaQuizState extends State<VocaQuiz> {
           isRadio: true,
           onSelected: (i, index, isSelected) =>
               print('$index button is selected'),
-          buttons: ["Cat", "Chickend", "Horse", "Fox"],
+          buttons: const ["Cat", "Chickend", "Horse", "Fox"],
         ));
 
     return AnnotatedRegion<SystemUiOverlayStyle>(
-      value: SystemUiOverlayStyle(
+      value: const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
         systemNavigationBarColor: Colors.black, // navigation bar color
         statusBarIconBrightness: Brightness.dark, // status bar icons' color

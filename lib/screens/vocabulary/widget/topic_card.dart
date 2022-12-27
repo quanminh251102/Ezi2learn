@@ -28,7 +28,7 @@ class _TopicCardState extends State<TopicCard> {
           SizedBox(
               width: 50,
               height: 50,
-              child: Image.asset(widget.vocaTopic.image)),
+              child: Image.network(widget.vocaTopic.image)),
           Text(
             widget.vocaTopic.title,
             style: const TextStyle(
