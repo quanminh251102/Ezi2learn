@@ -11,7 +11,7 @@ class Vocabulary {
       required this.spelling,
       required this.meaning});
   Map<String, dynamic> toJson() => {
-        'id': id,
+        'id': '',
         'text': text,
         'image': image,
         'spelling': spelling,

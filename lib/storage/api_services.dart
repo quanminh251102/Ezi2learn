@@ -21,14 +21,14 @@ class ApiServices {
 
   static Future addvocabinTopic(
       {required String? id, required Vocabulary tempVoca}) async {
-      final db = FirebaseFirestore.instance;
-      final docVoca = db.collection('topics');
-      final voca = Vocabulary(
-          text: tempVoca.text,
-          image: tempVoca.image,
-          spelling: tempVoca.spelling,
-          meaning: tempVoca.meaning);
-      final json = voca.toJson();
-      await docVoca.doc(id).collection('vocabularies').doc().set(json);
+    final db = FirebaseFirestore.instance;
+    final docVoca = db.collection('topics');
+    final voca = Vocabulary(
+        text: tempVoca.text,
+        image: tempVoca.image,
+        spelling: tempVoca.spelling,
+        meaning: tempVoca.meaning);
+    final json = voca.toJson();
+    await docVoca.doc(id).collection('vocabularies').doc(tempVoca.text).set(json);
   }
 }
