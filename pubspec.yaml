@@ -43,6 +43,13 @@ dependencies:
   firebase_core: ^2.4.0
   cloud_firestore: ^4.3.0
   firebase_storage: ^11.0.9
+  carousel_slider: ^4.2.1
+  flutter_custom_cards: ^0.2.1
+  highlight_text: ^1.6.0
+  speech_to_text: ^6.1.1
+  avatar_glow: ^2.0.2
+  flutter_tts: ^3.6.3
+  audioplayers: ^1.2.0
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +80,7 @@ flutter:
     - assets/RiveAssets/
     - assets/images/
     - assets/voca_quiz/
+    - assets/audio/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
