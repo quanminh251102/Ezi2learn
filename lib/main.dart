@@ -2,6 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/home/home_screen.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
+import 'package:rive_animation/screens/pronunciation/screen/record_speak.dart';
+import 'package:rive_animation/screens/pronunciation/screen/record_speech_to_text.dart';
 import 'package:rive_animation/screens/vocabulary/data/add_data.dart';
 import 'package:rive_animation/screens/vocabulary/data/voca_data.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_main.dart';
@@ -37,9 +39,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      //home: FlashCard(vocabulary: temp,),
-      //home: HomePage(),
-      home: PronunciationLesson(),
+      home: HomePage(),
     );
   }
 }

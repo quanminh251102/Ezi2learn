@@ -13,62 +13,62 @@ class SpeakLesson {
 }
 
 var data = [
-  SpeakLesson(
-    "Pizza for dinner",
-    "/i:/ and /i/",
-    [
-      "see",
-      "agree",
-      "eat",
-      "seat",
-      "team",
-      "if",
-      "listen",
-      "miss",
-      "dinner",
-      "swim"
-    ],
-    [
-      "nhìn",
-      "đồng ý",
-      "ăn",
-      "ghế ngồi",
-      "đội",
-      "nếu",
-      "nghe",
-      "bỏ lở",
-      "buổi ăn chiều",
-      "bơi"
-    ],
-  ),
-  SpeakLesson(
-    "Pizza for dinner",
-    "/i:/ and /i/",
-    [
-      "see",
-      "agree",
-      "eat",
-      "seat",
-      "team",
-      "if",
-      "listen",
-      "miss",
-      "dinner",
-      "swim"
-    ],
-    [
-      "nhìn",
-      "đồng ý",
-      "ăn",
-      "ghế ngồi",
-      "đội",
-      "nếu",
-      "nghe",
-      "bỏ lở",
-      "buổi ăn chiều",
-      "bơi"
-    ],
-  ),
+  // SpeakLesson(
+  //   "Pizza for dinner",
+  //   "/i:/ and /i/",
+  //   [
+  //     "see",
+  //     "agree",
+  //     "eat",
+  //     "seat",
+  //     "team",
+  //     "if",
+  //     "listen",
+  //     "miss",
+  //     "dinner",
+  //     "swim"
+  //   ],
+  //   [
+  //     "nhìn",
+  //     "đồng ý",
+  //     "ăn",
+  //     "ghế ngồi",
+  //     "đội",
+  //     "nếu",
+  //     "nghe",
+  //     "bỏ lở",
+  //     "buổi ăn chiều",
+  //     "bơi"
+  //   ],
+  // ),
+  // SpeakLesson(
+  //   "Pizza for dinner",
+  //   "/i:/ and /i/",
+  //   [
+  //     "see",
+  //     "agree",
+  //     "eat",
+  //     "seat",
+  //     "team",
+  //     "if",
+  //     "listen",
+  //     "miss",
+  //     "dinner",
+  //     "swim"
+  //   ],
+  //   [
+  //     "nhìn",
+  //     "đồng ý",
+  //     "ăn",
+  //     "ghế ngồi",
+  //     "đội",
+  //     "nếu",
+  //     "nghe",
+  //     "bỏ lở",
+  //     "buổi ăn chiều",
+  //     "bơi"
+  //   ],
+  // ),
   SpeakLesson(
     "test",
     "test",

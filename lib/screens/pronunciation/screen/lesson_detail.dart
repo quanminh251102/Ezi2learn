@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:rive_animation/screens/pronunciation/screen/finish_lesson.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -13,6 +15,7 @@ import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:audioplayers/audioplayers.dart';
 import '../data/pronounce_data.dart';
+import 'dart:io';
 
 class LessonDetail extends StatefulWidget {
   final SpeakLesson speakLesson;
@@ -43,6 +46,9 @@ class _LessonDetailState extends State<LessonDetail> {
     } else {
       setState(() {
         isCorrect = false;
+        if (_current == 1) {
+          _controller.previousPage();
+        }
         _current = 0;
         _currentWord++;
         _text = 'Nhấn nút bên dưới và bắt đầu nói';
@@ -108,6 +114,8 @@ class _LessonDetailState extends State<LessonDetail> {
         onError: (val) => print('onError: $val'),
       );
       if (available) {
+        //await recorder.openRecorder();
+        //await record();
         setState(() {
           _isListening = true;
           state = "Mình đang nghe...";
@@ -139,16 +147,72 @@ class _LessonDetailState extends State<LessonDetail> {
         _isListening = false;
         if (state == "Mình đang nghe...") state = "Đến lượt bạn";
       });
+      //await stop();
+      //recorder.closeRecorder();
       _speech!.stop();
     }
   }
   // End : Speech To Text
+
+  // Begin : Record
+  final recorder = FlutterSoundRecorder();
+  String filePath = '';
+
+  bool isRecordingReady = false;
+
+  bool isRecord = false;
+
+  Future record() async {
+    if (!isRecordingReady) return;
+
+    await recorder.startRecorder(toFile: 'audioRecord');
+  }
+
+  Future stop() async {
+    if (!isRecordingReady) return;
+
+    final path = await recorder.stopRecorder();
+    final audioFile = File(path!);
+    filePath = audioFile.path;
+
+    print('Record audio: $path');
+    print('Record audio: $audioFile');
+    print('Record audio: ${audioFile.absolute}');
+    print('Record audio: ${audioFile.path}');
+  }
+
+  Future initRecoder() async {
+    /*
+    final status = await Permission.microphone.request();
+
+    if (status != PermissionStatus.granted) {
+      throw 'Microphone permisstion not granted';
+    }
+    */
+
+    //await recorder.openRecorder();
+
+    isRecordingReady = true;
+
+    // recorder.setSubscriptionDuration(const Duration(
+    //   milliseconds: 500,
+    // ));
+  }
+  // End : Record
 
   @override
   void initState() {
     super.initState();
     _speech = stt.SpeechToText();
     reset();
+    initRecoder();
+  }
+
+  @override
+  void dispose() {
+    recorder.closeRecorder();
+    // TODO: implement dispose
+    super.dispose();
   }
 
   // Begin : Text To Speech
@@ -413,9 +477,28 @@ class _LessonDetailState extends State<LessonDetail> {
                         Visibility(
                           visible: !isSpeaking,
                           child: CustomCard(
+                            elevation: 0.0,
                             borderRadius: 130,
-                            child: const Icon(Icons.hearing_rounded),
-                            onTap: () {},
+                            child: const Icon(
+                              Icons.hearing_rounded,
+                              color: Colors.white,
+                            ),
+                            onTap: () {
+                              /*
+                              Directory dir = new Directory(filePath);
+                              List<FileSystemEntity> files = dir.listSync();
+
+                              for (FileSystemEntity file in files) {
+                                print(file.absolute);
+                                FileStat f = file.statSync();
+
+                                print(f.toString());
+                              }
+                              */
+                              final audioPlayer = AudioPlayer();
+                              print('file : $filePath');
+                              audioPlayer.play(DeviceFileSource(filePath));
+                            },
                           ),
                         ),
                         AvatarGlow(
@@ -429,14 +512,24 @@ class _LessonDetailState extends State<LessonDetail> {
                           child: FloatingActionButton(
                             backgroundColor:
                                 (isSpeaking) ? Colors.grey : Color(0xffFFDA2C),
-                            onPressed: _listen,
+                            onPressed: (() {
+                              // if (isRecord == false) {
+                              //   record();
+                              //   isRecord = true;
+                              // } else {
+                              //   stop();
+                              //   isRecord = false;
+                              // }
+                              _listen();
+                            }),
                             child: Icon(
                               _isListening ? Icons.mic : Icons.mic_none,
                             ),
                           ),
                         ),
                         Visibility(
-                          visible: !isSpeaking,
+                          //visible: !isSpeaking,
+                          visible: false,
                           child: CustomCard(
                             borderRadius: 130,
                             child: const Icon(Icons.bookmark),
@@ -448,6 +541,20 @@ class _LessonDetailState extends State<LessonDetail> {
                         ),
                       ],
                     )),
+                Positioned(
+                  top: 542,
+                  right: 20,
+                  child: Visibility(
+                    visible: !isSpeaking,
+                    child: CustomCard(
+                      borderRadius: 130,
+                      child: const Icon(Icons.bookmark),
+                      onTap: () {
+                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                      },
+                    ),
+                  ),
+                )
               ],
             )));
   }
