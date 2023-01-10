@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -48,8 +49,18 @@ class HomePage extends StatelessWidget {
                       children: <Widget>[
                         Courses(
                             'assets/images/voca.jpg', 'Vocabulary', context),
-                        Courses(
-                            'assets/images/speaking.png', 'Speaking', context),
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => PronunciationLesson(),
+                              ),
+                            );
+                          },
+                          child: Courses('assets/images/speaking.png',
+                              'Speaking', context),
+                        ),
                         Courses('assets/images/dictionary.jpg', 'Listening',
                             context),
                         Courses(
