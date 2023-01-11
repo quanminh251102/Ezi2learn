@@ -14,11 +14,12 @@ import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../data/pronounce_data.dart';
+import '../data/pronounciation_data.dart';
 import 'dart:io';
+import '../models/pronounciation_model.dart';
 
 class LessonDetail extends StatefulWidget {
-  final SpeakLesson speakLesson;
+  final PronuciationLessonModel speakLesson;
 
   LessonDetail({Key? key, required this.speakLesson}) : super(key: key);
   //LessonDetail({super.key});

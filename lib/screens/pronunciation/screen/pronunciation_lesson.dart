@@ -2,8 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:rive_animation/screens/pronunciation/screen/lesson_detail.dart';
-import '../data/pronounce_data.dart';
+import 'package:rive_animation/screens/pronunciation/service/pronunciation_service.dart';
+import '../data/pronounciation_data.dart';
+import '../models/pronounciation_model.dart';
+import 'package:shimmer/shimmer.dart';
 
 class PronunciationLesson extends StatefulWidget {
   const PronunciationLesson({super.key});
@@ -13,9 +17,29 @@ class PronunciationLesson extends StatefulWidget {
 }
 
 class _PronunciationLessonState extends State<PronunciationLesson> {
+  bool isLoading = false;
+  List<PronuciationLessonModel> list = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    setState(() {
+      isLoading = true;
+    });
+
+    PronounciationService.Read(null).then((value) {
+      setState(() {
+        list = value;
+        isLoading = false;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    Widget temp(int index, SpeakLesson item) {
+    Widget temp(int index, PronuciationLessonModel item) {
       return Container(
         margin: EdgeInsets.all(10),
         decoration: BoxDecoration(
@@ -53,6 +77,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
     }
 
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.white,
@@ -114,13 +139,35 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
         ),
       ),
       body: SafeArea(
-        child: Container(
-          color: Colors.white,
-          padding: EdgeInsets.all(10),
-          child: ListView(children: [
-            for (int i = 0; i < data.length; i++) temp(i, data[i])
-          ]),
-        ),
+        child: (isLoading == false)
+            ? Container(
+                color: Colors.white,
+                padding: EdgeInsets.all(10),
+                child: ListView(children: [
+                  for (int i = 0; i < list.length; i++) temp(i, dataPro[i])
+                ]),
+              )
+            : SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(20),
+                  child: Column(
+                    children: [
+                      for (int i = 0; i < 10; i++)
+                        SizedBox(
+                          height: 71.0,
+                          width: MediaQuery.of(context).size.width,
+                          child: Shimmer.fromColors(
+                              baseColor: Color.fromARGB(255, 228, 226, 226),
+                              highlightColor: Colors.white,
+                              child: CustomCard(
+                                borderRadius: 20,
+                                color: Colors.white,
+                              )),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
       ),
     );
   }

@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/home/home_screen.dart';
+import 'package:rive_animation/screens/pronunciation/screen/pronounciation_execute_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 import 'package:rive_animation/screens/pronunciation/screen/record_speak.dart';
 import 'package:rive_animation/screens/pronunciation/screen/record_speech_to_text.dart';
@@ -10,6 +11,7 @@ import 'package:rive_animation/screens/vocabulary/screen/voca_main.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 import 'package:rive_animation/screens/vocabulary/voca_quiz.dart';
 import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
+import './screens/entry_point.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,7 +41,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: HomePage(),
+      home: PronunciationLesson(),
     );
   }
 }
