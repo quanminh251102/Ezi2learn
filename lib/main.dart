@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/auth/screen/login_page.dart';
+import 'package:rive_animation/screens/auth/screen/splash_page.dart';
 import 'package:rive_animation/screens/home/home_screen.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronounciation_execute_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
@@ -14,6 +15,7 @@ import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 import 'package:rive_animation/screens/vocabulary/voca_quiz.dart';
 import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
 import './screens/entry_point.dart';
+import './screens/home/home_page.dart' as NewHomePage;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +48,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: MainPage(),
+      home: SplashScreen(),
     );
   }
 }
@@ -75,7 +77,7 @@ class MainPage extends StatelessWidget {
             } else if (snapshot.hasError) {
               return Center(child: Text('Something went wrong'));
             } else if (snapshot.hasData) {
-              return EntryPoint();
+              return NewHomePage.HomePage();
             } else {
               return LoginPage();
             }
