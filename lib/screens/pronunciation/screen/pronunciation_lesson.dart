@@ -88,7 +88,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
               color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         leading: GestureDetector(
-          //onTap: () => Navigator.pop(context),
+          onTap: () => Navigator.pop(context),
           child: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,

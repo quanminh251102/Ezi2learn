@@ -427,6 +427,11 @@ class _LessonDetailState extends State<LessonDetail> {
                         Text(
                           widget.speakLesson.words![_currentWord],
                           style: TextStyle(
+                            color: (state == "Bạn đã phát âm chính xác")
+                                ? Colors.lightGreen
+                                : (state == "Bạn đã phát âm sai")
+                                    ? Colors.red
+                                    : Colors.grey,
                             fontSize: 30,
                             fontWeight: FontWeight.w700,
                           ),
