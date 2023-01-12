@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rive_animation/screens/auth/service/auth_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 
 class HomePage extends StatelessWidget {
@@ -111,6 +112,11 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  AuthService.LogOut();
+                },
+                child: Text('Đăng xuất')),
           ],
         ),
       ),
