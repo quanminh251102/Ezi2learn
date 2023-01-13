@@ -1,12 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/vocabulary/data/add_data.dart';
-import 'package:rive_animation/screens/vocabulary/data/voca_data.dart';
-import 'package:rive_animation/screens/vocabulary/screen/voca_main.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
-import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
 
-Future<void> main () async{
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyEnglishApp());
@@ -34,7 +31,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: FlashCard(vocabulary: temp,),
+      home: const AddData(),
     );
   }
 }

@@ -43,6 +43,12 @@ dependencies:
   firebase_core: ^2.4.0
   cloud_firestore: ^4.3.0
   firebase_storage: ^11.0.9
+  card_swiper: ^2.0.4
+  awesome_snackbar_content: ^0.1.0
+  modal_bottom_sheet: ^2.1.2
+  flutter_tts: ^3.6.3
+  flutter_inset_box_shadow: ^1.0.8
+  giff_dialog: ^1.0.1
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +79,7 @@ flutter:
     - assets/RiveAssets/
     - assets/images/
     - assets/voca_quiz/
+    - assets/gif/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

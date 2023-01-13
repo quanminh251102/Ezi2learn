@@ -1,10 +1,11 @@
+import 'package:card_swiper/card_swiper.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:flutter_tts/flutter_tts.dart';
+import 'package:giff_dialog/giff_dialog.dart';
 import 'package:rive_animation/screens/vocabulary/model/topic.dart';
 import 'package:rive_animation/screens/vocabulary/model/vocabulary.dart';
+import 'package:rive_animation/screens/vocabulary/screen/voca_quiz.dart';
 import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
 import 'package:rive_animation/screens/vocabulary/widget/voca_card.dart';
 
@@ -16,14 +17,48 @@ class VocaMainScreen extends StatefulWidget {
 }
 
 class _VocaMainScreenState extends State<VocaMainScreen> {
+  //Text To Speech
+  FlutterTts flutterTts = FlutterTts();
+  //
+  List<Vocabulary> fullList = [];
+  int studiedCount = 0;
+  int listCount = 0;
+  int currentIndex = 0;
+  bool isvisibleSwiper = false;
+  bool isFinish = false;
+  bool test = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final controller = SwiperController();
     final db = FirebaseFirestore.instance;
-    Future<QuerySnapshot> vocabularies = db
-        .collection('topics')
-        .doc(widget.topic.title)
-        .collection('vocabularies')
-        .get();
+    Future<QuerySnapshot> getVocabularies() async {
+      QuerySnapshot querySnapshot = await db
+          .collection('topics')
+          .doc(widget.topic.title)
+          .collection('vocabularies')
+          .get();
+      return querySnapshot;
+    }
+
+    Future<int> getstudiedVocabularies() async {
+      QuerySnapshot vocabulariesRef = await FirebaseFirestore.instance
+          .collection('topics')
+          .doc(widget.topic.title)
+          .collection('vocabularies')
+          .where('studied', isEqualTo: true)
+          .get();
+      return vocabulariesRef.docs.length;
+    }
+
+// ...
+    Future<QuerySnapshot> vocabularies = getVocabularies();
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -48,61 +83,218 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(
                 horizontal: MediaQuery.of(context).size.width * 0.05),
-            child: Container(
-              color: Colors.white,
-              child: FutureBuilder<QuerySnapshot>(
-                  future: vocabularies,
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      final List<DocumentSnapshot> documents =
-                          snapshot.data!.docs;
-                      return Expanded(
-                          child: SizedBox(
-                        child: SingleChildScrollView(
-                          child: GridView.builder(
-                            physics: const ScrollPhysics(),
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: documents.length,
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisSpacing: 20,
-                              childAspectRatio: 1.1,
-                              mainAxisSpacing: 20,
-                              crossAxisCount: 2,
-                            ),
-                            itemBuilder: (context, index) {
-                              List<Vocabulary> vocabularies = documents
-                                  .map((doc) => Vocabulary(
-                                      id: '${doc['id']}',
-                                      meaning: '${doc['meaning']}',
-                                      image: '${doc['image']}',
-                                      spelling: '${doc['spelling']}',
-                                      text: '${doc['text']}'))
-                                  .toList();
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  FlashCard(
-                                                    vocabulary: vocabularies[index],
-                                                  )),
-                                        );
-                                },
-                                child: VocaCard(vocabulary: vocabularies[index]));
-                            },
+            child: FutureBuilder<QuerySnapshot>(
+                future: vocabularies,
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    final List<DocumentSnapshot> documents =
+                        snapshot.data!.docs;
+                    listCount = documents.length;
+                    return SizedBox(
+                      child: SingleChildScrollView(
+                        child: GridView.builder(
+                          physics: const ScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          shrinkWrap: true,
+                          itemCount: documents.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisSpacing: 20,
+                            childAspectRatio: 1.1,
+                            mainAxisSpacing: 20,
+                            crossAxisCount: 2,
                           ),
+                          itemBuilder: (context, index) {
+                            List<Vocabulary> vocabularies = documents
+                                .map((doc) => Vocabulary(
+                                    id: '${doc['id']}',
+                                    meaning: '${doc['meaning']}',
+                                    image: '${doc['image']}',
+                                    spelling: '${doc['spelling']}',
+                                    text: '${doc['text']}',
+                                    studied: '${doc['studied']}' == 'true'
+                                        ? true
+                                        : false))
+                                .toList();
+                            return GestureDetector(
+                                onTap: () async {
+                                  setState(() {
+                                    controller.index = index;
+                                  });
+                                  await db
+                                      .collection('topics')
+                                      .doc(widget.topic.title)
+                                      .update({
+                                    'progress': 2,
+                                  });
+                                  await db
+                                      .collection('topics')
+                                      .doc(widget.topic.title)
+                                      .collection('vocabularies')
+                                      .doc(vocabularies[index].text)
+                                      .update({
+                                    'studied': true,
+                                  });
+                                  await showGeneralDialog(
+                                    barrierLabel: "Label",
+                                    barrierDismissible: true,
+                                    barrierColor: Colors.black.withOpacity(0.5),
+                                    transitionDuration:
+                                        const Duration(milliseconds: 700),
+                                    context: context,
+                                    pageBuilder: (context, anim1, anim2) {
+                                      return Align(
+                                        alignment: Alignment.center,
+                                        child: SizedBox(
+                                          height: 430,
+                                          child: Swiper(
+                                            loop: false,
+                                            pagination: const SwiperPagination(
+                                                margin: EdgeInsets.only(
+                                                    bottom: 40)),
+                                            viewportFraction: 0.6,
+                                            scale: 0.8,
+                                            controller: controller,
+                                            itemCount: documents.length,
+                                            onIndexChanged: (int index) async {
+                                              await db
+                                                  .collection('topics')
+                                                  .doc(widget.topic.title)
+                                                  .collection('vocabularies')
+                                                  .doc(vocabularies[index].text)
+                                                  .update({
+                                                'studied': true,
+                                              });
+                                            },
+                                            itemBuilder: (context, index) {
+                                              return FlashCard(
+                                                  vocabulary:
+                                                      vocabularies[index]);
+                                            },
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                    transitionBuilder:
+                                        (context, anim1, anim2, child) {
+                                      return SlideTransition(
+                                        position: Tween(
+                                                begin: const Offset(0, 1),
+                                                end: const Offset(0, 0))
+                                            .animate(anim1),
+                                        child: child,
+                                      );
+                                    },
+                                  ).then((_) => setState(() {}));
+                                },
+                                child: VocaCard(
+                                  vocabulary: vocabularies[index],
+                                  isChecked: vocabularies[index].studied,
+                                ));
+                          },
                         ),
-                      ));
-                    } else if (snapshot.hasError) {
-                      return Text('$snapshot.error');
-                    }
-                    return const Center(child: CircularProgressIndicator());
-                  }),
-            ),
+                      ),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('$snapshot.error');
+                  }
+                  return const Center(child: CircularProgressIndicator());
+                }),
           ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () async {
+          await getstudiedVocabularies().then((value) => studiedCount = value);
+          if (studiedCount < listCount) {
+            showDialog(
+              context: context,
+              builder: (_) => AssetGiffDialog(
+                image: Image.asset(
+                  'assets/gif/not_done.gif',
+                  fit: BoxFit.cover,
+                  width: 10,
+                  height: 10,
+                ),
+                title: const Text(
+                  'Men Wearing Jackets',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+                ),
+                entryAnimation: EntryAnimation.bottomRight,
+                description: const Text(
+                  'This is a men wearing jackets dialog box. This library helps you easily create fancy giff dialog.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+                onOkButtonPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => VocaQuiz(topic: widget.topic)),
+                  ).then((_) => setState(() {}));
+                },
+              ),
+            );
+          } else {
+            showDialog(
+              context: context,
+              builder: (_) => AssetGiffDialog(
+                image: Image.asset(
+                  'assets/gif/not_done.gif',
+                  fit: BoxFit.cover,
+                  width: 10,
+                  height: 10,
+                ),
+                title: const Text(
+                  'Congratulation !',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
+                ),
+                entryAnimation: EntryAnimation.bottomRight,
+                description: const Text(
+                  'Start the challenge with some quizzes that help you to review your knowledge.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(),
+                ),
+                onOkButtonPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => VocaQuiz(topic: widget.topic)),
+                  ).then((_) => setState(() {}));
+                },
+              ),
+            );
+          }
+        },
+        backgroundColor: const Color(0xff49B0AB),
+        label: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              child: Row(
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.only(right: 5.0),
+                    child: Icon(
+                      Icons.check,
+                      color: Colors.white,
+                    ),
+                  ),
+                  Text(
+                    'Kiểm tra từ vựng',
+                    style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );
