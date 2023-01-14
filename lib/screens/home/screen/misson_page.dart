@@ -3,7 +3,7 @@ import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 
-import '../pronunciation/screen/pronunciation_lesson.dart';
+import '../../pronunciation/screen/pronunciation_lesson.dart';
 
 class MissonPage extends StatefulWidget {
   const MissonPage({super.key});
@@ -29,7 +29,7 @@ class _MissonPageState extends State<MissonPage> {
           }
         },
         child: Container(
-            margin: EdgeInsets.fromLTRB(20, 0, 20, 20),
+            margin: EdgeInsets.zero, //EdgeInsets.fromLTRB(20, 0, 20, 20),
             height: 200,
             child: Stack(
               children: [
@@ -47,8 +47,8 @@ class _MissonPageState extends State<MissonPage> {
                     height: 60,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10)),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20)),
                       color: Color.fromARGB(96, 0, 0, 0),
                       // gradient: LinearGradient(
                       //     begin: Alignment.bottomCenter,
@@ -108,23 +108,50 @@ class _MissonPageState extends State<MissonPage> {
                 height: 20,
               ),
               SizedBox(
-                height: 500,
+                height: 300,
                 child: ListView(
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    missionCard(
-                        'assets/images/voca.jpg', 'Vocabulary', Colors.brown),
-                    missionCard(
-                        'assets/images/speaking.png', 'Speaking', Colors.grey),
-                    missionCard('assets/images/dictionary.jpg', 'Listening',
-                        Colors.orange),
-                    missionCard('assets/images/dictionary.jpg', 'Gaming',
-                        Colors.orange),
-                    missionCard(
-                        'assets/images/grammar.jpg', 'Grammar', Colors.green),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/voca.jpg',
+                            'Vocabulary', Colors.brown),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/speaking.png',
+                            'Speaking', Colors.grey),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/dictionary.jpg',
+                            'Listening', Colors.orange),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/dictionary.jpg',
+                            'Gaming', Colors.orange),
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: missionCard(
+                    'assets/images/grammar.jpg', 'Grammar', Colors.green),
+              ),
             ],
           ),
         ),
