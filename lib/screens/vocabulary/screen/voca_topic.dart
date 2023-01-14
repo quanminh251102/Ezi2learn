@@ -116,7 +116,10 @@ class _VocaTopicScreenState extends State<VocaTopicScreen>
                                           image: '${doc['image']}',
                                           progress:
                                               int.parse('${doc['progress']}'),
-                                          point: int.parse('${doc['point']}')))
+                                          point: int.parse('${doc['point']}'),
+                                          done: '${doc['done']}' == 'true'
+                                              ? true
+                                              : false))
                                       .toList();
                                   return InkWell(
                                       onTap: () {
@@ -127,7 +130,7 @@ class _VocaTopicScreenState extends State<VocaTopicScreen>
                                                   VocaMainScreen(
                                                     topic: topics[index],
                                                   )),
-                                        );
+                                        ).then((_) => setState(() {}));
                                       },
                                       child:
                                           TopicCard(vocaTopic: topics[index]));

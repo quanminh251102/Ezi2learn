@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/auth/service/auth_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
+import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -48,8 +49,18 @@ class HomePage extends StatelessWidget {
                     child: ListView(
                       scrollDirection: Axis.horizontal,
                       children: <Widget>[
-                        Courses(
-                            'assets/images/voca.jpg', 'Vocabulary', context),
+                        InkWell(
+                          onTap: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => VocaTopicScreen(),
+                              ),
+                            );
+                          },
+                          child: Courses(
+                              'assets/images/voca.jpg', 'Vocabulary', context),
+                        ),
                         InkWell(
                           onTap: () {
                             Navigator.push(

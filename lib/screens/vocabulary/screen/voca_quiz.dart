@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:group_button/group_button.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
+import 'package:rive_animation/screens/vocabulary/model/topic.dart';
+import 'package:rive_animation/screens/vocabulary/widget/quiz_card.dart';
+
+import '../model/vocabulary.dart';
 
 class VocaQuiz extends StatefulWidget {
-  const VocaQuiz({super.key});
+  const VocaQuiz({super.key, required this.topic});
+  final Topic topic;
 
   @override
   State<VocaQuiz> createState() => _VocaQuizState();
@@ -21,21 +26,12 @@ class _VocaQuizState extends State<VocaQuiz> {
     final double titleWidgetWidth = deviceWidth - paddingNum * 2;
     final double titleWidgetHeight = deviceHeight * 0.1;
     Widget titleWidget = Positioned(
-      top: statusBarHeight + deviceHeight * 0.06 / 2,
+      top: statusBarHeight + deviceHeight * 0.06,
       left: (deviceWidth - titleWidgetWidth) / 2,
       width: titleWidgetWidth,
       height: titleWidgetHeight,
       child: Column(
         children: [
-          const Text(
-            'Vocabulary Quiz',
-            style: TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 24,
-              color: Colors.black,
-            ),
-            textAlign: TextAlign.center,
-          ),
           Center(
               child: FAProgressBar(
             backgroundColor: const Color(0xffC4C4C4),
@@ -89,77 +85,24 @@ class _VocaQuizState extends State<VocaQuiz> {
       ),
     );
 
-    double spaceBetweenTilteAndPicture = deviceHeight * 0.04;
+    double spaceBetweenTilteAndPicture = deviceHeight * 0.05;
     double pictureHeight = deviceHeight * 0.35;
     Widget picture = Positioned(
-      top: statusBarHeight + titleWidgetHeight + spaceBetweenTilteAndPicture,
-      left: 0,
-      width: deviceWidth - paddingNum,
-      height: pictureHeight,
-      child: Image.asset(
-        'assets/voca_quiz/cat.png',
-        width: deviceWidth,
-        fit: BoxFit.fill,
-      ),
-    );
+        top: statusBarHeight + spaceBetweenTilteAndPicture,
+        left: 0,
+        width: deviceWidth - paddingNum,
+        height: pictureHeight,
+        child: QuizCard(
+          vocabulary: Vocabulary(
+              text: 'Bee',
+              image:
+                  'https://firebasestorage.googleapis.com/v0/b/ezi2learn-badad.appspot.com/o/animals%2Fbee.png?alt=media&token=e6cfad05-3ba9-45df-978f-f0630b13be32',
+              spelling: '/biː/',
+              meaning: 'Con ong'),
+        ));
 
-    double pictureButtonsWidth = deviceWidth - paddingNum * 10;
-    Widget pictureButtons = Positioned(
-      top: statusBarHeight + titleWidgetHeight + pictureHeight / 1.5,
-      left: (deviceWidth - pictureButtonsWidth) / 2,
-      width: pictureButtonsWidth,
-      //height: 250,
-      child: Column(
-        children: <Widget>[
-          const Center(
-            child: Text('here'),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                autofocus: true,
-                icon: Image.asset(
-                  'assets/voca_quiz/snail.png',
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.fill,
-                ),
-                color: Colors.yellow,
-                onPressed: () {
-                  print("Click back button 1");
-                },
-              ),
-              IconButton(
-                padding: const EdgeInsets.all(0),
-                icon: Image.asset(
-                  'assets/voca_quiz/listen_button.png',
-                  width: 200,
-                  height: 200,
-                  fit: BoxFit.fill,
-                ),
-                color: Colors.yellow,
-                onPressed: () {
-                  print("Click back button 2");
-                },
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-
-    double spaceBetweenPictureAndAnswerButtons = deviceHeight * 0.08;
     double answerButtonsWidth = deviceWidth * 0.45;
     Widget answerButtons = Positioned(
-        top: statusBarHeight +
-            titleWidgetHeight +
-            spaceBetweenTilteAndPicture +
-            pictureButtonsWidth +
-            spaceBetweenPictureAndAnswerButtons,
-        left: paddingNum,
-        width: deviceWidth - paddingNum * 2,
         height: 250,
         child: GroupButton(
           options: GroupButtonOptions(
@@ -209,15 +152,56 @@ class _VocaQuizState extends State<VocaQuiz> {
             Brightness.dark, //navigation bar icons' color
       ),
       child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.white,
+          elevation: 0,
+          title: Column(
+            children: [
+              const Padding(
+                padding: EdgeInsets.only(top: 10.0),
+                child: Text(
+                  'Vocabulary Quiz',
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    fontSize: 22,
+                    color: Colors.black,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              Text('Topic: ${widget.topic.title}',
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                  )),
+            ],
+          ),
+          leading: GestureDetector(
+            onTap: () => Navigator.pop(context),
+            child: const Icon(
+              Icons.arrow_back_ios_rounded,
+              color: Colors.black,
+            ),
+          ),
+        ),
         backgroundColor: Colors.white,
-        body: Stack(
-          children: <Widget>[
-            titleWidget,
-            picture,
-            pictureButtons,
-            backButton,
-            answerButtons,
-          ],
+        body: Container(
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.03),
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: titleWidget,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 40.0, top: 20),
+                child: picture,
+              ),
+              answerButtons,
+            ],
+          ),
         ),
       ),
     );
