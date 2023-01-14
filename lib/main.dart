@@ -1,13 +1,26 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:rive_animation/screens/auth/screen/login_page.dart';
+import 'package:rive_animation/screens/auth/screen/splash_page.dart';
+import 'package:rive_animation/screens/home/home_screen.dart';
+import 'package:rive_animation/screens/pronunciation/screen/pronounciation_execute_service.dart';
+import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
+import 'package:rive_animation/screens/pronunciation/screen/record_speak.dart';
+import 'package:rive_animation/screens/pronunciation/screen/record_speech_to_text.dart';
 import 'package:rive_animation/screens/vocabulary/data/add_data.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
+import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
+import './screens/entry_point.dart';
+import './screens/home/home_page.dart' as NewHomePage;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(const MyEnglishApp());
 }
+
+final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyEnglishApp extends StatelessWidget {
   const MyEnglishApp({super.key});
@@ -16,6 +29,7 @@ class MyEnglishApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Ezi2learn',
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFEEF1F8),
@@ -31,7 +45,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: const AddData(),
+      home: SplashScreen(),
     );
   }
 }
@@ -43,3 +57,28 @@ const defaultInputBorder = OutlineInputBorder(
     width: 1,
   ),
 );
+
+class MainPage extends StatelessWidget {
+  const MainPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Something went wrong'));
+            } else if (snapshot.hasData) {
+              return NewHomePage.HomePage();
+            } else {
+              return LoginPage();
+            }
+          }),
+    );
+  }
+}
