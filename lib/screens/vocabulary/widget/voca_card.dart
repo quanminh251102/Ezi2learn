@@ -1,12 +1,11 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:rive_animation/screens/vocabulary/model/topic.dart';
 import 'package:rive_animation/screens/vocabulary/model/vocabulary.dart';
-import 'package:rive_animation/screens/vocabulary/widget/progress_status.dart';
 
 class VocaCard extends StatefulWidget {
   final Vocabulary vocabulary;
-  const VocaCard({super.key, required this.vocabulary});
+  final bool isChecked;
+  const VocaCard(
+      {super.key, required this.vocabulary, required this.isChecked});
 
   @override
   State<VocaCard> createState() => _VocaCardState();
@@ -24,31 +23,45 @@ class _VocaCardState extends State<VocaCard> {
         width: 150,
         decoration: BoxDecoration(
             color: const Color(0xffDBF9F8),
-            border: Border.all(color: const Color(0xffFFDA2C), width: 3),
+            border: Border.all(
+                color: Color.fromARGB(255, 227, 200, 200), width: 1.5),
             borderRadius: BorderRadius.circular(10)),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SizedBox(
-              width: 50,
-              height: 50,
-              child: Image.network(widget.vocabulary.image)),
-          const SizedBox(height: 10,),
-          Text(
-            widget.vocabulary.spelling,
-            style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.normal,
-                fontFamily: 'Intel',
-                color: Colors.black),
-          ),
-          Text(
-            widget.vocabulary.text,
-            style: const TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Intel',
-                color: Colors.black),
-          ),
-        ]),
+        child: Column(
+          children: [
+            widget.isChecked
+                ? const Padding(
+                    padding: EdgeInsets.only(right: 5, top: 10, bottom: 10),
+                    child: Align(
+                      alignment: Alignment.topRight,
+                      child: Icon(
+                        Icons.check,
+                        color: Colors.green,
+                        size: 25,
+                      ),
+                    ),
+                  )
+                : const Padding(
+                    padding: EdgeInsets.only(right: 5, bottom: 45),
+                  ),
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: Image.network(widget.vocabulary.image)),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                widget.vocabulary.text,
+                style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    fontFamily: 'Intel',
+                    color: Colors.black),
+              ),
+            ]),
+          ],
+        ),
       ),
     );
   }

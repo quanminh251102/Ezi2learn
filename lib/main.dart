@@ -9,10 +9,7 @@ import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson
 import 'package:rive_animation/screens/pronunciation/screen/record_speak.dart';
 import 'package:rive_animation/screens/pronunciation/screen/record_speech_to_text.dart';
 import 'package:rive_animation/screens/vocabulary/data/add_data.dart';
-import 'package:rive_animation/screens/vocabulary/data/voca_data.dart';
-import 'package:rive_animation/screens/vocabulary/screen/voca_main.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
-import 'package:rive_animation/screens/vocabulary/voca_quiz.dart';
 import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
 import './screens/entry_point.dart';
 import './screens/home/home_page.dart' as NewHomePage;
