@@ -46,6 +46,7 @@ class MyEnglishApp extends StatelessWidget {
         ),
       ),
       home: SplashScreen(),
+      //home: PronounciationExecuteService(),
     );
   }
 }

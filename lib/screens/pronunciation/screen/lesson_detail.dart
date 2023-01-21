@@ -5,6 +5,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:rive_animation/screens/home/service/achievenment_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/finish_lesson.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -14,9 +15,11 @@ import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:audioplayers/audioplayers.dart';
+import '../../../main.dart';
 import '../data/pronounciation_data.dart';
 import 'dart:io';
 import '../models/pronounciation_model.dart';
+import '../../home/screen/home_page.dart' as NewHomePage;
 
 class LessonDetail extends StatefulWidget {
   final PronuciationLessonModel speakLesson;
@@ -38,12 +41,22 @@ class _LessonDetailState extends State<LessonDetail> {
 
   void reset() async {
     if (_currentWord + 1 == widget.speakLesson.words!.length) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => Center(
+                child: CircularProgressIndicator(),
+              ));
+
+      await AchievenmentService.Update("Pronunciation");
+
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => FinishLesson(),
         ),
       );
+      //navigatorKey.currentState!.popUntil((route) => route.isFirst);
     } else {
       setState(() {
         isCorrect = false;
@@ -123,20 +136,8 @@ class _LessonDetailState extends State<LessonDetail> {
         });
         _speech!.listen(
           onResult: (val) => setState(() {
-            _text = val.recognizedWords;
+            _text = val.recognizedWords.toLowerCase();
 
-            if (_text == widget.speakLesson.words![_currentWord]) {
-              player.play(AssetSource("audio/right_answer.mp3"));
-              setState(() {
-                isCorrect = true;
-                state = "Bạn đã phát âm chính xác";
-              });
-            } else {
-              player.play(AssetSource("audio/wrong_answer.mp3"));
-              setState(() {
-                state = "Bạn đã phát âm sai";
-              });
-            }
             if (val.hasConfidenceRating && val.confidence > 0) {
               _confidence = val.confidence;
             }
@@ -147,6 +148,19 @@ class _LessonDetailState extends State<LessonDetail> {
       setState(() {
         _isListening = false;
         if (state == "Mình đang nghe...") state = "Đến lượt bạn";
+        if (_text == widget.speakLesson.words![_currentWord]) {
+          player.play(AssetSource("audio/right_answer.mp3"));
+          setState(() {
+            isCorrect = true;
+            state = "Bạn đã phát âm chính xác";
+          });
+        } else {
+          player.play(AssetSource("audio/wrong_answer.mp3"));
+          setState(() {
+            state = "Bạn đã phát âm sai";
+            isCorrect = false;
+          });
+        }
       });
       //await stop();
       //recorder.closeRecorder();
@@ -248,7 +262,9 @@ class _LessonDetailState extends State<LessonDetail> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: GestureDetector(
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: const Icon(
               Icons.arrow_back_ios_rounded,
               color: Colors.black,
@@ -369,7 +385,9 @@ class _LessonDetailState extends State<LessonDetail> {
                               child: (i == 1)
                                   ? ElevatedButton(
                                       onPressed: () {
-                                        reset();
+                                        if (isCorrect == true) {
+                                          reset();
+                                        }
                                       },
                                       child: Text(
                                         'Tiếp theo',

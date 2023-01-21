@@ -50,7 +50,19 @@ class AchievenmentService {
     return allList;
   }
 
-  static Future<void> Update(AchievementModel item) async {
+  static Future<void> Update(String type) async {
+    List<AchievementModel> list = await Read();
+
+    AchievementModel item = list[0];
+
+    if (type == "Pronunciation") {
+      item.toltalSpeakingPoint++;
+    }
+
+    if (type == "Vocabulary") {
+      item.toltalSpeakingPoint++;
+    }
+
     await db.collection(name).doc(item.id).update(item.toJson());
   }
 
