@@ -12,6 +12,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:rive_animation/screens/saved_words/model/saved_words_screen_model.dart';
+import 'package:rive_animation/screens/saved_words/service/saved_words_service.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -557,10 +559,7 @@ class _LessonDetailState extends State<LessonDetail> {
                           child: CustomCard(
                             borderRadius: 130,
                             child: const Icon(Icons.bookmark),
-                            onTap: () {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            },
+                            onTap: () {},
                           ),
                         ),
                       ],
@@ -574,7 +573,22 @@ class _LessonDetailState extends State<LessonDetail> {
                       borderRadius: 130,
                       child: const Icon(Icons.bookmark),
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        print("kiet debug 1");
+                        SavedWordsModel? temp;
+
+                        SavedWordsService.Read().then((value) async {
+                          SavedWordsModel savedWordsModel = value[0];
+                          savedWordsModel.words
+                              .add(widget.speakLesson.words![_currentWord]);
+                          savedWordsModel.meanings
+                              .add(widget.speakLesson.meanings![_currentWord]);
+
+                          print(savedWordsModel.toJson());
+                          print("kiet debug here");
+                          await SavedWordsService.Update(savedWordsModel);
+
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        });
                       },
                     ),
                   ),

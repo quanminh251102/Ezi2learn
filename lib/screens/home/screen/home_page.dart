@@ -11,6 +11,7 @@ import 'package:rive_animation/screens/home/screen/misson_page.dart';
 import 'package:rive_animation/screens/home/screen/profile_page.dart';
 import 'package:rive_animation/screens/home/service/achievenment_service.dart';
 import 'package:rive_animation/screens/home/service/detail_user_service.dart';
+import 'package:rive_animation/screens/saved_words/screen/saved_words_screen.dart';
 import '../widget/nav_bar.dart';
 
 class HomePage extends StatefulWidget {
@@ -69,8 +70,8 @@ class _HomePageState extends State<HomePage> {
                 text: 'Home',
               ),
               GButton(
-                icon: Icons.hearing_disabled,
-                text: 'Likes',
+                icon: Icons.save_alt_outlined,
+                text: 'Saved Words',
               ),
               GButton(
                 icon: Icons.search,
@@ -141,13 +142,20 @@ class _HomePageState extends State<HomePage> {
           ),
         ]);
 
-    Widget pageBody = (index == 0) ? MissonPage() : Text('text');
+    Widget pageBody = (index == 0)
+        ? MissonPage()
+        : (index == 1)
+            ? SavedWordsScreen()
+            : Text('text');
+
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
 
     return Scaffold(
+      //resizeToAvoidBottomInset: false,
       drawer: NavBar(),
       appBar: _appBar,
       backgroundColor: Colors.white,
-      bottomNavigationBar: _bottomNavigationBar,
+      bottomNavigationBar: isKeyboardOpen ? null : _bottomNavigationBar,
       body: SingleChildScrollView(
         child: FutureBuilder(
             future: Future.wait([
