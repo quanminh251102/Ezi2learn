@@ -1,7 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
+import 'package:rive_animation/main.dart';
+
+import '../../auth/service/auth_service.dart';
 
 class SignInForm extends StatefulWidget {
   const SignInForm({
@@ -13,6 +17,8 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
+  TextEditingController emailEditingController = TextEditingController();
+  TextEditingController passwordEditingController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isShowLoading = false;
   bool isShowConfetti = false;
@@ -46,30 +52,48 @@ class _SignInFormState extends State<SignInForm> {
       isShowConfetti = true;
       isShowLoading = true;
     });
+
     Future.delayed(
       const Duration(seconds: 1),
-      () {
+      () async {
         if (_formKey.currentState!.validate()) {
-          success.fire();
-          Future.delayed(
-            const Duration(seconds: 2),
-            () {
-              setState(() {
-                isShowLoading = false;
-              });
-              confetti.fire();
-              // Navigate & hide confetti
-              Future.delayed(const Duration(seconds: 1), () {
-                // Navigator.pop(context);
-                // Navigator.push(
-                //   context,
-                //   MaterialPageRoute(
-                //     builder: (context) => const EntryPoint(),
-                //   ),
-                // );
-              });
-            },
-          );
+          try {
+            await AuthService.signIn(emailEditingController.text.trim(),
+                passwordEditingController.text.trim());
+
+            success.fire();
+            Future.delayed(
+              const Duration(seconds: 2),
+              () {
+                setState(() {
+                  isShowLoading = false;
+                });
+                confetti.fire();
+                // Navigate & hide confetti
+                Future.delayed(const Duration(seconds: 1), () {
+                  // Navigator.pop(context);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MainPage(),
+                    ),
+                  );
+                });
+              },
+            );
+          } on FirebaseAuthException catch (e) {
+            print(e);
+            error.fire();
+            Future.delayed(
+              const Duration(seconds: 2),
+              () {
+                setState(() {
+                  isShowLoading = false;
+                });
+                reset.fire();
+              },
+            );
+          }
         } else {
           error.fire();
           Future.delayed(
@@ -104,6 +128,7 @@ class _SignInFormState extends State<SignInForm> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
                 child: TextFormField(
+                  controller: emailEditingController,
                   validator: (value) {
                     if (value!.isEmpty) {
                       return "";
@@ -127,6 +152,7 @@ class _SignInFormState extends State<SignInForm> {
               Padding(
                 padding: const EdgeInsets.only(top: 8, bottom: 16),
                 child: TextFormField(
+                  controller: passwordEditingController,
                   obscureText: true,
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -147,7 +173,6 @@ class _SignInFormState extends State<SignInForm> {
                 child: ElevatedButton.icon(
                   onPressed: () {
                     singIn(context);
-                    
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF77D8E),
