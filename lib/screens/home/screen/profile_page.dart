@@ -4,6 +4,9 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:rive_animation/screens/auth/service/auth_service.dart';
 import 'package:rive_animation/screens/home/models/detail_user_model.dart';
 import 'package:rive_animation/screens/home/service/detail_user_service.dart';
@@ -17,11 +20,55 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController emailController = TextEditingController();
   TextEditingController birthController = TextEditingController();
   TextEditingController addressController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
   TextEditingController genderController = TextEditingController();
+
+  MaskTextInputFormatter emailValidator = MaskTextInputFormatter(
+      mask: "##########################@gmail.com",
+      filter: {"#": RegExp(r'[a-z]')},
+      type: MaskAutoCompletionType.lazy);
+
+  MaskTextInputFormatter dateValidator =
+      MaskTextInputFormatter(mask: "####-##-##");
+
+  String? validateDate(String? value) {
+    if (value == null || value.isEmpty) {
+      return null;
+    }
+    final components = value.split("-");
+    if (components.length == 3) {
+      final day = int.tryParse(components[2]);
+      final month = int.tryParse(components[1]);
+      final year = int.tryParse(components[0]);
+      if (day != null && month != null && year != null) {
+        final date = DateTime(year, month, day);
+        if (date.year == year && date.month == month && date.day == day) {
+          return null;
+        }
+      }
+    }
+    return "wrong date";
+  }
+
+  String? validateEmail(String? value) {
+    const pattern = r"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'"
+        r'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-'
+        r'\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*'
+        r'[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:(2(5[0-5]|[0-4]'
+        r'[0-9])|1[0-9][0-9]|[1-9]?[0-9]))\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9]'
+        r'[0-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\'
+        r'x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])';
+    final regex = RegExp(pattern);
+
+    return value!.isNotEmpty && !regex.hasMatch(value)
+        ? 'Enter a valid email address'
+        : null;
+  }
 
   User? user;
   Future<List<DetailUserModel>>? detailUserModels;
@@ -38,10 +85,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
     detailUserModels = DetailUserService.Read();
     detailUserModels_normal = await DetailUserService.Read();
-
+//final DateFormat formatter = DateFormat('yyyy-MM-dd');
     setState(() {
       emailController.text = user?.email! as String;
-      birthController.text = detailUserModels_normal![0].birthDay.toString();
+      birthController.text =
+          detailUserModels_normal![0].birthDay.toString().substring(0, 10);
       addressController.text = detailUserModels_normal![0].address.toString();
       phoneController.text = detailUserModels_normal![0].phoneNumber.toString();
       genderController.text = detailUserModels_normal![0].gender.toString();
@@ -56,6 +104,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.end,
@@ -143,30 +192,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(height: 8),
               Text(
-                'nicolasadams@gmail.com',
+                emailController.text,
                 style: kCaptionTextStyle,
               ),
               SizedBox(
                 height: 8,
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: TextFormField(
-                  controller: emailController,
-                  keyboardType: TextInputType.emailAddress,
-                  textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
-                      hintText: 'Email', border: InputBorder.none),
+                child: Text(
+                  'Ngày sinh',
+                  style: TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
               SizedBox(
-                height: 8,
+                height: 4,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
+                  inputFormatters: [dateValidator],
+                  validator: validateDate,
+                  autocorrect: false,
+                  autovalidateMode: AutovalidateMode.always,
                   controller: birthController,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       hintText: 'Sinh nhật', border: InputBorder.none),
@@ -174,6 +224,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(
                 height: 8,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  'Địa chỉ',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+              ),
+              SizedBox(
+                height: 4,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -188,11 +248,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SizedBox(
                 height: 8,
               ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  'Số điện thoại',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+              ),
+              SizedBox(
+                height: 4,
+              ),
               Container(
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: phoneController,
-                  keyboardType: TextInputType.emailAddress,
+                  keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
                   decoration: InputDecoration(
                       hintText: 'Điện thoại', border: InputBorder.none),
@@ -200,6 +270,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               SizedBox(
                 height: 8,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: Text(
+                  'Giới tính',
+                  style: TextStyle(fontWeight: FontWeight.w700),
+                ),
+              ),
+              SizedBox(
+                height: 4,
               ),
               Container(
                 width: MediaQuery.of(context).size.width,
@@ -215,55 +295,78 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 height: 16,
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Text(
-                      'Hủy',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey,
-                        shape: StadiumBorder(),
-                        minimumSize: Size(
-                          150,
-                          50,
-                        )),
-                  ),
+                  // ElevatedButton(
+                  //   onPressed: () {},
+                  //   child: Text(
+                  //     'Hủy',
+                  //     style: TextStyle(
+                  //       color: Colors.white,
+                  //       fontWeight: FontWeight.w700,
+                  //     ),
+                  //   ),
+                  //   style: ElevatedButton.styleFrom(
+                  //       backgroundColor: Colors.grey,
+                  //       shape: StadiumBorder(),
+                  //       minimumSize: Size(
+                  //         150,
+                  //         50,
+                  //       )),
+                  // ),
                   ElevatedButton(
                     onPressed: () async {
-                      showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => Center(
-                                child: CircularProgressIndicator(),
-                              ));
+                      if (_formKey.currentState!.validate()) {
+                        showDialog(
+                            context: context,
+                            barrierDismissible: false,
+                            builder: (context) => Center(
+                                  child: CircularProgressIndicator(),
+                                ));
+                        String dateString = birthController.text;
+                        print(dateString);
+                        final components = dateString.split("-");
+                        if (components.length == 3) {
+                          final day = int.tryParse(components[2]);
+                          final month = int.tryParse(components[1]);
+                          final year = int.tryParse(components[0]);
+                          print(
+                              "kiet ${components[2]} ${components[1]}  ${components[0]} ");
+                          if (day != null && month != null && year != null) {
+                            final date = DateTime(year, month, day);
+                            detailUserModels_normal?[0].birthDay = date;
+                            print(date);
+                          }
+                        }
+                        detailUserModels_normal?[0].address =
+                            addressController.text;
+                        detailUserModels_normal?[0].gender =
+                            genderController.text;
+                        detailUserModels_normal?[0].phoneNumber =
+                            phoneController.text;
 
-                      detailUserModels_normal?[0].address =
-                          addressController.text;
-                      detailUserModels_normal?[0].gender =
-                          genderController.text;
-                      detailUserModels_normal?[0].phoneNumber =
-                          phoneController.text;
+                        print(detailUserModels_normal?[0].toJson());
+                        await DetailUserService.Update(
+                            detailUserModels_normal?[0]);
 
-                      print(detailUserModels_normal?[0].toJson());
-                      await DetailUserService.Update(
-                          detailUserModels_normal?[0]);
-
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MainPage()));
-                      // navigatorKey.currentState!
-                      //     .popUntil((route) => route.isFirst);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Cập nhật thành công'),
-                        ),
-                      );
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MainPage()));
+                        // navigatorKey.currentState!
+                        //     .popUntil((route) => route.isFirst);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Cập nhật thành công'),
+                          ),
+                        );
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                              content: Text('Thông tin đã điền lổi')),
+                        );
+                      }
                     },
                     child: Text(
                       'Lưu',
@@ -276,7 +379,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         backgroundColor: Color(0xffFFDA2C),
                         shape: StadiumBorder(),
                         minimumSize: Size(
-                          150,
+                          MediaQuery.of(context).size.width - 40,
                           50,
                         )),
                   ),
