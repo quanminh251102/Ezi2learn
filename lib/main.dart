@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/auth/screen/login_page.dart';
 import 'package:rive_animation/screens/auth/screen/splash_page.dart';
 import 'package:rive_animation/screens/home/screen/home_screen.dart';
+import 'package:rive_animation/screens/onboding/onboding_screen.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronounciation_execute_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 import 'package:rive_animation/screens/pronunciation/screen/record_speak.dart';
@@ -45,7 +46,9 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: SplashScreen(),
+      home: OnbodingScreen(),
+      //home: SplashScreen(),
+      //home: PronounciationExecuteService(),
     );
   }
 }
@@ -76,7 +79,8 @@ class MainPage extends StatelessWidget {
             } else if (snapshot.hasData) {
               return NewHomePage.HomePage();
             } else {
-              return LoginPage();
+              //return LoginPage();
+              return OnbodingScreen();
             }
           }),
     );
