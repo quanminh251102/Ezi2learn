@@ -50,6 +50,23 @@ class AchievenmentService {
     return allList;
   }
 
+  static Future<List<AchievementModel>> ReadWithUserId(String id) async {
+    QuerySnapshot<Map<String, dynamic>> snapshot =
+        await db.collection(name).get();
+
+    var allList = snapshot.docs
+        .map(
+            (docSnapshot) => AchievementModel.fromDocumentSnapshot(docSnapshot))
+        .toList();
+    print('kiet');
+    allList = allList.where((element) {
+      return (element.userId == id);
+    }).toList();
+
+    print(allList[0].toJson());
+    return allList;
+  }
+
   static Future<void> Update(String type) async {
     List<AchievementModel> list = await Read();
 

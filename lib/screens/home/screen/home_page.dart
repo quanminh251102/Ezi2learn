@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:get/get.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:rive_animation/screens/auth/service/auth_service.dart';
@@ -9,6 +10,7 @@ import 'package:rive_animation/screens/home/models/achievement_model.dart';
 import 'package:rive_animation/screens/home/models/detail_user_model.dart';
 import 'package:rive_animation/screens/home/screen/misson_page.dart';
 import 'package:rive_animation/screens/home/screen/profile_page.dart';
+import 'package:rive_animation/screens/home/screen/ranking_screen.dart';
 import 'package:rive_animation/screens/home/service/achievenment_service.dart';
 import 'package:rive_animation/screens/home/service/detail_user_service.dart';
 import 'package:rive_animation/screens/saved_words/screen/saved_words_screen.dart';
@@ -23,9 +25,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int index = 0;
-  Future<List<DetailUserModel>>? detailUserModels;
-  Future<List<AchievementModel>>? achievementModels;
-  List<DetailUserModel>? detailUserModels_for_use;
+  List<DetailUserModel> detailUserModels = [];
+  List<AchievementModel> achievementModels = [];
+  //List<DetailUserModel> detailUserModels_for_use = [];
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -35,9 +38,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future<void> init() async {
-    detailUserModels = DetailUserService.Read();
-    achievementModels = AchievenmentService.Read();
-    detailUserModels_for_use = await DetailUserService.Read();
+    setState(() {
+      isLoading = true;
+    });
+    await DetailUserService.Read().then((value) {
+      setState(() {
+        detailUserModels = value;
+      });
+    });
+    await AchievenmentService.Read().then((value) {
+      setState(() {
+        achievementModels = value;
+      });
+    });
+    setState(() {
+      isLoading = false;
+    });
   }
 
   @override
@@ -74,8 +90,8 @@ class _HomePageState extends State<HomePage> {
                 text: 'Saved Words',
               ),
               GButton(
-                icon: Icons.search,
-                text: 'Search',
+                icon: Icons.list_alt_rounded,
+                text: 'Ranking',
               ),
               GButton(
                 icon: Icons.supervised_user_circle,
@@ -112,32 +128,37 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               },
-              child: FutureBuilder(
-                  future: detailUserModels,
-                  builder: (BuildContext context,
-                      AsyncSnapshot<List<Object>> snapshot) {
-                    if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                      return CircleAvatar(
-                          radius: 20,
-                          backgroundImage: NetworkImage(
-                            (detailUserModels_for_use?[0].avatarUrl == '')
-                                ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-                                : detailUserModels_for_use?[0].avatarUrl ?? '',
-                          ));
-                    } else {
-                      return SizedBox(
-                        height: 400,
-                        child: const Center(child: CircularProgressIndicator()),
-                      );
-                    }
-                  }),
-              // child: CircleAvatar(
-              //     radius: 20,
-              //     backgroundImage: NetworkImage(
-              //       (detailUserModels_for_use?[0].avatarUrl == '')
-              //           ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-              //           : detailUserModels_for_use?[0].avatarUrl ?? '',
-              //     )),
+              // child: FutureBuilder(
+              //     future: detailUserModels,
+              //     builder: (BuildContext context,
+              //         AsyncSnapshot<List<Object>> snapshot) {
+              //       if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+              //         return CircleAvatar(
+              //             radius: 20,
+              //             backgroundImage: NetworkImage(
+              //               (detailUserModels_for_use?[0].avatarUrl == '')
+              //                   ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
+              //                   : detailUserModels_for_use?[0].avatarUrl ?? '',
+              //             ));
+              //       } else {
+              //         return SizedBox(
+              //           height: 400,
+              //           child: const Center(child: CircularProgressIndicator()),
+              //         );
+              //       }
+              //     }),
+              child: detailUserModels.length > 0
+                  ? CircleAvatar(
+                      radius: 20,
+                      backgroundImage: NetworkImage(
+                        (detailUserModels[0].avatarUrl == '')
+                            ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
+                            : detailUserModels[0].avatarUrl ?? '',
+                      ))
+                  : CircleAvatar(
+                      radius: 20,
+                      backgroundImage: NetworkImage(
+                          'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528')),
             ),
           ),
         ]);
@@ -146,7 +167,9 @@ class _HomePageState extends State<HomePage> {
         ? MissonPage()
         : (index == 1)
             ? SavedWordsScreen()
-            : Text('text');
+            : (index == 2)
+                ? RankingScreen()
+                : Text('text');
 
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
 
@@ -157,22 +180,11 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Colors.white,
       bottomNavigationBar: isKeyboardOpen ? null : _bottomNavigationBar,
       body: SingleChildScrollView(
-        child: FutureBuilder(
-            future: Future.wait([
-              detailUserModels!,
-              achievementModels!,
-            ]),
-            builder:
-                (BuildContext context, AsyncSnapshot<List<Object>> snapshot) {
-              if (snapshot.hasData && snapshot.data!.isNotEmpty) {
-                return pageBody;
-              } else {
-                return SizedBox(
-                  height: 400,
-                  child: const Center(child: CircularProgressIndicator()),
-                );
-              }
-            }),
+        child: isLoading == true
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : pageBody,
       ),
     );
   }
