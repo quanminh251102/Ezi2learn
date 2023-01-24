@@ -10,6 +10,7 @@ class DetailUserModel {
   String gender;
   String avatarUrl;
   String phoneNumber;
+  String gmail;
 
   DetailUserModel({
     this.id,
@@ -19,6 +20,7 @@ class DetailUserModel {
     required this.gender,
     required this.avatarUrl,
     required this.phoneNumber,
+    required this.gmail,
   });
 
   Map<String, dynamic> toJson() => {
@@ -28,6 +30,7 @@ class DetailUserModel {
         'gender': (gender == null) ? '' : gender,
         'avatarUrl': (avatarUrl == null) ? '' : avatarUrl,
         'phoneNumber': (phoneNumber == null) ? '' : phoneNumber,
+        'gmail': (gmail == null) ? '' : gmail,
       };
 
   DetailUserModel.fromDocumentSnapshot(
@@ -41,5 +44,6 @@ class DetailUserModel {
             doc.data()?["avatarUrl"] == null ? '' : doc.data()?["avatarUrl"],
         phoneNumber = doc.data()?["phoneNumber"] == null
             ? ''
-            : doc.data()?["phoneNumber"];
+            : doc.data()?["phoneNumber"],
+        gmail = doc.data()?["gmail"] == null ? '' : doc.data()?["gmail"];
 }

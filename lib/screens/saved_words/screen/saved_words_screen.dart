@@ -82,7 +82,7 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
                     List<String> new_words = [];
                     List<String> new_meanings = [];
                     for (int i = 0; i < words.length; i++) {
-                      if (words[i].contains(value)) {
+                      if (words[i].contains(value.trim())) {
                         new_words.add(words[i]);
                         new_meanings.add(meanings[i]);
                       }
