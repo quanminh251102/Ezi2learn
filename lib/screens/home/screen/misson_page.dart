@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:rive_animation/screens/game/screen/game_list_screen.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 
 import '../../pronunciation/screen/pronunciation_lesson.dart';
@@ -27,12 +28,18 @@ class _MissonPageState extends State<MissonPage> {
                 builder: (context) => PronunciationLesson(),
               ),
             );
-          }
-          else if(title == "Vocabulary"){
+          } else if (title == "Vocabulary") {
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => VocaTopicScreen(),
+              ),
+            );
+          } else if (title == "Gaming") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameListScreen(),
               ),
             );
           }
