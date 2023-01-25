@@ -24,7 +24,7 @@ class _VocaCardState extends State<VocaCard> {
         decoration: BoxDecoration(
             color: const Color(0xffDBF9F8),
             border: Border.all(
-                color: Color.fromARGB(255, 227, 200, 200), width: 1.5),
+                color: const Color.fromARGB(255, 227, 200, 200), width: 1.5),
             borderRadius: BorderRadius.circular(10)),
         child: Column(
           children: [

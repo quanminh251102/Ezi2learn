@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -29,18 +27,18 @@ class _FinishLessonState extends State<FinishLesson> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
-            Image(
+            const Image(
               image: NetworkImage(
                   'https://thumbs.gfycat.com/FarawayTestyChimneyswift-max-1mb.gif'),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+            const Padding(
+              padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Text(
                 'Chúc mừng bạn đã hoàn thành bài học, bấm vào nút bên dưới để đến với bài học tiếp theo',
                 textAlign: TextAlign.center,
@@ -51,7 +49,7 @@ class _FinishLessonState extends State<FinishLesson> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 100,
             ),
             ElevatedButton(
@@ -59,24 +57,24 @@ class _FinishLessonState extends State<FinishLesson> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => PronunciationLesson(),
+                    builder: (context) => const PronunciationLesson(),
                   ),
                 );
               },
-              child: Text(
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xffFFDA2C),
+                  shape: const StadiumBorder(),
+                  minimumSize: Size(
+                    MediaQuery.of(context).size.width + 100,
+                    50,
+                  )),
+              child: const Text(
                 'Trở lại',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xffFFDA2C),
-                  shape: StadiumBorder(),
-                  minimumSize: Size(
-                    MediaQuery.of(context).size.width + 100,
-                    50,
-                  )),
             )
           ],
         ),

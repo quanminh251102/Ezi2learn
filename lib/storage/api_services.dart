@@ -38,29 +38,35 @@ class ApiServices {
         .doc(tempVoca.text)
         .set(json);
   }
+
   static Future addQuestion({required Question tempQuestion}) async {
     final db = FirebaseFirestore.instance;
     final docQuestion = db.collection('questions').doc(tempQuestion.text);
     final question = Question(
-        id: docQuestion.id,
-        topic: tempQuestion.topic,
-        text: tempQuestion.text,
-        image: tempQuestion.image,
-        isLocked: tempQuestion.isLocked,
-        selectedIndex: tempQuestion.selectedIndex);
+      id: docQuestion.id,
+      topic: tempQuestion.topic,
+      text: tempQuestion.text,
+      image: tempQuestion.image,
+      isLocked: tempQuestion.isLocked,
+      selectedIndex: tempQuestion.selectedIndex,
+      options: tempQuestion.options
+    );
     final json = question.toJson();
     await docQuestion
         .set(json)
         .onError((e, _) => print("Error writing document: $e"));
     // await addvocabinTopic(id: docTopic.id, listVoca: tempVoca);
   }
+
   static Future addoptioninQuestion(
-      {required String? id, required Option tempOption}) async {
+      {required String id, required Option tempOption}) async {
     final db = FirebaseFirestore.instance;
     final docOption = db.collection('questions');
     final option = Option(
-        text: tempOption.text,
-        isCorrect: tempOption.isCorrect,);
+      ruid: id,
+      text: tempOption.text,
+      isCorrect: tempOption.isCorrect,
+    );
     final json = option.toJson();
     await docOption
         .doc(id)

@@ -1,11 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:rive_animation/screens/auth/service/auth_service.dart';
 import 'package:rive_animation/screens/home/models/achievement_model.dart';
 import 'package:rive_animation/screens/home/models/detail_user_model.dart';
 import 'package:rive_animation/screens/home/screen/misson_page.dart';
@@ -58,7 +53,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _bottomNavigationBar = Container(
+    Widget bottomNavigationBar = Container(
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(width: 0.8, color: Colors.grey.shade200),
@@ -73,14 +68,14 @@ class _HomePageState extends State<HomePage> {
             activeColor: Colors.black,
             tabBackgroundColor: Colors.yellow.shade200,
             gap: 8,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             onTabChange: ((value) {
               print(value);
               setState(() {
                 index = value;
               });
             }),
-            tabs: [
+            tabs: const [
               GButton(
                 icon: Icons.home,
                 text: 'Home',
@@ -101,13 +96,13 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    AppBar _appBar = AppBar(
+    AppBar appBar = AppBar(
         iconTheme: const IconThemeData(
           //size: 40, //change size on your need
           color: Colors.black, //change color on your need
         ),
         centerTitle: true,
-        title: Text(
+        title: const Text(
           'Home',
           style: TextStyle(
             color: Colors.black,
@@ -147,7 +142,7 @@ class _HomePageState extends State<HomePage> {
               //         );
               //       }
               //     }),
-              child: detailUserModels.length > 0
+              child: detailUserModels.isNotEmpty
                   ? CircleAvatar(
                       radius: 20,
                       backgroundImage: NetworkImage(
@@ -155,7 +150,7 @@ class _HomePageState extends State<HomePage> {
                             ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
                             : detailUserModels[0].avatarUrl ?? '',
                       ))
-                  : CircleAvatar(
+                  : const CircleAvatar(
                       radius: 20,
                       backgroundImage: NetworkImage(
                           'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528')),
@@ -164,24 +159,24 @@ class _HomePageState extends State<HomePage> {
         ]);
 
     Widget pageBody = (index == 0)
-        ? MissonPage()
+        ? const MissonPage()
         : (index == 1)
-            ? SavedWordsScreen()
+            ? const SavedWordsScreen()
             : (index == 2)
-                ? RankingScreen()
-                : Text('text');
+                ? const RankingScreen()
+                : const Text('text');
 
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
 
     return Scaffold(
       //resizeToAvoidBottomInset: false,
-      drawer: NavBar(),
-      appBar: _appBar,
+      drawer: const NavBar(),
+      appBar: appBar,
       backgroundColor: Colors.white,
-      bottomNavigationBar: isKeyboardOpen ? null : _bottomNavigationBar,
+      bottomNavigationBar: isKeyboardOpen ? null : bottomNavigationBar,
       body: SingleChildScrollView(
         child: isLoading == true
-            ? Center(
+            ? const Center(
                 child: CircularProgressIndicator(),
               )
             : pageBody,

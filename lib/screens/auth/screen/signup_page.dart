@@ -1,17 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:rive_animation/main.dart';
-import 'package:rive_animation/screens/entry_point.dart';
-import './login_page.dart';
 
 import '../utils/colors.dart';
 import '../widget/login_button.dart';
 import '../widget/or_divider.dart';
 import '../widget/social_icon.dart';
 
-import '../../../main.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({Key? key}) : super(key: key);
@@ -50,7 +45,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Widget>[
             Container(
                 alignment: Alignment.center,
-                child: Image(image: AssetImage('assets/images/res-logo.png'))),
+                child: const Image(image: AssetImage('assets/images/res-logo.png'))),
             SizedBox(
               height: screenSize.height * 0.05,
             ),
@@ -64,20 +59,20 @@ class _SignUpPageState extends State<SignUpPage> {
             Form(
               child: Column(
                 children: <Widget>[
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       controller: emailController,
                       keyboardType: TextInputType.emailAddress,
                       textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           hintText: 'Email', border: InputBorder.none),
                     ),
                   ),
                   SizedBox(
                     height: screenSize.height * 0.02,
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       controller: passController,
@@ -91,13 +86,13 @@ class _SignUpPageState extends State<SignUpPage> {
                             icon: isObscure
                                 ? Image(
                                     image:
-                                        AssetImage('assets/images/eyeOff.png'),
+                                        const AssetImage('assets/images/eyeOff.png'),
                                     height: screenSize.height * 0.03,
                                     width: screenSize.width * 0.05,
                                   )
                                 : Image(
                                     image:
-                                        AssetImage('assets/images/eyeOn.png'),
+                                        const AssetImage('assets/images/eyeOn.png'),
                                     height: screenSize.height * 0.03,
                                     width: screenSize.width * 0.05,
                                   ),
@@ -110,7 +105,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     height: screenSize.height * 0.02,
                   ),
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width,
                     child: TextFormField(
                       obscureText: isObscure,
@@ -123,13 +118,13 @@ class _SignUpPageState extends State<SignUpPage> {
                             icon: isObscure
                                 ? Image(
                                     image:
-                                        AssetImage('assets/images/eyeOff.png'),
+                                        const AssetImage('assets/images/eyeOff.png'),
                                     height: screenSize.height * 0.03,
                                     width: screenSize.width * 0.05,
                                   )
                                 : Image(
                                     image:
-                                        AssetImage('assets/images/eyeOn.png'),
+                                        const AssetImage('assets/images/eyeOn.png'),
                                     height: screenSize.height * 0.03,
                                     width: screenSize.width * 0.05,
                                   ),
@@ -152,7 +147,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   showDialog(
                       context: context,
                       barrierDismissible: false,
-                      builder: (context) => Center(
+                      builder: (context) => const Center(
                             child: CircularProgressIndicator(),
                           ));
 
@@ -165,7 +160,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     navigatorKey.currentState!
                         .popUntil((route) => route.isFirst);
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MainPage()));
+                        MaterialPageRoute(builder: (context) => const MainPage()));
                   }).onError((error, stackTrace) {
                     print("Error ${error.toString()}");
                   });
@@ -175,7 +170,7 @@ class _SignUpPageState extends State<SignUpPage> {
             ),
             Container(
               alignment: Alignment.center,
-              child: OrDivider(text: 'Hoặc đăng ký với'),
+              child: const OrDivider(text: 'Hoặc đăng ký với'),
             ),
             SizedBox(
               height: screenSize.height * 0.01,
@@ -209,11 +204,12 @@ class _SignUpPageState extends State<SignUpPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Đã có tài khoản? ',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               InkWell(
+                onTap: handleOnPressLoginText,
                 child: Text(
                   'Đăng nhập',
                   style: TextStyle(
@@ -221,7 +217,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       fontWeight: FontWeight.w500,
                       color: MyColor.mainColor),
                 ),
-                onTap: handleOnPressLoginText,
               ),
             ],
           ),

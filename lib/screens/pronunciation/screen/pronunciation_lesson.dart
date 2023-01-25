@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:rive_animation/screens/home/models/achievement_model.dart';
@@ -39,20 +37,20 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
     });
 
     PronounciationService.Read(null).then((value) {
-      AchievenmentService.Read().then((value_achi) {
+      AchievenmentService.Read().then((valueAchi) {
         setState(() {
-          achievementModel = value_achi[0];
+          achievementModel = valueAchi[0];
           list = value;
 
           currentPoint =
-              achievementModel!.toltalSpeakingPoint % this.pointEachLevel;
-          processValue = (currentPoint.toDouble() / this.pointEachLevel) * 100;
+              achievementModel!.toltalSpeakingPoint % pointEachLevel;
+          processValue = (currentPoint.toDouble() / pointEachLevel) * 100;
 
           currentLevel =
-              achievementModel!.toltalSpeakingPoint ~/ this.pointEachLevel;
+              achievementModel!.toltalSpeakingPoint ~/ pointEachLevel;
 
-          point_need_to_up_level = this.pointEachLevel -
-              (achievementModel!.toltalSpeakingPoint % this.pointEachLevel);
+          point_need_to_up_level = pointEachLevel -
+              (achievementModel!.toltalSpeakingPoint % pointEachLevel);
 
           isLoading = false;
         });
@@ -64,18 +62,18 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
   Widget build(BuildContext context) {
     Widget temp(int index, PronuciationLessonModel item) {
       return Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: (index % 2 == 1)
               ? const Color(0xffFFDA2C)
-              : Color.fromARGB(255, 248, 230, 149),
+              : const Color.fromARGB(255, 248, 230, 149),
         ),
         child: ListTile(
-          title: Text(item.title!),
-          subtitle: Text(item.subTilte!),
-          trailing: Icon(Icons.arrow_forward_ios),
-          leading: Icon(
+          title: Text(item.title),
+          subtitle: Text(item.subTilte),
+          trailing: const Icon(Icons.arrow_forward_ios),
+          leading: const Icon(
             Icons.speaker_notes,
             size: 30,
           ),
@@ -115,7 +113,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => NewHomePage.HomePage(),
+                builder: (context) => const NewHomePage.HomePage(),
               ),
             );
           },
@@ -125,7 +123,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(30.0), // here the desired height
+          preferredSize: const Size.fromHeight(30.0), // here the desired height
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Column(
@@ -135,7 +133,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
                   backgroundColor: const Color(0xffC4C4C4),
                   changeProgressColor: const Color(0xffFFDA2C),
                   progressColor: const Color(0xffFFDA2C),
-                  currentValue: this.processValue,
+                  currentValue: processValue,
                   displayText: '%',
                   size: 20,
                 )),
@@ -146,16 +144,16 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      'Level ${this.currentLevel}',
-                      style: TextStyle(
+                      'Level $currentLevel',
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 12,
                         color: Colors.black,
                       ),
                     ),
                     Text(
-                      '${this.processValue.toStringAsFixed(2)}% - More ${this.point_need_to_up_level} pts to reach Level ${this.currentLevel + 1}',
-                      style: TextStyle(
+                      '${processValue.toStringAsFixed(2)}% - More $point_need_to_up_level pts to reach Level ${currentLevel + 1}',
+                      style: const TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 12,
                         color: Color(0xff8A8A8A),
@@ -172,7 +170,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
         child: (isLoading == false)
             ? Container(
                 color: Colors.white,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: ListView(children: [
                   for (int i = 0; i < list.length; i++) temp(i, dataPro[i])
                 ]),
@@ -187,7 +185,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
                           height: 71.0,
                           width: MediaQuery.of(context).size.width,
                           child: Shimmer.fromColors(
-                              baseColor: Color.fromARGB(255, 228, 226, 226),
+                              baseColor: const Color.fromARGB(255, 228, 226, 226),
                               highlightColor: Colors.white,
                               child: CustomCard(
                                 borderRadius: 20,

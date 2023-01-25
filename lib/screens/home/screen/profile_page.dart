@@ -5,9 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:rive_animation/screens/auth/service/auth_service.dart';
 import 'package:rive_animation/screens/home/models/detail_user_model.dart';
 import 'package:rive_animation/screens/home/service/detail_user_service.dart';
 import 'package:rive_animation/screens/home/service/storge_service.dart';
@@ -81,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _initRetrieval() async {
-    user = await FirebaseAuth.instance.currentUser!;
+    user = FirebaseAuth.instance.currentUser!;
 
     detailUserModels = DetailUserService.Read();
     detailUserModels_normal = await DetailUserService.Read();
@@ -98,7 +95,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    ScreenUtil.init(context, designSize: Size(414, 896));
+    ScreenUtil.init(context, designSize: const Size(414, 896));
 
     Widget pageBody = SingleChildScrollView(
       child: Padding(
@@ -110,7 +107,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             mainAxisAlignment: MainAxisAlignment.end,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              Container(
+              SizedBox(
                 height: 140,
                 width: 140,
                 child: Stack(
@@ -138,7 +135,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 content: Text('Bạn chưa chọn file'),
                               ),
                             );
-                            return null;
+                            return;
                           }
 
                           final path = result.files.single.path!;
@@ -166,11 +163,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         child: Container(
                           height: 40,
                           width: 40,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Colors.yellow,
                             shape: BoxShape.circle,
                           ),
-                          child: Center(
+                          child: const Center(
                             heightFactor: 30,
                             widthFactor: 30,
                             child: Icon(
@@ -185,30 +182,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 'Nicolas Adams',
                 style: kTitleTextStyle,
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Text(
                 emailController.text,
                 style: kCaptionTextStyle,
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: Text(
+                child: const Text(
                   'Ngày sinh',
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   inputFormatters: [dateValidator],
@@ -218,80 +215,80 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   controller: birthController,
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: 'Sinh nhật', border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: Text(
+                child: const Text(
                   'Địa chỉ',
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: addressController,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: 'Địa chỉ', border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: Text(
+                child: const Text(
                   'Số điện thoại',
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: phoneController,
                   keyboardType: TextInputType.phone,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: 'Điện thoại', border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 8,
               ),
               SizedBox(
                 width: MediaQuery.of(context).size.width,
-                child: Text(
+                child: const Text(
                   'Giới tính',
                   style: TextStyle(fontWeight: FontWeight.w700),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 4,
               ),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 child: TextFormField(
                   controller: genderController,
                   keyboardType: TextInputType.emailAddress,
                   textInputAction: TextInputAction.next,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       hintText: 'Giới tính', border: InputBorder.none),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               Row(
@@ -321,7 +318,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         showDialog(
                             context: context,
                             barrierDismissible: false,
-                            builder: (context) => Center(
+                            builder: (context) => const Center(
                                   child: CircularProgressIndicator(),
                                 ));
                         String dateString = birthController.text;
@@ -353,7 +350,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MainPage()));
+                                builder: (context) => const MainPage()));
                         // navigatorKey.currentState!
                         //     .popUntil((route) => route.isFirst);
                         ScaffoldMessenger.of(context).showSnackBar(
@@ -368,20 +365,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         );
                       }
                     },
-                    child: Text(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xffFFDA2C),
+                        shape: const StadiumBorder(),
+                        minimumSize: Size(
+                          MediaQuery.of(context).size.width - 40,
+                          50,
+                        )),
+                    child: const Text(
                       'Lưu',
                       style: TextStyle(
                         color: Color.fromARGB(255, 87, 87, 87),
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Color(0xffFFDA2C),
-                        shape: StadiumBorder(),
-                        minimumSize: Size(
-                          MediaQuery.of(context).size.width - 40,
-                          50,
-                        )),
                   ),
                 ],
               )

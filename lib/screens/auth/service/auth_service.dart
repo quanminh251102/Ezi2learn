@@ -7,7 +7,7 @@ class AuthService {
   }
 
   static Future getUser() async {
-    final user = await FirebaseAuth.instance.currentUser!;
+    final user = FirebaseAuth.instance.currentUser!;
     // user.email!
     return user;
   }

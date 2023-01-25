@@ -31,7 +31,6 @@ final kDarkTheme = ThemeData(
   primaryColor: kDarkPrimaryColor,
   canvasColor: kDarkPrimaryColor,
   backgroundColor: kDarkSecondaryColor,
-  accentColor: kAccentColor,
   iconTheme: ThemeData.dark().iconTheme.copyWith(
         color: kLightSecondaryColor,
       ),
@@ -39,7 +38,7 @@ final kDarkTheme = ThemeData(
         fontFamily: 'SFProText',
         bodyColor: kLightSecondaryColor,
         displayColor: kLightSecondaryColor,
-      ),
+      ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kAccentColor),
 );
 
 final kLightTheme = ThemeData(
@@ -48,7 +47,6 @@ final kLightTheme = ThemeData(
   primaryColor: kLightPrimaryColor,
   canvasColor: kLightPrimaryColor,
   backgroundColor: kLightSecondaryColor,
-  accentColor: kAccentColor,
   iconTheme: ThemeData.light().iconTheme.copyWith(
         color: kDarkSecondaryColor,
       ),
@@ -56,5 +54,5 @@ final kLightTheme = ThemeData(
         fontFamily: 'SFProText',
         bodyColor: kDarkSecondaryColor,
         displayColor: kDarkSecondaryColor,
-      ),
+      ), colorScheme: ColorScheme.fromSwatch().copyWith(secondary: kAccentColor),
 );

@@ -1,18 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:rive_animation/screens/auth/screen/login_page.dart';
-import 'package:rive_animation/screens/auth/screen/splash_page.dart';
-import 'package:rive_animation/screens/home/screen/home_screen.dart';
 import 'package:rive_animation/screens/onboding/onboding_screen.dart';
-import 'package:rive_animation/screens/pronunciation/screen/pronounciation_execute_service.dart';
-import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
-import 'package:rive_animation/screens/pronunciation/screen/record_speak.dart';
-import 'package:rive_animation/screens/pronunciation/screen/record_speech_to_text.dart';
-import 'package:rive_animation/screens/vocabulary/data/add_data.dart';
-import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
-import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
-import './screens/entry_point.dart';
 import 'screens/home/screen/home_page.dart' as NewHomePage;
 
 Future<void> main() async {
@@ -35,7 +24,7 @@ class MyEnglishApp extends StatelessWidget {
       theme: ThemeData(
         scaffoldBackgroundColor: const Color(0xFFEEF1F8),
         primarySwatch: Colors.blue,
-        fontFamily: "Intel",
+        fontFamily: "Roboto",
         inputDecorationTheme: const InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
@@ -46,9 +35,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: OnbodingScreen(),
-      //home: SplashScreen(),
-      //home: PronounciationExecuteService(),
+      home: const OnbodingScreen(),
     );
   }
 }
@@ -71,16 +58,15 @@ class MainPage extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             } else if (snapshot.hasError) {
-              return Center(child: Text('Something went wrong'));
+              return const Center(child: Text('Something went wrong'));
             } else if (snapshot.hasData) {
-              return NewHomePage.HomePage();
+              return const NewHomePage.HomePage();
             } else {
-              //return LoginPage();
-              return OnbodingScreen();
+              return const OnbodingScreen();
             }
           }),
     );

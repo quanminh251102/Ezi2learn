@@ -70,7 +70,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   bool _mPlayerIsInited = false;
   bool _mRecorderIsInited = false;
   bool _mplaybackReady = false;
-  String _text = "";
+  final String _text = "";
 
   bool recognizing = false;
   bool recognizeFinished = false;
@@ -81,7 +81,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       recognizing = true;
     });
     final serviceAccount = ServiceAccount.fromString(
-        '${(await rootBundle.loadString('assets/test_service_account.json'))}');
+        (await rootBundle.loadString('assets/test_service_account.json')));
     final speechToText = SpeechToText.viaServiceAccount(serviceAccount);
     final config = _getConfig();
     final audio = await _getAudioContent('test.wav');
@@ -103,7 +103,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
       recognizing = true;
     });
     final serviceAccount = ServiceAccount.fromString(
-        '${(await rootBundle.loadString('assets/test_service_account.json'))}');
+        (await rootBundle.loadString('assets/test_service_account.json')));
     final speechToText = SpeechToText.viaServiceAccount(serviceAccount);
     final config = _getConfig();
 
@@ -134,14 +134,14 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
   Future<void> _copyFileFromAssets(String name) async {
     var data = await rootBundle.load('assets/$name');
     final directory = await getApplicationDocumentsDirectory();
-    final path = directory.path + '/$name';
+    final path = '${directory.path}/$name';
     await File(path).writeAsBytes(
         data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes));
   }
 
   Future<List<int>> _getAudioContent(String name) async {
     final directory = await getApplicationDocumentsDirectory();
-    final path = directory.path + '/$name';
+    final path = '${directory.path}/$name';
     if (!File(path).existsSync()) {
       await _copyFileFromAssets(name);
     }
@@ -150,7 +150,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
 
   Future<Stream<List<int>>> _getAudioStream(String name) async {
     final directory = await getApplicationDocumentsDirectory();
-    final path = directory.path + '/$name';
+    final path = '${directory.path}/$name';
     if (!File(path).existsSync()) {
       await _copyFileFromAssets(name);
     }
@@ -295,7 +295,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Color(0xFFFAF0E6),
+              color: const Color(0xFFFAF0E6),
               border: Border.all(
                 color: Colors.indigo,
                 width: 3,
@@ -308,7 +308,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                 //disabledColor: Colors.grey,
                 child: Text(_mRecorder!.isRecording ? 'Stop' : 'Record'),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Text(_mRecorder!.isRecording
@@ -323,7 +323,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
             width: double.infinity,
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              color: Color(0xFFFAF0E6),
+              color: const Color(0xFFFAF0E6),
               border: Border.all(
                 color: Colors.indigo,
                 width: 3,
@@ -338,7 +338,7 @@ class _SimpleRecorderState extends State<SimpleRecorder> {
                 //disabledColor: Colors.grey,
                 child: Text(_mPlayer!.isPlaying ? 'Stop' : 'Play'),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               Text(_mPlayer!.isPlaying

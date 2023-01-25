@@ -54,7 +54,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => VocaTopicScreen(),
+                                builder: (context) => const VocaTopicScreen(),
                               ),
                             );
                           },
@@ -66,7 +66,7 @@ class HomePage extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => PronunciationLesson(),
+                                builder: (context) => const PronunciationLesson(),
                               ),
                             );
                           },
@@ -127,7 +127,7 @@ class HomePage extends StatelessWidget {
                 onPressed: () {
                   AuthService.LogOut();
                 },
-                child: Text('Đăng xuất')),
+                child: const Text('Đăng xuất')),
           ],
         ),
       ),

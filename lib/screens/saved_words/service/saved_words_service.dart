@@ -11,7 +11,7 @@ class SavedWordsService {
   }
 
   static Future<List<SavedWordsModel>> Read() async {
-    User user = await FirebaseAuth.instance.currentUser!;
+    User user = FirebaseAuth.instance.currentUser!;
     String id = user.uid;
 
     QuerySnapshot<Map<String, dynamic>> snapshot =
@@ -25,9 +25,9 @@ class SavedWordsService {
       return (element.userid == id);
     }).toList();
 
-    if (allList.length == 0) {
-      SavedWordsModel achievementModel = new SavedWordsModel(
-        userid: user.uid!,
+    if (allList.isEmpty) {
+      SavedWordsModel achievementModel = SavedWordsModel(
+        userid: user.uid,
         words: [],
         meanings: [],
       );

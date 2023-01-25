@@ -213,20 +213,26 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
               builder: (_) => AssetGiffDialog(
                 image: Image.asset(
                   'assets/gif/not_done.gif',
-                  fit: BoxFit.cover,
-                  width: 10,
-                  height: 10,
+                  fit: BoxFit.contain,
                 ),
                 title: const Text(
-                  'Men Wearing Jackets',
+                  'Oops!!!',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
                 ),
                 entryAnimation: EntryAnimation.bottomRight,
                 description: const Text(
-                  'This is a men wearing jackets dialog box. This library helps you easily create fancy giff dialog.',
+                  'Có vẻ bạn chưa hoàn thành các từ vựng mới, bạn có chắc muốn tham gia bài kiểm tra chứ ?',
                   textAlign: TextAlign.center,
-                  style: TextStyle(),
+                  style: TextStyle(fontSize: 14),
+                ),
+                buttonOkText: const Text(
+                  'Tiếp tục',
+                  style: TextStyle(color: Colors.white),
+                ),
+                buttonCancelText: const Text(
+                  'Quay lại',
+                  style: TextStyle(color: Colors.white),
                 ),
                 onOkButtonPressed: () {
                   Navigator.push(
@@ -242,21 +248,29 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
               context: context,
               builder: (_) => AssetGiffDialog(
                 image: Image.asset(
-                  'assets/gif/not_done.gif',
+                  'assets/gif/done.gif',
                   fit: BoxFit.cover,
                   width: 10,
                   height: 10,
                 ),
                 title: const Text(
-                  'Congratulation !',
+                  'Chúc mừng !',
                   textAlign: TextAlign.center,
                   style: TextStyle(fontSize: 22.0, fontWeight: FontWeight.w600),
                 ),
                 entryAnimation: EntryAnimation.bottomRight,
                 description: const Text(
-                  'Start the challenge with some quizzes that help you to review your knowledge.',
+                  'Chà có vẻ bạn đã hoàn thành học các từ vựng mới, cùng kiểm tra lại kiến thức của mình nhé !',
                   textAlign: TextAlign.center,
                   style: TextStyle(),
+                ),
+                buttonOkText: const Text(
+                  'Tiếp tục',
+                  style: TextStyle(color: Colors.white),
+                ),
+                buttonCancelText: const Text(
+                  'Quay lại',
+                  style: TextStyle(color: Colors.white),
                 ),
                 onOkButtonPressed: () {
                   Navigator.push(

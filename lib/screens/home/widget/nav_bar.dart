@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:rive_animation/screens/auth/service/auth_service.dart';
 import 'package:rive_animation/screens/home/screen/profile_page.dart';
 
@@ -36,8 +32,8 @@ class _NavBarState extends State<NavBar> {
     return Drawer(
       child: ListView(padding: EdgeInsets.zero, children: <Widget>[
         UserAccountsDrawerHeader(
-          accountName: Text('John Wiston'),
-          accountEmail: Text('john134@gmail.com'),
+          accountName: const Text('John Wiston'),
+          accountEmail: const Text('john134@gmail.com'),
           currentAccountPicture: FutureBuilder(
             future: detailUserModels,
             builder: (BuildContext context,
@@ -81,7 +77,7 @@ class _NavBarState extends State<NavBar> {
             //   ),
             // ),
           ),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt5KENnAJ_Vfx8W3gzM_U79r3zNwppNXCknA&usqp=CAU'),
@@ -89,22 +85,22 @@ class _NavBarState extends State<NavBar> {
             ),
           ),
         ),
-        ListTile(
+        const ListTile(
           leading: Icon(Icons.description),
           title: Text('Chính sách'),
           onTap: null,
         ),
         ListTile(
-          leading: Icon(Icons.account_balance_outlined),
-          title: Text('Trang cá nhân'),
+          leading: const Icon(Icons.account_balance_outlined),
+          title: const Text('Trang cá nhân'),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfileScreen()));
           },
         ),
         ListTile(
-          leading: Icon(Icons.exit_to_app),
-          title: Text('Đăng xuất'),
+          leading: const Icon(Icons.exit_to_app),
+          title: const Text('Đăng xuất'),
           onTap: () async {
             await AuthService.LogOut();
           },

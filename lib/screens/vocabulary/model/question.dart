@@ -1,4 +1,5 @@
 
+
 class Question {
   String id;
   String topic;
@@ -6,6 +7,7 @@ class Question {
   final String image;
   bool isLocked;
   int? selectedIndex;
+  final Map<String, bool> options;
 
   Question(
       {this.id = '',
@@ -13,7 +15,8 @@ class Question {
       required this.text,
       required this.image,
       this.isLocked = false,
-      this.selectedIndex});
+      this.selectedIndex,
+      required this.options});
   Map<String, dynamic> toJson() => {
         'id': id,
         'topic': topic,
@@ -21,5 +24,6 @@ class Question {
         'image': image,
         'isLocked': isLocked,
         'selectedOption': selectedIndex,
+        'options': options,
       };
 }

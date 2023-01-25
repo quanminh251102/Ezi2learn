@@ -1,13 +1,7 @@
-import 'dart:async';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
 import 'package:rive_animation/main.dart';
-import './login_page.dart';
-import '../utils/colors.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -50,14 +44,14 @@ class _SplashScreenState extends State<SplashScreen> {
         //duration: 4000,
         //splashTransition: SplashTransition.slideTransition,
         backgroundColor: Colors.white,
-        nextScreen: MainPage(),
+        nextScreen: const MainPage(),
         splash: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Container(
+                  SizedBox(
                       // color: Colors.amber,
                       height: screenSize.height * 0.3,
                       width: screenSize.width * 0.5,
