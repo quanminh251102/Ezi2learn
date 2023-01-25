@@ -29,23 +29,23 @@ class ProfileListItem extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(kSpacingUnit.w * 3),
-        color: Color.fromARGB(96, 231, 230, 230),
+        color: const Color.fromARGB(96, 231, 230, 230),
       ),
       child: Row(
         children: <Widget>[
           Icon(
-            this.icon,
+            icon,
             size: kSpacingUnit.w * 2.5,
           ),
           SizedBox(width: kSpacingUnit.w * 1.5),
           Text(
-            this.text,
+            text,
             style: kTitleTextStyle.copyWith(
               fontWeight: FontWeight.w500,
             ),
           ),
-          Spacer(),
-          if (this.hasNavigation)
+          const Spacer(),
+          if (hasNavigation)
             Icon(
               LineAwesomeIcons.angle_right,
               size: kSpacingUnit.w * 2.5,

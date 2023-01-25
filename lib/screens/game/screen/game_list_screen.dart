@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import '../../home/screen/home_page.dart' as NewHomePage;
 
 class GameListScreen extends StatefulWidget {
@@ -50,7 +48,7 @@ class _GameListScreenState extends State<GameListScreen> {
                   right: 0,
                   child: Container(
                     height: 60,
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(20),
                           bottomRight: Radius.circular(20)),
@@ -73,36 +71,36 @@ class _GameListScreenState extends State<GameListScreen> {
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         Column(
                           children: [
                             Text(title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color.fromARGB(226, 255, 255, 255),
                                     fontSize: 25)),
                             Text(title,
-                                style: TextStyle(
+                                style: const TextStyle(
                                     color: Color.fromARGB(226, 255, 255, 255),
                                     fontSize: 25)),
                           ],
                         ),
-                        SizedBox(width: 100),
+                        const SizedBox(width: 100),
                         ElevatedButton(
                           onPressed: () async {},
-                          child: Text(
+                          style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xffFFDA2C),
+                              shape: const StadiumBorder(),
+                              minimumSize: const Size(
+                                50,
+                                30,
+                              )),
+                          child: const Text(
                             'Chơi ngay',
                             style: TextStyle(
                               color: Color.fromARGB(255, 87, 87, 87),
                               fontWeight: FontWeight.w700,
                             ),
                           ),
-                          style: ElevatedButton.styleFrom(
-                              backgroundColor: Color(0xffFFDA2C),
-                              shape: StadiumBorder(),
-                              minimumSize: Size(
-                                50,
-                                30,
-                              )),
                         ),
                       ],
                     ),
@@ -113,7 +111,7 @@ class _GameListScreenState extends State<GameListScreen> {
       );
     }
 
-    final _appBar = AppBar(
+    final appBar = AppBar(
       centerTitle: true,
       backgroundColor: Colors.white,
       elevation: 0,
@@ -127,7 +125,7 @@ class _GameListScreenState extends State<GameListScreen> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => NewHomePage.HomePage(),
+              builder: (context) => const NewHomePage.HomePage(),
             ),
           );
         },
@@ -139,7 +137,7 @@ class _GameListScreenState extends State<GameListScreen> {
     );
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: _appBar,
+      appBar: appBar,
       body: Column(
         children: [
           Padding(
@@ -147,9 +145,9 @@ class _GameListScreenState extends State<GameListScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: const Text('Hãy chọn game để ôn tập',
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text('Hãy chọn game để ôn tập',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,

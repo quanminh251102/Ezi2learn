@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:rive_animation/screens/home/service/achievenment_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/finish_lesson.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -13,11 +12,8 @@ import 'package:rive_animation/screens/saved_words/service/saved_words_service.d
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../../../main.dart';
-import '../data/pronounciation_data.dart';
 import 'dart:io';
 import '../models/pronounciation_model.dart';
-import '../../home/screen/home_page.dart' as NewHomePage;
 
 class LessonDetail extends StatefulWidget {
   final PronuciationLessonModel speakLesson;
@@ -38,11 +34,11 @@ class _LessonDetailState extends State<LessonDetail> {
       "Hãy đọc tất cả các từ để phần mềm\n chấm điểm cho bạn chính xác nhất.";
 
   void reset() async {
-    if (_currentWord + 1 == widget.speakLesson.words!.length) {
+    if (_currentWord + 1 == widget.speakLesson.words.length) {
       showDialog(
           context: context,
           barrierDismissible: false,
-          builder: (context) => Center(
+          builder: (context) => const Center(
                 child: CircularProgressIndicator(),
               ));
 
@@ -146,7 +142,7 @@ class _LessonDetailState extends State<LessonDetail> {
       setState(() {
         _isListening = false;
         if (state == "Mình đang nghe...") state = "Đến lượt bạn";
-        if (_text == widget.speakLesson.words![_currentWord]) {
+        if (_text == widget.speakLesson.words[_currentWord]) {
           player.play(AssetSource("audio/right_answer.mp3"));
           setState(() {
             isCorrect = true;
@@ -577,9 +573,9 @@ class _LessonDetailState extends State<LessonDetail> {
                         SavedWordsService.Read().then((value) async {
                           SavedWordsModel savedWordsModel = value[0];
                           savedWordsModel.words
-                              .add(widget.speakLesson.words![_currentWord]);
+                              .add(widget.speakLesson.words[_currentWord]);
                           savedWordsModel.meanings
-                              .add(widget.speakLesson.meanings![_currentWord]);
+                              .add(widget.speakLesson.meanings[_currentWord]);
 
                           print(savedWordsModel.toJson());
                           print("kiet debug here");

@@ -1,11 +1,4 @@
-import 'dart:math';
 
-import 'package:firebase_admin/firebase_admin.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:rive_animation/screens/home/models/achievement_model.dart';
@@ -38,42 +31,42 @@ class _RankingScreenState extends State<RankingScreen> {
     setState(() {
       isLoading = true;
     });
-    List<DetailUserModel> temp_list = [];
-    List<int> temp_list_point = [];
+    List<DetailUserModel> tempList = [];
+    List<int> tempListPoint = [];
 
     await DetailUserService.ReadAll().then((value) {
-      temp_list = value;
+      tempList = value;
     });
 
-    for (var item in temp_list) {
+    for (var item in tempList) {
       print(item.toJson());
       await AchievenmentService.ReadWithUserId(item.userId).then((value) {
         AchievementModel achievementModel = value[0];
         int totalPoint = achievementModel.toltalSpeakingPoint +
             achievementModel.toltalVocabularyPoint;
-        temp_list_point.add(totalPoint);
+        tempListPoint.add(totalPoint);
       });
     }
 
     // sort
-    for (int i = 0; i < temp_list_point.length - 1; i++) {
-      for (int j = i + 1; j <= temp_list_point.length - 1; j++) {
-        if (temp_list_point[i] < temp_list_point[j]) {
-          var temp = temp_list_point[i];
-          temp_list_point[i] = temp_list_point[j];
-          temp_list_point[j] = temp;
+    for (int i = 0; i < tempListPoint.length - 1; i++) {
+      for (int j = i + 1; j <= tempListPoint.length - 1; j++) {
+        if (tempListPoint[i] < tempListPoint[j]) {
+          var temp = tempListPoint[i];
+          tempListPoint[i] = tempListPoint[j];
+          tempListPoint[j] = temp;
 
-          var temp2 = temp_list[i];
-          temp_list[i] = temp_list[j];
-          temp_list[j] = temp2;
+          var temp2 = tempList[i];
+          tempList[i] = tempList[j];
+          tempList[j] = temp2;
         }
       }
     }
-    print(temp_list_point);
+    print(tempListPoint);
 
     setState(() {
-      list = temp_list;
-      list_point = temp_list_point;
+      list = tempList;
+      list_point = tempListPoint;
       isLoading = false;
     });
   }
@@ -84,7 +77,7 @@ class _RankingScreenState extends State<RankingScreen> {
       //color: Color.fromARGB(255, 245, 231, 111),
       //padding: EdgeInsets.all(24),
       child: Column(children: [
-        SizedBox(
+        const SizedBox(
           height: 24,
         ),
         Row(
@@ -101,7 +94,7 @@ class _RankingScreenState extends State<RankingScreen> {
               visible: (list.length >= 2) ? true : false,
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   CircleAvatar(
@@ -117,16 +110,16 @@ class _RankingScreenState extends State<RankingScreen> {
                     (list.length >= 2
                         ? '${list[1].gmail.substring(0, 6)}...'
                         : '???'),
-                    style: TextStyle(fontSize: 13),
+                    style: const TextStyle(fontSize: 13),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
                     width: 60,
                     height: 65,
                     color: Colors.yellow,
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       '2',
                       style: TextStyle(
@@ -139,36 +132,36 @@ class _RankingScreenState extends State<RankingScreen> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               width: 24,
             ),
             Visibility(
-              visible: (list.length >= 1) ? true : false,
+              visible: (list.isNotEmpty) ? true : false,
               child: Column(
                 children: [
                   CircleAvatar(
                       radius: 30,
                       backgroundImage: NetworkImage(
-                        list.length >= 1
+                        list.isNotEmpty
                             ? (list[0].avatarUrl == ''
                                 ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
                                 : list[0].avatarUrl)
                             : 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
                       )),
                   Text(
-                    (list.length >= 1
+                    (list.isNotEmpty
                         ? '${list[0].gmail.substring(0, 6)}...'
                         : '???'),
-                    style: TextStyle(fontSize: 13),
+                    style: const TextStyle(fontSize: 13),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   Container(
                     width: 64,
                     height: 90,
                     color: Colors.yellow,
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       '1',
                       style: TextStyle(
@@ -180,14 +173,14 @@ class _RankingScreenState extends State<RankingScreen> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               width: 24,
             ),
             Visibility(
               visible: (list.length >= 3) ? true : false,
               child: Column(
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 50,
                   ),
                   CircleAvatar(
@@ -203,16 +196,16 @@ class _RankingScreenState extends State<RankingScreen> {
                     (list.length >= 3
                         ? '${list[2].gmail.substring(0, 6)}...'
                         : '???'),
-                    style: TextStyle(fontSize: 13),
+                    style: const TextStyle(fontSize: 13),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 20,
                   ),
                   Container(
                     width: 60,
                     height: 36,
                     color: Colors.yellow,
-                    child: Center(
+                    child: const Center(
                         child: Text(
                       '3',
                       style: TextStyle(
@@ -226,7 +219,7 @@ class _RankingScreenState extends State<RankingScreen> {
             ),
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 24,
         ),
         CustomCard(
@@ -234,8 +227,8 @@ class _RankingScreenState extends State<RankingScreen> {
           borderRadius: 12,
           color: Colors.white,
           childPadding: 4,
-          child: (list.length == 0)
-              ? Center(
+          child: (list.isEmpty)
+              ? const Center(
                   child: Text('Danh sách trống'),
                 )
               : ListView(children: [
@@ -265,7 +258,7 @@ class _RankingScreenState extends State<RankingScreen> {
       ]),
     );
     return (isLoading)
-        ? Center(child: CircularProgressIndicator())
+        ? const Center(child: CircularProgressIndicator())
         // : FutureBuilder(
         //     future: init(),
         //     builder: (snap, context) {

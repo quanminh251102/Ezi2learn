@@ -1,8 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:rive_animation/screens/auth/service/auth_service.dart';
 import 'package:rive_animation/screens/home/screen/profile_page.dart';
 
@@ -95,8 +91,8 @@ class _NavBarState extends State<NavBar> {
           onTap: null,
         ),
         ListTile(
-          leading: Icon(Icons.account_balance_outlined),
-          title: Text('Trang cá nhân'),
+          leading: const Icon(Icons.account_balance_outlined),
+          title: const Text('Trang cá nhân'),
           onTap: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => ProfileScreen()));

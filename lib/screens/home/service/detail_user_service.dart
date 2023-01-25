@@ -22,7 +22,7 @@ class DetailUserService {
   }
 
   static Future<List<DetailUserModel>> Read() async {
-    User user = await FirebaseAuth.instance.currentUser!;
+    User user = FirebaseAuth.instance.currentUser!;
     String id = user.uid;
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await db.collection(name).get();
@@ -35,15 +35,15 @@ class DetailUserService {
       return (element.userId == id);
     }).toList();
 
-    if (allList.length == 0) {
-      DetailUserModel detailUserModel = new DetailUserModel(
-        userId: user?.uid as String,
+    if (allList.isEmpty) {
+      DetailUserModel detailUserModel = DetailUserModel(
+        userId: user.uid,
         birthDay: DateTime.now(),
         address: '',
         gender: '',
         avatarUrl: '',
         phoneNumber: '',
-        gmail: user?.email as String,
+        gmail: user.email as String,
       );
 
       await DetailUserService.Create(detailUserModel);

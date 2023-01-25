@@ -33,7 +33,7 @@ class _QuizCardState extends State<QuizCard> {
       ),
       child: Container(
         decoration: BoxDecoration(
-            color: Color(0xffDBF9F8),
+            color: const Color(0xffDBF9F8),
             borderRadius: BorderRadius.circular(10),
             border: Border.all(width: 2, color: Colors.black)),
         child: Center(

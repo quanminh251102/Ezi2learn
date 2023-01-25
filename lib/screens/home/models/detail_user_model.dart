@@ -1,4 +1,3 @@
-import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -38,12 +37,10 @@ class DetailUserModel {
       : id = doc.id,
         userId = doc.data()!["userId"],
         birthDay = (doc.data()!["birthDay"] as Timestamp).toDate(),
-        address = doc.data()?["address"] == null ? '' : doc.data()?["address"],
-        gender = doc.data()?["gender"] == null ? '' : doc.data()?["gender"],
+        address = doc.data()?["address"] ?? '',
+        gender = doc.data()?["gender"] ?? '',
         avatarUrl =
-            doc.data()?["avatarUrl"] == null ? '' : doc.data()?["avatarUrl"],
-        phoneNumber = doc.data()?["phoneNumber"] == null
-            ? ''
-            : doc.data()?["phoneNumber"],
-        gmail = doc.data()?["gmail"] == null ? '' : doc.data()?["gmail"];
+            doc.data()?["avatarUrl"] ?? '',
+        phoneNumber = doc.data()?["phoneNumber"] ?? '',
+        gmail = doc.data()?["gmail"] ?? '';
 }

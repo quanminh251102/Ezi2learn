@@ -1,9 +1,5 @@
-import 'dart:ffi';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:rive_animation/screens/saved_words/model/saved_words_screen_model.dart';
 import 'package:rive_animation/screens/saved_words/service/saved_words_service.dart';
@@ -66,41 +62,41 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
   @override
   Widget build(BuildContext context) {
     return (isLoading)
-        ? Center(
+        ? const Center(
             child: CircularProgressIndicator(),
           )
         : Container(
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
               children: [
-                SizedBox(height: 8),
+                const SizedBox(height: 8),
                 TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search),
                       hintText: "Tìm từ trong danh sách"),
                   onChanged: (value) {
-                    List<String> new_words = [];
-                    List<String> new_meanings = [];
+                    List<String> newWords = [];
+                    List<String> newMeanings = [];
                     for (int i = 0; i < words.length; i++) {
                       if (words[i].contains(value.trim())) {
-                        new_words.add(words[i]);
-                        new_meanings.add(meanings[i]);
+                        newWords.add(words[i]);
+                        newMeanings.add(meanings[i]);
                       }
                     }
                     setState(() {
-                      _searchResult_words = new_words;
-                      _searchResult_meanings = new_meanings;
+                      _searchResult_words = newWords;
+                      _searchResult_meanings = newMeanings;
                     });
                   },
                 ),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 CustomCard(
                   height: 440,
                   borderRadius: 12,
                   color: Colors.white,
                   childPadding: 4,
-                  child: (_searchResult_words.length == 0)
-                      ? Center(
+                  child: (_searchResult_words.isEmpty)
+                      ? const Center(
                           child: Text('Danh sách trống'),
                         )
                       : ListView(children: [
@@ -110,7 +106,7 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
                             ListTile(
                               leading: CustomCard(
                                 borderRadius: 80,
-                                child: Icon(
+                                child: const Icon(
                                   Icons.volume_up,
                                   color: Colors.black,
                                 ),

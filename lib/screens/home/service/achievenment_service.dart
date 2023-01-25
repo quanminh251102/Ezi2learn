@@ -11,7 +11,7 @@ class AchievenmentService {
   }
 
   static Future<List<AchievementModel>> Read() async {
-    User user = await FirebaseAuth.instance.currentUser!;
+    User user = FirebaseAuth.instance.currentUser!;
     String id = user.uid;
 
     QuerySnapshot<Map<String, dynamic>> snapshot =
@@ -26,9 +26,9 @@ class AchievenmentService {
       return (element.userId == id);
     }).toList();
 
-    if (allList.length == 0) {
-      AchievementModel achievementModel = new AchievementModel(
-        userId: user.uid!,
+    if (allList.isEmpty) {
+      AchievementModel achievementModel = AchievementModel(
+        userId: user.uid,
         toltalSpeakingPoint: 0,
         toltalVocabularyPoint: 0,
       );
