@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_tts/flutter_tts.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:rive_animation/screens/home/service/achievenment_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/finish_lesson.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:highlight_text/highlight_text.dart';
+import 'package:rive_animation/screens/saved_words/model/saved_words_screen_model.dart';
+import 'package:rive_animation/screens/saved_words/service/saved_words_service.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:audioplayers/audioplayers.dart';
+import '../../../main.dart';
+import '../data/pronounciation_data.dart';
 import 'dart:io';
 import '../models/pronounciation_model.dart';
+import '../../home/screen/home_page.dart' as NewHomePage;
 
 class LessonDetail extends StatefulWidget {
   final PronuciationLessonModel speakLesson;
@@ -31,13 +38,23 @@ class _LessonDetailState extends State<LessonDetail> {
       "Hãy đọc tất cả các từ để phần mềm\n chấm điểm cho bạn chính xác nhất.";
 
   void reset() async {
-    if (_currentWord + 1 == widget.speakLesson.words.length) {
+    if (_currentWord + 1 == widget.speakLesson.words!.length) {
+      showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) => Center(
+                child: CircularProgressIndicator(),
+              ));
+
+      await AchievenmentService.Update("Pronunciation");
+
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => const FinishLesson(),
         ),
       );
+      //navigatorKey.currentState!.popUntil((route) => route.isFirst);
     } else {
       setState(() {
         isCorrect = false;
@@ -117,20 +134,8 @@ class _LessonDetailState extends State<LessonDetail> {
         });
         _speech!.listen(
           onResult: (val) => setState(() {
-            _text = val.recognizedWords;
+            _text = val.recognizedWords.toLowerCase();
 
-            if (_text == widget.speakLesson.words[_currentWord]) {
-              player.play(AssetSource("audio/right_answer.mp3"));
-              setState(() {
-                isCorrect = true;
-                state = "Bạn đã phát âm chính xác";
-              });
-            } else {
-              player.play(AssetSource("audio/wrong_answer.mp3"));
-              setState(() {
-                state = "Bạn đã phát âm sai";
-              });
-            }
             if (val.hasConfidenceRating && val.confidence > 0) {
               _confidence = val.confidence;
             }
@@ -141,6 +146,19 @@ class _LessonDetailState extends State<LessonDetail> {
       setState(() {
         _isListening = false;
         if (state == "Mình đang nghe...") state = "Đến lượt bạn";
+        if (_text == widget.speakLesson.words![_currentWord]) {
+          player.play(AssetSource("audio/right_answer.mp3"));
+          setState(() {
+            isCorrect = true;
+            state = "Bạn đã phát âm chính xác";
+          });
+        } else {
+          player.play(AssetSource("audio/wrong_answer.mp3"));
+          setState(() {
+            state = "Bạn đã phát âm sai";
+            isCorrect = false;
+          });
+        }
       });
       //await stop();
       //recorder.closeRecorder();
@@ -242,7 +260,9 @@ class _LessonDetailState extends State<LessonDetail> {
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: GestureDetector(
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+            },
             child: const Icon(
               Icons.arrow_back_ios_rounded,
               color: Colors.black,
@@ -363,7 +383,9 @@ class _LessonDetailState extends State<LessonDetail> {
                               child: (i == 1)
                                   ? ElevatedButton(
                                       onPressed: () {
-                                        reset();
+                                        if (isCorrect == true) {
+                                          reset();
+                                        }
                                       },
                                       style: ElevatedButton.styleFrom(
                                           backgroundColor: (isCorrect)
@@ -535,10 +557,7 @@ class _LessonDetailState extends State<LessonDetail> {
                           child: CustomCard(
                             borderRadius: 130,
                             child: const Icon(Icons.bookmark),
-                            onTap: () {
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            },
+                            onTap: () {},
                           ),
                         ),
                       ],
@@ -552,7 +571,22 @@ class _LessonDetailState extends State<LessonDetail> {
                       borderRadius: 130,
                       child: const Icon(Icons.bookmark),
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        print("kiet debug 1");
+                        SavedWordsModel? temp;
+
+                        SavedWordsService.Read().then((value) async {
+                          SavedWordsModel savedWordsModel = value[0];
+                          savedWordsModel.words
+                              .add(widget.speakLesson.words![_currentWord]);
+                          savedWordsModel.meanings
+                              .add(widget.speakLesson.meanings![_currentWord]);
+
+                          print(savedWordsModel.toJson());
+                          print("kiet debug here");
+                          await SavedWordsService.Update(savedWordsModel);
+
+                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                        });
                       },
                     ),
                   ),

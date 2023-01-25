@@ -33,102 +33,87 @@ void showCustomDialog(BuildContext context, {required ValueChanged onValue}) {
             ],
           ),
           child: Scaffold(
+            //resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            body: Stack(
-              clipBehavior: Clip.none,
-              children: [
-                Column(
-                  children: [
-                    const Text(
-                      "Đăng nhập",
-                      style: TextStyle(
-                        fontSize: 34,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: Text(
-                        "Cùng Ezi2learn bắt đầu hành trình khám phá tiếng Anh nào!",
-                        textAlign: TextAlign.center,
-                      ),
-                    ),
-                    const SignInForm(),
-                    Row(
-                      children: const [
-                        Expanded(
-                          child: Divider(),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: Text(
-                            "Hoặc",
-                            style: TextStyle(
-                              color: Colors.black26,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
-                        Expanded(child: Divider()),
-                      ],
-                    ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(vertical: 24),
-                      child: Text(
-                        "Đăng nhập bằng Email, Apple hoặc Google",
-                        style: TextStyle(color: Colors.black54),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          padding: EdgeInsets.zero,
-                          icon: SvgPicture.asset(
-                            "assets/icons/email_box.svg",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          padding: EdgeInsets.zero,
-                          icon: SvgPicture.asset(
-                            "assets/icons/apple_box.svg",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
-                        IconButton(
-                          onPressed: () {},
-                          padding: EdgeInsets.zero,
-                          icon: SvgPicture.asset(
-                            "assets/icons/google_box.svg",
-                            height: 64,
-                            width: 64,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                const Positioned(
-                  left: 0,
-                  right: 0,
-                  bottom: -48,
-                  child: CircleAvatar(
-                    radius: 16,
-                    backgroundColor: Colors.white,
-                    child: Icon(
-                      Icons.close,
-                      size: 20,
-                      color: Colors.black,
+            body: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Column(
+                children: [
+                  const Text(
+                    "Đăng nhập",
+                    style: TextStyle(
+                      fontSize: 34,
+                      fontFamily: "Poppins",
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                )
-              ],
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    child: Text(
+                      "Cùng Ezi2learn bắt đầu hành trình khám phá tiếng Anh nào!",
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  const SignInForm(),
+                  Row(
+                    children: const [
+                      Expanded(
+                        child: Divider(),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          "Hoặc",
+                          style: TextStyle(
+                            color: Colors.black26,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                      Expanded(child: Divider()),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 24),
+                    child: Text(
+                      "Đăng nhập bằng Email, Apple hoặc Google",
+                      style: TextStyle(color: Colors.black54),
+                    ),
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.zero,
+                        icon: SvgPicture.asset(
+                          "assets/icons/email_box.svg",
+                          height: 64,
+                          width: 64,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.zero,
+                        icon: SvgPicture.asset(
+                          "assets/icons/apple_box.svg",
+                          height: 64,
+                          width: 64,
+                        ),
+                      ),
+                      IconButton(
+                        onPressed: () {},
+                        padding: EdgeInsets.zero,
+                        icon: SvgPicture.asset(
+                          "assets/icons/google_box.svg",
+                          height: 64,
+                          width: 64,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ),
         ),

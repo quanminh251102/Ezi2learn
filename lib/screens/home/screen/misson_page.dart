@@ -1,7 +1,11 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/src/widgets/container.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/material.dart';
+import 'package:rive_animation/screens/game/screen/game_list_screen.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 
-import '../pronunciation/screen/pronunciation_lesson.dart';
+import '../../pronunciation/screen/pronunciation_lesson.dart';
 
 class MissonPage extends StatefulWidget {
   const MissonPage({super.key});
@@ -21,21 +25,27 @@ class _MissonPageState extends State<MissonPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const PronunciationLesson(),
+                builder: (context) => PronunciationLesson(),
               ),
             );
-          }
-          else if(title == "Vocabulary"){
+          } else if (title == "Vocabulary") {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => const VocaTopicScreen(),
+                builder: (context) => VocaTopicScreen(),
+              ),
+            );
+          } else if (title == "Gaming") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GameListScreen(),
               ),
             );
           }
         },
         child: Container(
-            margin: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+            margin: EdgeInsets.zero, //EdgeInsets.fromLTRB(20, 0, 20, 20),
             height: 200,
             child: Stack(
               children: [
@@ -51,10 +61,10 @@ class _MissonPageState extends State<MissonPage> {
                   right: 0,
                   child: Container(
                     height: 60,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10)),
+                          bottomLeft: Radius.circular(20),
+                          bottomRight: Radius.circular(20)),
                       color: Color.fromARGB(96, 0, 0, 0),
                       // gradient: LinearGradient(
                       //     begin: Alignment.bottomCenter,
@@ -75,15 +85,15 @@ class _MissonPageState extends State<MissonPage> {
                         ClipOval(
                             child: Container(
                           color: iconColor,
-                          padding: const EdgeInsets.all(8),
-                          child: const Icon(
+                          padding: EdgeInsets.all(8),
+                          child: Icon(
                             Icons.add_task,
                             color: Colors.white,
                           ),
                         )),
-                        const SizedBox(width: 10),
+                        SizedBox(width: 10),
                         Text(title,
-                            style: const TextStyle(
+                            style: TextStyle(
                                 color: Color.fromARGB(226, 255, 255, 255),
                                 fontSize: 25))
                       ],
@@ -102,9 +112,9 @@ class _MissonPageState extends State<MissonPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Text('Thử Thách Hôm Nay',
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: const Text('Thử Thách Hôm Nay',
                     style: TextStyle(
                         color: Colors.black,
                         fontSize: 20,
@@ -114,23 +124,50 @@ class _MissonPageState extends State<MissonPage> {
                 height: 20,
               ),
               SizedBox(
-                height: 500,
+                height: 300,
                 child: ListView(
-                  scrollDirection: Axis.vertical,
+                  scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    missionCard(
-                        'assets/images/voca.jpg', 'Vocabulary', Colors.brown),
-                    missionCard(
-                        'assets/images/speaking.png', 'Speaking', Colors.grey),
-                    missionCard('assets/images/dictionary.jpg', 'Listening',
-                        Colors.orange),
-                    missionCard('assets/images/dictionary.jpg', 'Gaming',
-                        Colors.orange),
-                    missionCard(
-                        'assets/images/grammar.jpg', 'Grammar', Colors.green),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/voca.jpg',
+                            'Vocabulary', Colors.brown),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/speaking.png',
+                            'Speaking', Colors.grey),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/dictionary.jpg',
+                            'Listening', Colors.orange),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
+                      child: SizedBox(
+                        width: 250,
+                        child: missionCard('assets/images/dictionary.jpg',
+                            'Gaming', Colors.orange),
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+                child: missionCard(
+                    'assets/images/grammar.jpg', 'Grammar', Colors.green),
+              ),
             ],
           ),
         ),

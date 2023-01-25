@@ -70,6 +70,14 @@ dependencies:
   giff_dialog: ^1.0.1
   word_search_safety: ^0.1.2-nullsafety.1
 
+  flutter_screenutil: ^5.6.0
+  animated_theme_switcher: ^2.0.7
+  line_awesome_flutter: ^2.0.0
+  file_picker: ^5.2.5
+  provider: ^6.0.5
+  mask_text_input_formatter: ^2.4.0
+  firebase_admin: ^0.2.0
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

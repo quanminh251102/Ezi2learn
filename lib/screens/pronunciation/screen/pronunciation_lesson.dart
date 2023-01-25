@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
+import 'package:rive_animation/screens/home/models/achievement_model.dart';
+import 'package:rive_animation/screens/home/service/achievenment_service.dart';
 import 'package:rive_animation/screens/pronunciation/screen/lesson_detail.dart';
 import 'package:rive_animation/screens/pronunciation/service/pronunciation_service.dart';
 import '../data/pronounciation_data.dart';
 import '../models/pronounciation_model.dart';
 import 'package:shimmer/shimmer.dart';
+import '../../home/screen/home_page.dart' as NewHomePage;
 
 class PronunciationLesson extends StatefulWidget {
   const PronunciationLesson({super.key});
@@ -17,6 +20,12 @@ class PronunciationLesson extends StatefulWidget {
 class _PronunciationLessonState extends State<PronunciationLesson> {
   bool isLoading = false;
   List<PronuciationLessonModel> list = [];
+  AchievementModel? achievementModel;
+  final int pointEachLevel = 3;
+  int currentPoint = 0;
+  double processValue = 0;
+  int point_need_to_up_level = 0;
+  int currentLevel = 0;
 
   @override
   void initState() {
@@ -28,9 +37,23 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
     });
 
     PronounciationService.Read(null).then((value) {
-      setState(() {
-        list = value;
-        isLoading = false;
+      AchievenmentService.Read().then((value_achi) {
+        setState(() {
+          achievementModel = value_achi[0];
+          list = value;
+
+          currentPoint =
+              achievementModel!.toltalSpeakingPoint % this.pointEachLevel;
+          processValue = (currentPoint.toDouble() / this.pointEachLevel) * 100;
+
+          currentLevel =
+              achievementModel!.toltalSpeakingPoint ~/ this.pointEachLevel;
+
+          point_need_to_up_level = this.pointEachLevel -
+              (achievementModel!.toltalSpeakingPoint % this.pointEachLevel);
+
+          isLoading = false;
+        });
       });
     });
   }
@@ -86,7 +109,14 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
               color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => NewHomePage.HomePage(),
+              ),
+            );
+          },
           child: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,
@@ -103,7 +133,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
                   backgroundColor: const Color(0xffC4C4C4),
                   changeProgressColor: const Color(0xffFFDA2C),
                   progressColor: const Color(0xffFFDA2C),
-                  currentValue: 80,
+                  currentValue: this.processValue,
                   displayText: '%',
                   size: 20,
                 )),
@@ -112,9 +142,9 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
+                  children: [
                     Text(
-                      'Level 3',
+                      'Level ${this.currentLevel}',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 12,
@@ -122,7 +152,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
                       ),
                     ),
                     Text(
-                      '54% - More 1250 pts to reach Level 4',
+                      '${this.processValue.toStringAsFixed(2)}% - More ${this.point_need_to_up_level} pts to reach Level ${this.currentLevel + 1}',
                       style: TextStyle(
                         fontWeight: FontWeight.w600,
                         fontSize: 12,
