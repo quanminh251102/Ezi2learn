@@ -1,7 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:rive_animation/screens/pronunciation/models/pronounciation_model.dart';
 import '../service/pronunciation_service.dart';
 import '../data/pronounciation_data.dart' as pronounciationData;
@@ -62,16 +59,16 @@ class _PronounciationExecuteServiceState
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('CRUD')),
+      appBar: AppBar(title: const Text('CRUD')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           mainAxisSize: MainAxisSize.max,
           children: [
-            ElevatedButton(onPressed: () => _creat(), child: Text('Create')),
-            ElevatedButton(onPressed: () => _read(), child: Text('Read')),
-            ElevatedButton(onPressed: () => _update(), child: Text('Update')),
-            ElevatedButton(onPressed: () => _delete(), child: Text('Delete'))
+            ElevatedButton(onPressed: () => _creat(), child: const Text('Create')),
+            ElevatedButton(onPressed: () => _read(), child: const Text('Read')),
+            ElevatedButton(onPressed: () => _update(), child: const Text('Update')),
+            ElevatedButton(onPressed: () => _delete(), child: const Text('Delete'))
           ],
         ),
       ),

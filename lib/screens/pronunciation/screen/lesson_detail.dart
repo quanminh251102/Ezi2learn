@@ -1,12 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_sound/flutter_sound.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:rive_animation/screens/pronunciation/screen/finish_lesson.dart';
-import 'package:rive_animation/screens/pronunciation/screen/pronunciation_lesson.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
@@ -14,14 +9,13 @@ import 'package:highlight_text/highlight_text.dart';
 import 'package:speech_to_text/speech_to_text.dart' as stt;
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../data/pronounciation_data.dart';
 import 'dart:io';
 import '../models/pronounciation_model.dart';
 
 class LessonDetail extends StatefulWidget {
   final PronuciationLessonModel speakLesson;
 
-  LessonDetail({Key? key, required this.speakLesson}) : super(key: key);
+  const LessonDetail({Key? key, required this.speakLesson}) : super(key: key);
   //LessonDetail({super.key});
 
   @override
@@ -37,11 +31,11 @@ class _LessonDetailState extends State<LessonDetail> {
       "Hãy đọc tất cả các từ để phần mềm\n chấm điểm cho bạn chính xác nhất.";
 
   void reset() async {
-    if (_currentWord + 1 == widget.speakLesson.words!.length) {
+    if (_currentWord + 1 == widget.speakLesson.words.length) {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => FinishLesson(),
+          builder: (context) => const FinishLesson(),
         ),
       );
     } else {
@@ -53,9 +47,9 @@ class _LessonDetailState extends State<LessonDetail> {
         _current = 0;
         _currentWord++;
         _text = 'Nhấn nút bên dưới và bắt đầu nói';
-        state = widget.speakLesson.words![_currentWord];
+        state = widget.speakLesson.words[_currentWord];
       });
-      await speak(widget.speakLesson.words![_currentWord], 0.8);
+      await speak(widget.speakLesson.words[_currentWord], 0.8);
       setState(() {
         state = "Đến lượt bạn";
       });
@@ -125,7 +119,7 @@ class _LessonDetailState extends State<LessonDetail> {
           onResult: (val) => setState(() {
             _text = val.recognizedWords;
 
-            if (_text == widget.speakLesson.words![_currentWord]) {
+            if (_text == widget.speakLesson.words[_currentWord]) {
               player.play(AssetSource("audio/right_answer.mp3"));
               setState(() {
                 isCorrect = true;
@@ -271,7 +265,7 @@ class _LessonDetailState extends State<LessonDetail> {
                         changeProgressColor: const Color(0xffFFDA2C),
                         progressColor: const Color(0xffFFDA2C),
                         currentValue: _currentWord /
-                            (widget.speakLesson.words!.length) *
+                            (widget.speakLesson.words.length) *
                             100,
                         displayText: '%',
                         size: 20,
@@ -280,7 +274,7 @@ class _LessonDetailState extends State<LessonDetail> {
                     Card(
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
-                        children: [],
+                        children: const [],
                       ),
                     ),
                     Padding(
@@ -302,24 +296,24 @@ class _LessonDetailState extends State<LessonDetail> {
                                   // mainAxisAlignment:
                                   //     MainAxisAlignment.spaceBetween,
                                   children: [
-                                    CircleAvatar(
+                                    const CircleAvatar(
                                       radius: 20.0,
                                       backgroundImage: NetworkImage(
                                           "https://cdn-icons-png.flaticon.com/512/5526/5526465.png"),
                                       backgroundColor: Colors.yellow,
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       width: 10,
                                     ),
                                     Text(
                                       state,
                                       textAlign: TextAlign.left,
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.w100),
                                     ),
                                   ]),
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 200,
                             )
                           ],
@@ -330,7 +324,7 @@ class _LessonDetailState extends State<LessonDetail> {
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Row(
-                          children: [
+                          children: const [
                             Icon(Icons.question_answer),
                             Text('Tra từ'),
                           ],
@@ -357,42 +351,42 @@ class _LessonDetailState extends State<LessonDetail> {
                             setState(() {
                               _current = index;
                             });
-                            print("change ${index}");
+                            print("change $index");
                           }),
                       items: [1, 2].map((i) {
                         return Builder(
                           builder: (BuildContext context) {
                             return Container(
                               width: MediaQuery.of(context).size.width,
-                              margin: EdgeInsets.symmetric(horizontal: 5.0),
+                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
                               //decoration: BoxDecoration(color: Colors.amber),
                               child: (i == 1)
                                   ? ElevatedButton(
                                       onPressed: () {
                                         reset();
                                       },
-                                      child: Text(
+                                      style: ElevatedButton.styleFrom(
+                                          backgroundColor: (isCorrect)
+                                              ? const Color(0xffFFDA2C)
+                                              : Colors.grey,
+                                          shape: const StadiumBorder(),
+                                          minimumSize: Size(
+                                            MediaQuery.of(context).size.width +
+                                                100,
+                                            50,
+                                          )),
+                                      child: const Text(
                                         'Tiếp theo',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w700,
                                         ),
                                       ),
-                                      style: ElevatedButton.styleFrom(
-                                          backgroundColor: (isCorrect)
-                                              ? Color(0xffFFDA2C)
-                                              : Colors.grey,
-                                          shape: StadiumBorder(),
-                                          minimumSize: Size(
-                                            MediaQuery.of(context).size.width +
-                                                100,
-                                            50,
-                                          )),
                                     )
                                   : Card(
                                       child: Center(
                                           child: Text(
-                                              'Dịch nghĩa : ${widget.speakLesson.meanings![_currentWord]}')),
+                                              'Dịch nghĩa : ${widget.speakLesson.meanings[_currentWord]}')),
                                     ),
                             );
                           },
@@ -425,7 +419,7 @@ class _LessonDetailState extends State<LessonDetail> {
                     child: Column(
                       children: [
                         Text(
-                          widget.speakLesson.words![_currentWord],
+                          widget.speakLesson.words[_currentWord],
                           style: TextStyle(
                             color: (state == "Bạn đã phát âm chính xác")
                                 ? Colors.lightGreen
@@ -436,7 +430,7 @@ class _LessonDetailState extends State<LessonDetail> {
                             fontWeight: FontWeight.w700,
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 24,
                         ),
                         Row(
@@ -449,9 +443,10 @@ class _LessonDetailState extends State<LessonDetail> {
                                     (isSpeaking) ? Colors.grey : Colors.black,
                               ),
                               onTap: () {
-                                if (!isSpeaking)
-                                  speak(widget.speakLesson.words![_currentWord],
+                                if (!isSpeaking) {
+                                  speak(widget.speakLesson.words[_currentWord],
                                       0.8);
+                                }
                               },
                             ),
                             const SizedBox(
@@ -465,9 +460,10 @@ class _LessonDetailState extends State<LessonDetail> {
                                     (isSpeaking) ? Colors.grey : Colors.black,
                               ),
                               onTap: () {
-                                if (!isSpeaking)
-                                  speak(widget.speakLesson.words![_currentWord],
+                                if (!isSpeaking) {
+                                  speak(widget.speakLesson.words[_currentWord],
                                       0.01);
+                                }
                               },
                             ),
                           ],
@@ -517,7 +513,7 @@ class _LessonDetailState extends State<LessonDetail> {
                           repeat: true,
                           child: FloatingActionButton(
                             backgroundColor:
-                                (isSpeaking) ? Colors.grey : Color(0xffFFDA2C),
+                                (isSpeaking) ? Colors.grey : const Color(0xffFFDA2C),
                             onPressed: (() {
                               // if (isRecord == false) {
                               //   record();

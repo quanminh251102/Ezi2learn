@@ -56,9 +56,6 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:rive_animation/screens/entry_point.dart';
 import '../service/auth_service.dart';
 import './signup_page.dart';
 import '../utils/colors.dart';
@@ -104,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                   Widget>[
             Container(
                 alignment: Alignment.center,
-                child: Image(image: AssetImage('assets/images/res-logo.png'))),
+                child: const Image(image: AssetImage('assets/images/res-logo.png'))),
             SizedBox(
               height: screenSize.height * 0.05,
             ),
@@ -118,20 +115,20 @@ class _LoginPageState extends State<LoginPage> {
             Form(
                 child: Column(
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
                     textInputAction: TextInputAction.next,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                         hintText: 'Email', border: InputBorder.none),
                   ),
                 ),
                 SizedBox(
                   height: screenSize.height * 0.02,
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width,
                   child: TextFormField(
                     controller: passController,
@@ -144,12 +141,12 @@ class _LoginPageState extends State<LoginPage> {
                         suffixIcon: IconButton(
                           icon: isObscure
                               ? Image(
-                                  image: AssetImage('assets/images/eyeOff.png'),
+                                  image: const AssetImage('assets/images/eyeOff.png'),
                                   height: screenSize.height * 0.03,
                                   width: screenSize.width * 0.05,
                                 )
                               : Image(
-                                  image: AssetImage('assets/images/eyeOn.png'),
+                                  image: const AssetImage('assets/images/eyeOn.png'),
                                   height: screenSize.height * 0.03,
                                   width: screenSize.width * 0.05,
                                 ),
@@ -182,7 +179,7 @@ class _LoginPageState extends State<LoginPage> {
                 showDialog(
                     context: context,
                     barrierDismissible: false,
-                    builder: (context) => Center(
+                    builder: (context) => const Center(
                           child: CircularProgressIndicator(),
                         ));
                 print("email : ${emailController.text}");
@@ -202,7 +199,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             Container(
               alignment: Alignment.center,
-              child: OrDivider(
+              child: const OrDivider(
                 text: 'Hoặc đăng nhập với',
               ),
             ),
@@ -238,11 +235,12 @@ class _LoginPageState extends State<LoginPage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
+              const Text(
                 'Chưa có tài khoản? ',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
               ),
               InkWell(
+                onTap: handleOnPressSignUpText,
                 child: Text(
                   'Đăng ký',
                   style: TextStyle(
@@ -250,7 +248,6 @@ class _LoginPageState extends State<LoginPage> {
                       fontWeight: FontWeight.w500,
                       color: MyColor.mainColor),
                 ),
-                onTap: handleOnPressSignUpText,
               ),
             ],
           ),

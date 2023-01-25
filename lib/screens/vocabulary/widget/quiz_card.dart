@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
-import 'package:rive_animation/screens/vocabulary/model/vocabulary.dart';
+import 'package:rive_animation/screens/vocabulary/model/question.dart';
 import 'package:rive_animation/screens/vocabulary/widget/speaker_button.dart';
 
 class QuizCard extends StatefulWidget {
-  const QuizCard({super.key, required this.vocabulary});
-  final Vocabulary vocabulary;
+  const QuizCard(
+      {super.key,
+      required this.question,
+      required this.currentQuestion,
+      required this.amountofQuestion});
+  final Question question;
+  final int currentQuestion;
+  final int amountofQuestion;
 
   @override
   State<QuizCard> createState() => _QuizCardState();
@@ -21,39 +27,55 @@ class _QuizCardState extends State<QuizCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Card(
-              child: Container(
-            height: 250,
-            width: 250,
-            decoration: BoxDecoration(
-                color: const Color(0xffDBF9F8),
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.black, width: 3),),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Align(
-                        alignment: Alignment.topRight,
-                        child: SpeakerButton(
-                          text: widget.vocabulary.text,
-                        )),
-                    Padding(
-                      padding: const EdgeInsets.all(30.0),
-                      child: SizedBox(
-                        width: 100,
-                        child: Image.network(widget.vocabulary.image),
-                      ),
+    return Padding(
+      padding: EdgeInsets.only(
+        top: MediaQuery.of(context).size.height * 0.02,
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+            color: Color(0xffDBF9F8),
+            borderRadius: BorderRadius.circular(10),
+            border: Border.all(width: 2, color: Colors.black)),
+        child: Center(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      margin: const EdgeInsets.all(10),
+                      child: Text(
+                          'Question ${widget.currentQuestion} / ${widget.amountofQuestion}',
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold)),
                     ),
-                  ]),
-            ),
-          )),
-        ],
+                  ),
+                  Align(
+                      alignment: Alignment.topRight,
+                      child: SpeakerButton(
+                        text: widget.question.text,
+                      )),
+                ],
+              ),
+              Card(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.35,
+                decoration: BoxDecoration(
+                  color: const Color(0xffDBF9F8),
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: SizedBox(
+                  width: 120,
+                  child: Image.network(widget.question.image),
+                ),
+              )),
+            ],
+          ),
+        ),
       ),
     );
     //

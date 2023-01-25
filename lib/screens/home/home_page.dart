@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:rive_animation/screens/home/misson_page.dart';
@@ -18,7 +16,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Widget _bottomNavigationBar = Container(
+    Widget bottomNavigationBar = Container(
       decoration: BoxDecoration(
         border: Border(
           top: BorderSide(width: 0.8, color: Colors.grey.shade200),
@@ -33,14 +31,14 @@ class _HomePageState extends State<HomePage> {
             activeColor: Colors.black,
             tabBackgroundColor: Colors.yellow.shade200,
             gap: 8,
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             onTabChange: ((value) {
               print(value);
               setState(() {
                 index = value;
               });
             }),
-            tabs: [
+            tabs: const [
               GButton(
                 icon: Icons.home,
                 text: 'Home',
@@ -61,13 +59,13 @@ class _HomePageState extends State<HomePage> {
       ),
     );
 
-    AppBar _appBar = AppBar(
+    AppBar appBar = AppBar(
       iconTheme: const IconThemeData(
         //size: 40, //change size on your need
         color: Colors.black, //change color on your need
       ),
       centerTitle: true,
-      title: Text(
+      title: const Text(
         'Home',
         style: TextStyle(
           color: Colors.black,
@@ -76,9 +74,9 @@ class _HomePageState extends State<HomePage> {
       ),
       backgroundColor: Colors.white,
       elevation: 0.4,
-      actions: [
+      actions: const [
         Padding(
-          padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
+          padding: EdgeInsets.fromLTRB(0, 0, 20, 0),
           child: CircleAvatar(
             radius: 20.0,
             backgroundImage: NetworkImage(
@@ -90,11 +88,11 @@ class _HomePageState extends State<HomePage> {
     );
 
     return Scaffold(
-      drawer: NavBar(),
-      appBar: _appBar,
+      drawer: const NavBar(),
+      appBar: appBar,
       backgroundColor: Colors.white,
-      bottomNavigationBar: _bottomNavigationBar,
-      body: (index == 0) ? MissonPage() : Text('text'),
+      bottomNavigationBar: bottomNavigationBar,
+      body: (index == 0) ? const MissonPage() : const Text('text'),
     );
   }
 }

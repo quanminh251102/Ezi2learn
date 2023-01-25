@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:rive_animation/screens/auth/service/auth_service.dart';
 
 class NavBar extends StatefulWidget {
@@ -16,8 +14,8 @@ class _NavBarState extends State<NavBar> {
     return Drawer(
       child: ListView(padding: EdgeInsets.zero, children: <Widget>[
         UserAccountsDrawerHeader(
-          accountName: Text('John Wiston'),
-          accountEmail: Text('john134@gmail.com'),
+          accountName: const Text('John Wiston'),
+          accountEmail: const Text('john134@gmail.com'),
           currentAccountPicture: CircleAvatar(
             child: ClipOval(
               child: Image.network(
@@ -28,7 +26,7 @@ class _NavBarState extends State<NavBar> {
               ),
             ),
           ),
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: NetworkImage(
                   'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRt5KENnAJ_Vfx8W3gzM_U79r3zNwppNXCknA&usqp=CAU'),
@@ -36,14 +34,14 @@ class _NavBarState extends State<NavBar> {
             ),
           ),
         ),
-        ListTile(
+        const ListTile(
           leading: Icon(Icons.description),
           title: Text('Chính sách'),
           onTap: null,
         ),
         ListTile(
-          leading: Icon(Icons.exit_to_app),
-          title: Text('Đăng xuất'),
+          leading: const Icon(Icons.exit_to_app),
+          title: const Text('Đăng xuất'),
           onTap: () async {
             await AuthService.LogOut();
           },

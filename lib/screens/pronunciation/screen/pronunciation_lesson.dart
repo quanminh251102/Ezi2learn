@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:rive_animation/screens/pronunciation/screen/lesson_detail.dart';
@@ -41,18 +39,18 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
   Widget build(BuildContext context) {
     Widget temp(int index, PronuciationLessonModel item) {
       return Container(
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(20),
           color: (index % 2 == 1)
               ? const Color(0xffFFDA2C)
-              : Color.fromARGB(255, 248, 230, 149),
+              : const Color.fromARGB(255, 248, 230, 149),
         ),
         child: ListTile(
-          title: Text(item.title!),
-          subtitle: Text(item.subTilte!),
-          trailing: Icon(Icons.arrow_forward_ios),
-          leading: Icon(
+          title: Text(item.title),
+          subtitle: Text(item.subTilte),
+          trailing: const Icon(Icons.arrow_forward_ios),
+          leading: const Icon(
             Icons.speaker_notes,
             size: 30,
           ),
@@ -95,7 +93,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
           ),
         ),
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(30.0), // here the desired height
+          preferredSize: const Size.fromHeight(30.0), // here the desired height
           child: Padding(
             padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
             child: Column(
@@ -142,7 +140,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
         child: (isLoading == false)
             ? Container(
                 color: Colors.white,
-                padding: EdgeInsets.all(10),
+                padding: const EdgeInsets.all(10),
                 child: ListView(children: [
                   for (int i = 0; i < list.length; i++) temp(i, dataPro[i])
                 ]),
@@ -157,7 +155,7 @@ class _PronunciationLessonState extends State<PronunciationLesson> {
                           height: 71.0,
                           width: MediaQuery.of(context).size.width,
                           child: Shimmer.fromColors(
-                              baseColor: Color.fromARGB(255, 228, 226, 226),
+                              baseColor: const Color.fromARGB(255, 228, 226, 226),
                               highlightColor: Colors.white,
                               child: CustomCard(
                                 borderRadius: 20,

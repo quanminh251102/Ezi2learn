@@ -20,12 +20,12 @@ class _HomePageState extends State<RecordSpeechToText> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text("Record Speech To Text"),
+          title: const Text("Record Speech To Text"),
           centerTitle: true,
           actions: [
             Builder(
               builder: (context) => IconButton(
-                icon: Icon(Icons.content_copy),
+                icon: const Icon(Icons.content_copy),
                 onPressed: () async {
                   await FlutterClipboard.copy(text);
 
@@ -62,8 +62,8 @@ class _HomePageState extends State<RecordSpeechToText> {
           endRadius: 75,
           glowColor: Theme.of(context).primaryColor,
           child: FloatingActionButton(
-            child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
             onPressed: toggleRecording,
+            child: Icon(isListening ? Icons.mic : Icons.mic_none, size: 36),
           ),
         ),
       );
@@ -74,7 +74,7 @@ class _HomePageState extends State<RecordSpeechToText> {
           setState(() => this.isListening = isListening);
 
           if (!isListening) {
-            Future.delayed(Duration(seconds: 1), () {
+            Future.delayed(const Duration(seconds: 1), () {
               //Utils.scanText(text);
             });
           }
