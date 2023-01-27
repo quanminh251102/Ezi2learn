@@ -48,7 +48,7 @@ class ApiServices {
       text: tempQuestion.text,
       image: tempQuestion.image,
       isLocked: tempQuestion.isLocked,
-      selectedIndex: tempQuestion.selectedIndex,
+      selectedOption: tempQuestion.selectedOption,
       options: tempQuestion.options
     );
     final json = question.toJson();

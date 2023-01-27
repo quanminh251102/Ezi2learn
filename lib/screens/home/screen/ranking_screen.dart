@@ -1,4 +1,4 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:rive_animation/screens/home/models/achievement_model.dart';
@@ -19,7 +19,8 @@ class _RankingScreenState extends State<RankingScreen> {
   List<int> list_point = [];
   List<DetailUserModel> top_three = [];
   List<int> top_three_point = [];
-
+  bool iscurrentUser = false;
+  User? currentUser;
   @override
   void initState() {
     // TODO: implement initState
@@ -31,6 +32,7 @@ class _RankingScreenState extends State<RankingScreen> {
     setState(() {
       isLoading = true;
     });
+    currentUser = FirebaseAuth.instance.currentUser!;
     List<DetailUserModel> tempList = [];
     List<int> tempListPoint = [];
 
@@ -74,8 +76,7 @@ class _RankingScreenState extends State<RankingScreen> {
   @override
   Widget build(BuildContext context) {
     Widget pageBody = Container(
-      //color: Color.fromARGB(255, 245, 231, 111),
-      //padding: EdgeInsets.all(24),
+      decoration: const BoxDecoration(color: Color(0xffDBF9F8)),
       child: Column(children: [
         const SizedBox(
           height: 24,
@@ -222,38 +223,78 @@ class _RankingScreenState extends State<RankingScreen> {
         const SizedBox(
           height: 24,
         ),
-        CustomCard(
-          height: 440,
-          borderRadius: 12,
-          color: Colors.white,
-          childPadding: 4,
-          child: (list.isEmpty)
-              ? const Center(
-                  child: Text('Danh sách trống'),
-                )
-              : ListView(children: [
-                  for (int i = 0; i < list.length; i++) ...{
-                    ListTile(
-                      leading: Text((i + 1).toString()),
-                      title: Align(
-                        alignment: Alignment.centerLeft,
-                        child: CircleAvatar(
-                          radius: 20,
-                          backgroundImage: NetworkImage((list[i].avatarUrl ==
-                                  "")
-                              ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-                              : list[i].avatarUrl),
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: CustomCard(
+            elevation: 15,
+            height: 440,
+            borderRadius: 15,
+            color: Colors.white,
+            child: (list.isEmpty)
+                ? const Center(
+                    child: Text('Danh sách trống'),
+                  )
+                : ListView(children: [
+                    for (int i = 0; i < list.length; i++) ...{
+                      ListTile(
+                        title: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 15.0),
+                              child: Text(
+                                (i + 1).toString(),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 15.0),
+                              child: CircleAvatar(
+                                radius: 20,
+                                backgroundImage: NetworkImage((list[i]
+                                            .avatarUrl ==
+                                        "")
+                                    ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
+                                    : list[i].avatarUrl),
+                              ),
+                            ),
+                            currentUser?.uid.toString() == list[i].userId
+                                ? Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      list.length >= 3
+                                          ? '${list[i].gmail.substring(0, 6)}... (You)'
+                                          : '???',
+                                      style: const TextStyle(
+                                          color: Colors.blue,
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold),
+                                    ))
+                                : Align(
+                                    alignment: Alignment.centerLeft,
+                                    child: Text(
+                                      list[i].gmail,
+                                    ),
+                                  )
+                          ],
+                        ),
+                        trailing: Container(
+                          decoration: BoxDecoration(
+                            color: const Color(0xffDBF9F8),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text('${list_point[i]} points')),
                         ),
                       ),
-                      subtitle: Text(list[i].gmail),
-                      trailing: Text('${list_point[i]} points'),
-                    ),
-                    Container(
-                      color: Colors.grey.shade300,
-                      height: 1,
-                    ),
-                  }
-                ]),
+                      Container(
+                        color: Colors.grey.shade300,
+                        height: 1,
+                      ),
+                    }
+                  ]),
+          ),
         ),
       ]),
     );
