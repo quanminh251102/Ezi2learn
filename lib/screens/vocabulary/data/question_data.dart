@@ -198,15 +198,15 @@ final allQuestion = <Question>[
   ),
   Question(
     options: {
-      'Orange': true,
+      'Rambutan': true,
       'Banana': false,
       'Mango': false,
       'Apple': false,
     },
     topic: 'Fruits',
-    text: 'Orange',
+    text: 'Rambutan',
     image:
-        'https://firebasestorage.googleapis.com/v0/b/ezi2learn-badad.appspot.com/o/fruits%2Forange.png?alt=media&token=d685fa2d-0c56-4834-9c3c-92b7c630c5de',
+        'https://firebasestorage.googleapis.com/v0/b/ezi2learn-badad.appspot.com/o/fruits%2Frambutan.png?alt=media&token=5c6396ce-e8da-48e2-87cd-3385b5680841',
   ),
   Question(
     options: {
@@ -1454,14 +1454,14 @@ final allQuestion = <Question>[
   ),
   Question(
     options: {
-      'Train': true,
+      'Rocking Horse': true,
       'Lego': false,
       'Tricycle': false,
       'Slingshot': false,
     },
     topic: 'Toys',
-    text: 'Train',
+    text: 'Rocking Horse',
     image:
-        'https://firebasestorage.googleapis.com/v0/b/ezi2learn-badad.appspot.com/o/toys%2Ftrain.png?alt=media&token=cd6859ee-ab12-4214-ae2d-4ad35f5c727a',
+        'https://firebasestorage.googleapis.com/v0/b/ezi2learn-badad.appspot.com/o/toys%2Frockinghorse.png?alt=media&token=ff33a4d7-3624-48be-a00f-82dd05f8958c',
   )
 ];

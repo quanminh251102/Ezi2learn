@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:rive_animation/screens/vocabulary/model/topic.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_main.dart';
+import '../../home/models/achievement_model.dart';
+import '../../home/service/achievenment_service.dart';
 import '../widget/topic_card.dart';
 
 class VocaTopicScreen extends StatefulWidget {
@@ -14,9 +16,30 @@ class VocaTopicScreen extends StatefulWidget {
 
 class _VocaTopicScreenState extends State<VocaTopicScreen>
     with SingleTickerProviderStateMixin {
+  bool isLoading = false;
+  AchievementModel? achievementModel;
+  final int pointEachLevel = 100;
+  int currentPoint = 0;
+  double processValue = 0;
+  int point_need_to_up_level = 0;
+  int currentLevel = 0;
   @override
   void initState() {
     super.initState();
+    setState(() {
+      isLoading = true;
+    });
+    AchievenmentService.Read().then((valueAchi) {
+      setState(() {
+        achievementModel = valueAchi[0];
+        currentPoint = achievementModel!.toltalVocabularyPoint % pointEachLevel;
+        processValue = (currentPoint.toDouble() / pointEachLevel) * 100;
+        currentLevel = achievementModel!.toltalVocabularyPoint ~/ pointEachLevel;
+        point_need_to_up_level = pointEachLevel -
+            (achievementModel!.toltalVocabularyPoint % pointEachLevel);
+        isLoading = false;
+      });
+    });
   }
 
   @override
@@ -57,7 +80,7 @@ class _VocaTopicScreenState extends State<VocaTopicScreen>
                     backgroundColor: const Color(0xffC4C4C4),
                     changeProgressColor: const Color(0xffFFDA2C),
                     progressColor: const Color(0xffFFDA2C),
-                    currentValue: 80,
+                    currentValue: processValue,
                     displayText: '%',
                     size: 20,
                   )),
@@ -66,18 +89,18 @@ class _VocaTopicScreenState extends State<VocaTopicScreen>
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
+                    children: [
                       Text(
-                        'Level 3',
-                        style: TextStyle(
+                        'Level $currentLevel',
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
                           color: Colors.black,
                         ),
                       ),
                       Text(
-                        '54% - More 1250 pts to reach Level 4',
-                        style: TextStyle(
+                        '${processValue.toStringAsFixed(2)}% - More $point_need_to_up_level pts to reach Level ${currentLevel + 1}',
+                        style: const TextStyle(
                           fontWeight: FontWeight.w600,
                           fontSize: 12,
                           color: Color(0xff8A8A8A),

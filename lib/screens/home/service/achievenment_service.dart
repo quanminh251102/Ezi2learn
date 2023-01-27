@@ -77,7 +77,7 @@ class AchievenmentService {
     }
 
     if (type == "Vocabulary") {
-      item.toltalSpeakingPoint++;
+      item.toltalVocabularyPoint = item.toltalVocabularyPoint + 10;
     }
 
     await db.collection(name).doc(item.id).update(item.toJson());
@@ -85,5 +85,22 @@ class AchievenmentService {
 
   static Future<void> Delete(String documentId) async {
     await db.collection(name).doc(documentId).delete();
+  }
+
+  static Future<void> updatescrorewhenExit(
+      String type, int currentScore) async {
+    List<AchievementModel> list = await Read();
+
+    AchievementModel item = list[0];
+
+    if (type == "Pronunciation") {
+      item.toltalSpeakingPoint;
+    }
+
+    if (type == "Vocabulary") {
+      item.toltalVocabularyPoint = item.toltalVocabularyPoint - currentScore;
+    }
+
+    await db.collection(name).doc(item.id).update(item.toJson());
   }
 }

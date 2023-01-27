@@ -54,25 +54,27 @@ class _QuizCardState extends State<QuizCard> {
                               fontWeight: FontWeight.bold)),
                     ),
                   ),
-                  Align(
-                      alignment: Alignment.topRight,
-                      child: SpeakerButton(
-                        text: widget.question.text,
-                      )),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Align(
+                        alignment: Alignment.topRight,
+                        child: SpeakerButton(
+                          text: widget.question.text,
+                        )),
+                  ),
                 ],
               ),
-              Card(
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.35,
+              Container(
+                height: MediaQuery.of(context).size.height * 0.35,
                 decoration: BoxDecoration(
-                  color: const Color(0xffDBF9F8),
-                  borderRadius: BorderRadius.circular(8),
-                ),
+                color: const Color(0xffDBF9F8),
+                border:
+                    Border.all(width: 0, color: const Color(0xffDBF9F8))),
                 child: SizedBox(
-                  width: 120,
-                  child: Image.network(widget.question.image),
-                ),
-              )),
+              width: 150,
+              height: 150,
+              child: Image.network(widget.question.image)),
+              ),
             ],
           ),
         ),
