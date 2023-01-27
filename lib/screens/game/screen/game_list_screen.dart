@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../home/screen/home_page.dart' as NewHomePage;
+import './guess_word_screen.dart';
 
 class GameListScreen extends StatefulWidget {
   const GameListScreen({super.key});
@@ -29,6 +30,13 @@ class _GameListScreenState extends State<GameListScreen> {
             //     builder: (context) => VocaTopicScreen(),
             //   ),
             // );
+          } else if (title == "Guess word") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => GuessWordScreen(),
+              ),
+            );
           }
         },
         child: Container(
@@ -174,23 +182,7 @@ class _GameListScreenState extends State<GameListScreen> {
                         child: SizedBox(
                           width: 250,
                           child: gameCard('assets/images/speaking.png',
-                              'Speaking', Colors.grey),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                        child: SizedBox(
-                          width: 250,
-                          child: gameCard('assets/images/dictionary.jpg',
-                              'Listening', Colors.orange),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                        child: SizedBox(
-                          width: 250,
-                          child: gameCard('assets/images/dictionary.jpg',
-                              'Gaming', Colors.orange),
+                              'Guess word', Colors.grey),
                         ),
                       ),
                     ],
