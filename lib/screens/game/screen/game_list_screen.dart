@@ -122,7 +122,7 @@ class _GameListScreenState extends State<GameListScreen> {
     final appBar = AppBar(
       centerTitle: true,
       backgroundColor: Colors.white,
-      elevation: 0,
+      //elevation: 0,
       title: const Text(
         'Game',
         style: TextStyle(
