@@ -38,7 +38,7 @@ class _GuessWordDoneScreenState extends State<GuessWordDoneScreen> {
                   'https://thumbs.gfycat.com/FarawayTestyChimneyswift-max-1mb.gif'),
             ),
             const SizedBox(
-              height: 100,
+              height: 16,
             ),
             const Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
@@ -53,7 +53,7 @@ class _GuessWordDoneScreenState extends State<GuessWordDoneScreen> {
               ),
             ),
             const SizedBox(
-              height: 100,
+              height: 16,
             ),
             ElevatedButton(
               onPressed: () {
