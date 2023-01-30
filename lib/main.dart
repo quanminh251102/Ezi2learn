@@ -36,7 +36,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: const VocaTopicScreen()
+      home: OnbodingScreen(),
     );
   }
 }

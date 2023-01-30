@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:giff_dialog/giff_dialog.dart';
+import 'package:rive_animation/main.dart';
 import 'package:rive_animation/screens/listen/screens/welcome_screen.dart';
 import '../constaints/constants.dart';
 import '../controllers/question_controller.dart';
 import 'package:flutter_svg/svg.dart';
+import '../../home/screen/home_page.dart' as NewHomePage;
 
 class ScoreScreen extends StatelessWidget {
   // @override
@@ -211,6 +213,12 @@ class ScoreScreen extends StatelessWidget {
                         //     },
                         //   ),
                         // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => WelcomeScreen(),
+                          ),
+                        );
                       },
                       padding: EdgeInsets.zero,
                       icon: SvgPicture.asset(
@@ -249,7 +257,7 @@ class ScoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => WelcomeScreen(),
+                            builder: (context) => NewHomePage.HomePage(),
                           ),
                         );
                       },
@@ -260,40 +268,40 @@ class ScoreScreen extends StatelessWidget {
                         width: 30,
                       ),
                     ),
-                    IconButton(
-                      onPressed: () async {
-                        // await db
-                        //     .collection('topics')
-                        //     .doc(widget.topic.title)
-                        //     .update({
-                        //   'progress': 1,
-                        // });
-                        // await db
-                        //     .collection('topics')
-                        //     .doc(widget.topic.title)
-                        //     .update({'point': totalScore});
-                        // for (var question in questionList) {
-                        //   await db
-                        //       .collection('topics')
-                        //       .doc(widget.topic.title)
-                        //       .collection('vocabularies')
-                        //       .doc(question.text)
-                        //       .update({
-                        //     'studied': true,
-                        //   });
-                        // }
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //       builder: (context) =>
-                        //           const Scaffold(body: RankingScreen())),
-                        // );
-                      },
-                      padding: EdgeInsets.zero,
-                      icon: SvgPicture.asset(
-                        "assets/icons/leaderboard.svg",
-                      ),
-                    ),
+                    // IconButton(
+                    //   onPressed: () async {
+                    //     // await db
+                    //     //     .collection('topics')
+                    //     //     .doc(widget.topic.title)
+                    //     //     .update({
+                    //     //   'progress': 1,
+                    //     // });
+                    //     // await db
+                    //     //     .collection('topics')
+                    //     //     .doc(widget.topic.title)
+                    //     //     .update({'point': totalScore});
+                    //     // for (var question in questionList) {
+                    //     //   await db
+                    //     //       .collection('topics')
+                    //     //       .doc(widget.topic.title)
+                    //     //       .collection('vocabularies')
+                    //     //       .doc(question.text)
+                    //     //       .update({
+                    //     //     'studied': true,
+                    //     //   });
+                    //     // }
+                    //     // Navigator.push(
+                    //     //   context,
+                    //     //   MaterialPageRoute(
+                    //     //       builder: (context) =>
+                    //     //           const Scaffold(body: RankingScreen())),
+                    //     // );
+                    //   },
+                    //   padding: EdgeInsets.zero,
+                    //   icon: SvgPicture.asset(
+                    //     "assets/icons/leaderboard.svg",
+                    //   ),
+                    // ),
                   ],
                 ),
               ]),
