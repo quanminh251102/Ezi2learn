@@ -2,10 +2,15 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:giff_dialog/giff_dialog.dart';
 import 'package:group_button/group_button.dart';
 import 'package:rive_animation/screens/vocabulary/model/question.dart';
 import 'package:rive_animation/screens/vocabulary/model/topic.dart';
+import 'package:rive_animation/screens/vocabulary/screen/result_screen.dart';
+import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 import 'package:rive_animation/screens/vocabulary/widget/quiz_card.dart';
+
+import '../../home/service/achievenment_service.dart';
 
 class VocaQuiz extends StatefulWidget {
   const VocaQuiz({super.key, required this.topic});
@@ -16,7 +21,9 @@ class VocaQuiz extends StatefulWidget {
 }
 
 class _VocaQuizState extends State<VocaQuiz> {
+//
   final player = AudioPlayer();
+  int current_score = 0;
   int listQuestion = 0;
   bool isPressed = false;
   bool isLocked = false;
@@ -27,6 +34,7 @@ class _VocaQuizState extends State<VocaQuiz> {
   int index = 0;
   Color optionColor = const Color(0xffFFDA2C);
   List<String> listOption = [];
+  List<Question> list = [];
   late PageController controller;
   final db = FirebaseFirestore.instance;
   Future<QuerySnapshot> getQuestion() async {
@@ -52,7 +60,7 @@ class _VocaQuizState extends State<VocaQuiz> {
     // TODO: implement initState
     super.initState();
     controller = PageController(initialPage: 0);
-    player.play(AssetSource("audio/background.mp3"));
+    player.play(AssetSource("audio/background.mp3"), volume: 40);
   }
 
   @override
@@ -79,8 +87,11 @@ class _VocaQuizState extends State<VocaQuiz> {
                       text: doc['text'],
                       image: doc['image'],
                       isLocked: '${doc['isLocked']}' == 'true' ? true : false,
+                      selectedOption:
+                          '${doc['selectedOption']}' == 'true' ? true : false,
                       options: Map<String, bool>.from(doc['options'])))
                   .toList();
+              list = questionList;
               for (var temp in questionList) {
                 for (var element in temp.options.keys) {
                   listOption.add(element.toString());
@@ -123,7 +134,7 @@ class _VocaQuizState extends State<VocaQuiz> {
                     elevation: 0,
                   ),
                   isRadio: true,
-                  onSelected: (text, optionIndex, isSelected) {
+                  onSelected: (text, optionIndex, isSelected) async {
                     setState(() {
                       isLocked = true;
                     });
@@ -133,12 +144,26 @@ class _VocaQuizState extends State<VocaQuiz> {
                         nextQuestion = true;
                         optionColor = const Color(0xff49B0AB);
                         player.play(AssetSource("audio/correct.mp3"));
+                        current_score = current_score + 10;
+                        AchievenmentService.Update("Vocabulary");
+                      });
+                      await db
+                          .collection('questions')
+                          .doc(questionList[currentQuestion - 1].text)
+                          .update({
+                        'selectedOption': true,
                       });
                     } else {
                       setState(() {
                         optionColor = Colors.red;
                         nextQuestion = true;
                         player.play(AssetSource("audio/wrong.mp3"));
+                      });
+                      await db
+                          .collection('questions')
+                          .doc(questionList[currentQuestion - 1].text)
+                          .update({
+                        'selectedOption': false,
                       });
                     }
                   },
@@ -213,20 +238,139 @@ class _VocaQuizState extends State<VocaQuiz> {
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold),
                           )
-                        : const Text(
-                            'Result',
-                            style: TextStyle(
-                                color: Color(0xff49B0AB),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
+                        : InkWell(
+                            onTap: () async {
+                              player.stop();
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => VocaResultScreen(
+                                          topic: widget.topic,
+                                        )),
+                              ).then((_) => setState(() {}));
+                            },
+                            child: const Text(
+                              'Result',
+                              style: TextStyle(
+                                  color: Color(0xff49B0AB),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
                           )),
               ),
             )
           ],
           leading: GestureDetector(
             onTap: () {
-              Navigator.pop(context);
-              player.stop();
+              if (currentQuestion < listQuestion) {
+                showDialog(
+                  context: context,
+                  builder: (_) => AssetGiffDialog(
+                    image: Image.asset(
+                      'assets/gif/warning.gif',
+                      fit: BoxFit.contain,
+                    ),
+                    title: const Text(
+                      'Wait!!!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.w600),
+                    ),
+                    entryAnimation: EntryAnimation.bottomRight,
+                    description: const Text(
+                      'Nếu bạn thoát ra lúc này điểm sẽ không được lưu, bạn chắc chứ ?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    buttonOkText: const Text(
+                      'Tiếp tục',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    buttonCancelText: const Text(
+                      'Thoát',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onCancelButtonPressed: () async {
+                      await db
+                          .collection('topics')
+                          .doc(widget.topic.title)
+                          .update({
+                        'progress': 2,
+                      });
+                      AchievenmentService.updatescrorewhenExit(
+                          "Vocabulary", current_score);
+                      player.stop();
+                      Navigator.pop(context);
+                      Navigator.pop(context);
+                    },
+                    onOkButtonPressed: () {
+                      Navigator.pop(context);
+                    },
+                  ),
+                );
+              } else {
+                showDialog(
+                  context: context,
+                  builder: (_) => AssetGiffDialog(
+                    image: Image.asset(
+                      'assets/gif/welldone.gif',
+                      fit: BoxFit.contain,
+                    ),
+                    title: const Text(
+                      'Good!!!',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 22.0, fontWeight: FontWeight.w600),
+                    ),
+                    entryAnimation: EntryAnimation.bottomRight,
+                    description: const Text(
+                      'Bạn vừa hoàn thành xong bài kiểm tra, bạn muốn xem lại kết quả chứ ?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 14),
+                    ),
+                    buttonOkText: const Text(
+                      'Xem kết quả',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    buttonCancelText: const Text(
+                      'Quay lại',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    onOkButtonPressed: () async {
+                      await db
+                          .collection('topics')
+                          .doc(widget.topic.title)
+                          .update({
+                        'progress': 1,
+                      });
+                      player.stop();
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VocaResultScreen(
+                                  topic: widget.topic,
+                                )),
+                      ).then((_) => setState(() {}));
+                    },
+                    onCancelButtonPressed: () async {
+                      await db
+                          .collection('topics')
+                          .doc(widget.topic.title)
+                          .update({
+                        'progress': 1,
+                      });
+                      player.stop();
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const VocaTopicScreen()),
+                      ).then((_) => setState(() {}));
+                    },
+                  ),
+                );
+              }
             },
             child: const Icon(
               Icons.arrow_back_ios_rounded,
@@ -266,38 +410,43 @@ class _VocaQuizState extends State<VocaQuiz> {
                                         isLocked: '${doc['isLocked']}' == 'true'
                                             ? true
                                             : false,
+                                        selectedOption:
+                                            '${doc['selectedOption']}' == 'true'
+                                                ? true
+                                                : false,
                                         options: Map<String, bool>.from(
                                             doc['options'])))
                                     .toList();
                                 return Column(
                                   children: [
-                                    Container(
-                                      width: MediaQuery.of(context).size.width *
-                                          0.5,
-                                      decoration: BoxDecoration(
-                                          color: const Color(0xffDBF9F8),
-                                          borderRadius:
-                                              BorderRadius.circular(5),
-                                          border: Border.all(
-                                              width: 2, color: Colors.black)),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(8.0),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            const Text('Topic: ',
-                                                style: TextStyle(
+                                    FittedBox(
+                                      fit: BoxFit.contain,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: const Color(0xffDBF9F8),
+                                            borderRadius:
+                                                BorderRadius.circular(5),
+                                            border: Border.all(
+                                                width: 2, color: Colors.black)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              const Text('Topic: ',
+                                                  style: TextStyle(
+                                                      color: Colors.black,
+                                                      fontSize: 24,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                              Text(widget.topic.title,
+                                                  style: const TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 24,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                            Text(widget.topic.title,
-                                                style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 24,
-                                                )),
-                                          ],
+                                                  )),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ),

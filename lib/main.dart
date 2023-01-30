@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:rive_animation/screens/onboding/onboding_screen.dart';
+import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 import 'screens/home/screen/home_page.dart' as NewHomePage;
 
 Future<void> main() async {
@@ -15,7 +16,6 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 class MyEnglishApp extends StatelessWidget {
   const MyEnglishApp({super.key});
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class MyEnglishApp extends StatelessWidget {
           errorBorder: defaultInputBorder,
         ),
       ),
-      home: const OnbodingScreen(),
+      home: const VocaTopicScreen()
     );
   }
 }

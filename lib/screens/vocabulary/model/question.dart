@@ -6,7 +6,7 @@ class Question {
   final String text;
   final String image;
   bool isLocked;
-  int? selectedIndex;
+  bool? selectedOption;
   final Map<String, bool> options;
 
   Question(
@@ -15,7 +15,7 @@ class Question {
       required this.text,
       required this.image,
       this.isLocked = false,
-      this.selectedIndex,
+      this.selectedOption,
       required this.options});
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -23,7 +23,7 @@ class Question {
         'text': text,
         'image': image,
         'isLocked': isLocked,
-        'selectedOption': selectedIndex,
+        'selectedOption': selectedOption,
         'options': options,
       };
 }

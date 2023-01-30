@@ -6,6 +6,7 @@ import 'package:giff_dialog/giff_dialog.dart';
 import 'package:rive_animation/screens/vocabulary/model/topic.dart';
 import 'package:rive_animation/screens/vocabulary/model/vocabulary.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_quiz.dart';
+import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 import 'package:rive_animation/screens/vocabulary/widget/flashcard.dart';
 import 'package:rive_animation/screens/vocabulary/widget/voca_card.dart';
 
@@ -17,6 +18,7 @@ class VocaMainScreen extends StatefulWidget {
 }
 
 class _VocaMainScreenState extends State<VocaMainScreen> {
+  //Update Score
   //Text To Speech
   FlutterTts flutterTts = FlutterTts();
   //
@@ -70,7 +72,14 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
               color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => const VocaTopicScreen(
+                      )),
+            ).then((_) => setState(() {}));
+          },
           child: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,
@@ -234,12 +243,15 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
                   'Quay lại',
                   style: TextStyle(color: Colors.white),
                 ),
-                onOkButtonPressed: () {
+                onOkButtonPressed: () async {
+                  await db.collection('topics').doc(widget.topic.title).update({
+                    'progress': 2,
+                  });
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => VocaQuiz(topic: widget.topic)),
-                  ).then((_) => setState(() {}));
+                  ).then((_) => Navigator.of(context).pop());
                 },
               ),
             );
@@ -277,7 +289,7 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
                     context,
                     MaterialPageRoute(
                         builder: (context) => VocaQuiz(topic: widget.topic)),
-                  ).then((_) => setState(() {}));
+                  ).then((_) => Navigator.of(context).pop());
                 },
               ),
             );
