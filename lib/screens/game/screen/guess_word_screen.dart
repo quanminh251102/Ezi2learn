@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:group_button/group_button.dart';
 import 'package:rive_animation/screens/game/screen/game_list_screen.dart';
@@ -23,7 +21,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
   int currentIndex = 0;
   List<String> list_no_order = [];
   List<String> list_choose = [];
-  TextEditingController _controller = TextEditingController();
+  final TextEditingController _controller = TextEditingController();
   double processValue = 0;
   GroupButtonController controllerGroupButton = GroupButtonController();
 
@@ -65,15 +63,15 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
 
     list_no_order = [];
     list_choose = [];
-    List<String> temp_list_no_order = [];
-    List<String> temp_list_choose = [];
+    List<String> tempListNoOrder = [];
+    List<String> tempListChoose = [];
     for (int i = 0; i < topicName.length; i++) {
-      temp_list_no_order.add(topicName[i]);
+      tempListNoOrder.add(topicName[i]);
     }
-    temp_list_no_order.shuffle();
+    tempListNoOrder.shuffle();
 
     setState(() {
-      list_no_order = temp_list_no_order;
+      list_no_order = tempListNoOrder;
       processValue = currentIndex.toDouble() / list.length * 100;
     });
 
@@ -84,10 +82,12 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
   final player = AudioPlayer();
 
   bool check() {
-    String string_choice = "";
-    for (var i in list_choose) string_choice += i;
+    String stringChoice = "";
+    for (var i in list_choose) {
+      stringChoice += i;
+    }
 
-    if (string_choice == list[currentIndex].title) {
+    if (stringChoice == list[currentIndex].title) {
       //Right
       player.play(AssetSource("audio/right_answer.mp3"));
       ScaffoldMessenger.of(context).showSnackBar(
@@ -106,7 +106,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Widget pageBody = Container(
+    Widget pageBody = SizedBox(
       //color: Colors.green,
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -114,7 +114,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-              padding: EdgeInsets.fromLTRB(24, 16, 24, 16),
+              padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
               child: FAProgressBar(
                 backgroundColor: const Color(0xffC4C4C4),
                 changeProgressColor: const Color(0xffFFDA2C),
@@ -127,9 +127,9 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
             width: 200,
             height: 200,
             child: Image.network(
-                (list.length > 0 ? list[currentIndex].image : "")),
+                (list.isNotEmpty ? list[currentIndex].image : "")),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           Padding(
@@ -139,7 +139,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
               //enabled: false,
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           GroupButton(
@@ -184,7 +184,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
             },
             buttons: list_no_order,
           ),
-          SizedBox(
+          const SizedBox(
             height: 32,
           ),
           ElevatedButton(
@@ -206,8 +206,8 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
 
               if (check() == true) {
                 Future.delayed(const Duration(seconds: 2), () async {
-                  int end_quiz = 6;
-                  if (currentIndex + 1 == end_quiz) {
+                  int endQuiz = 6;
+                  if (currentIndex + 1 == endQuiz) {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -235,7 +235,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 16,
           ),
           ElevatedButton(
@@ -270,7 +270,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => GameListScreen(),
+                  builder: (context) => const GameListScreen(),
                 ),
               );
             },
@@ -282,7 +282,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
         ),
         backgroundColor: Colors.white,
         body: (isLoading)
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(child: pageBody));
   }
 }

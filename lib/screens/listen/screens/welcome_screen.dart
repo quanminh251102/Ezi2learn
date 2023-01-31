@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:get/get.dart';
 import '../constaints/constants.dart';
 import './quiz_screen.dart';
 import '../../home/screen/home_page.dart' as NewHomePage;
 
 class WelcomeScreen extends StatelessWidget {
+  const WelcomeScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     final appBar = AppBar(
@@ -42,10 +42,10 @@ class WelcomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             //Spacer(flex: 2), //2/6
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
-            Text(
+            const Text(
               "Let's Play Quiz",
               // style: Theme.of(context).textTheme.headline4.copyWith(
               //     color: Colors.white, fontWeight: FontWeight.bold),
@@ -55,10 +55,10 @@ class WelcomeScreen extends StatelessWidget {
                 fontSize: 18,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            Text(
+            const Text(
               "This quiz tests listening comprehension with conversational phrases.",
               style: TextStyle(
                 color: Color.fromARGB(255, 119, 119, 119),
@@ -66,10 +66,10 @@ class WelcomeScreen extends StatelessWidget {
                 //fontWeight: FontWeight.w600,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
-            Text(
+            const Text(
               'Instructions: Listen to the recorded question (person A), then select the best response (person B).',
               style: TextStyle(
                 color: Color.fromARGB(255, 119, 119, 119),
@@ -88,27 +88,27 @@ class WelcomeScreen extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            Spacer(), // 1/6
+            const Spacer(), // 1/6
             InkWell(
               //onTap: () => Get.to(QuizScreen()) ,
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizScreen(),
+                    builder: (context) => const QuizScreen(),
                   ),
                 );
               },
               child: Container(
                 width: double.infinity,
                 alignment: Alignment.center,
-                padding: EdgeInsets.all(kDefaultPadding * 0.75), // 15
-                decoration: BoxDecoration(
+                padding: const EdgeInsets.all(kDefaultPadding * 0.75), // 15
+                decoration: const BoxDecoration(
                   color: Colors.yellow,
                   //gradient: kPrimaryGradient,
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
-                child: Text(
+                child: const Text(
                   "Lets Start Quiz",
                   // style: Theme.of(context)
                   //     .textTheme
@@ -122,7 +122,7 @@ class WelcomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Spacer(flex: 2), // it will take 2/6 spaces
+            const Spacer(flex: 2), // it will take 2/6 spaces
           ],
         ),
       ),

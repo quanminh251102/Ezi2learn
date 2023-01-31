@@ -4,23 +4,23 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
-import 'package:rive_animation/main.dart';
-import 'package:rive_animation/screens/onboding/components/sign_up_form.dart';
+import 'package:rive_animation/screens/onboding/components/sign_in_form.dart';
 
-import '../../auth/service/auth_service.dart';
 
-class SignInForm extends StatefulWidget {
-  const SignInForm({
+class SignUpForm extends StatefulWidget {
+  const SignUpForm({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<SignInForm> createState() => _SignInFormState();
+  State<SignUpForm> createState() => _SignUpFormState();
 }
 
-class _SignInFormState extends State<SignInForm> {
+class _SignUpFormState extends State<SignUpForm> {
   TextEditingController emailEditingController = TextEditingController();
   TextEditingController passwordEditingController = TextEditingController();
+  TextEditingController passwordconfirmEditingController =
+      TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool isShowLoading = false;
   bool isShowConfetti = false;
@@ -29,8 +29,7 @@ class _SignInFormState extends State<SignInForm> {
   late SMITrigger reset;
 
   late SMITrigger confetti;
-  double paddingTop1 = 10;
-  double paddingTop2 = 20;
+  double paddingTop = 30;
   void _onCheckRiveInit(Artboard artboard) {
     StateMachineController? controller =
         StateMachineController.fromArtboard(artboard, 'State Machine 1');
@@ -49,7 +48,7 @@ class _SignInFormState extends State<SignInForm> {
     confetti = controller.findInput<bool>("Trigger explosion") as SMITrigger;
   }
 
-  void singIn(BuildContext context) {
+  void signUp(BuildContext context) {
     // confetti.fire();
     setState(() {
       isShowConfetti = true;
@@ -59,11 +58,19 @@ class _SignInFormState extends State<SignInForm> {
     Future.delayed(
       const Duration(seconds: 1),
       () async {
-        if (_formKey.currentState!.validate()) {
+        if (_formKey.currentState!.validate() &&
+            passwordEditingController.text ==
+                passwordconfirmEditingController.text) {
           try {
-            await AuthService.signIn(emailEditingController.text.trim(),
-                passwordEditingController.text.trim());
-
+            await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(
+                    email: emailEditingController.text,
+                    password: passwordEditingController.text)
+                .then((value) {
+              print("Created New Account");
+            }).onError((error, stackTrace) {
+              print("Error ${error.toString()}");
+            });
             success.fire();
             Future.delayed(
               const Duration(seconds: 2),
@@ -75,11 +82,11 @@ class _SignInFormState extends State<SignInForm> {
                 // Navigate & hide confetti
                 Future.delayed(const Duration(seconds: 1), () {
                   // Navigator.pop(context);
-                  Navigator.push(
+                  showsignInDialog(
                     context,
-                    MaterialPageRoute(
-                      builder: (context) => const MainPage(),
-                    ),
+                    onValue: (_) {
+                      setState(() {});
+                    },
                   );
                 });
               },
@@ -98,55 +105,6 @@ class _SignInFormState extends State<SignInForm> {
             );
           }
         } else {
-          error.fire();
-          Future.delayed(
-            const Duration(seconds: 2),
-            () {
-              setState(() {
-                isShowLoading = false;
-              });
-              reset.fire();
-            },
-          );
-        }
-      },
-    );
-  }
-
-  void signinwithGoogle(BuildContext context) {
-    // confetti.fire();
-    setState(() {
-      isShowConfetti = true;
-      isShowLoading = true;
-    });
-
-    Future.delayed(
-      const Duration(seconds: 1),
-      () async {
-        try {
-          await AuthService.signinwithGoogle();
-          success.fire();
-          Future.delayed(
-            const Duration(seconds: 2),
-            () {
-              setState(() {
-                isShowLoading = false;
-              });
-              confetti.fire();
-              // Navigate & hide confetti
-              Future.delayed(const Duration(seconds: 1), () {
-                // Navigator.pop(context);
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const MainPage(),
-                  ),
-                );
-              });
-            },
-          );
-        } on FirebaseAuthException catch (e) {
-          print(e);
           error.fire();
           Future.delayed(
             const Duration(seconds: 2),
@@ -182,9 +140,9 @@ class _SignInFormState extends State<SignInForm> {
                 child: TextFormField(
                   controller: emailEditingController,
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       setState(() {
-                        paddingTop2 = 0;
+                        paddingTop = 0;
                       });
                       return "Vui lòng nhập email";
                     }
@@ -210,12 +168,45 @@ class _SignInFormState extends State<SignInForm> {
                   controller: passwordEditingController,
                   obscureText: true,
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       setState(() {
-                        paddingTop1 = 10;
-                        paddingTop2 = 10;
+                        paddingTop = 0;
                       });
                       return "Vui lòng nhập mật khẩu";
+                    }
+                    else if(passwordEditingController.text != passwordconfirmEditingController.text){
+                      return "Mật khẩu không khớp";
+                    }
+                    return null;
+                  },
+                  decoration: InputDecoration(
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: SvgPicture.asset("assets/icons/password.svg"),
+                    ),
+                  ),
+                ),
+              ),
+              const Text(
+                "Xác nhận mật khẩu",
+                style: TextStyle(
+                  color: Colors.black54,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 16),
+                child: TextFormField(
+                  controller: passwordconfirmEditingController,
+                  obscureText: true,
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      setState(() {
+                        paddingTop = 0;
+                      });
+                      return "Vui lòng nhập mật khẩu";
+                    }
+                    else if(passwordEditingController.text != passwordconfirmEditingController.text){
+                      return "Mật khẩu không khớp";
                     }
                     return null;
                   },
@@ -231,7 +222,7 @@ class _SignInFormState extends State<SignInForm> {
                 padding: const EdgeInsets.only(top: 8, bottom: 24),
                 child: ElevatedButton.icon(
                   onPressed: () {
-                    singIn(context);
+                    signUp(context);
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFF77D8E),
@@ -249,64 +240,24 @@ class _SignInFormState extends State<SignInForm> {
                     CupertinoIcons.arrow_right,
                     color: Color(0xFFFE0037),
                   ),
-                  label: const Text("Đăng nhập"),
-                ),
-              ),
-              Row(
-                children: const [
-                  Expanded(
-                    child: Divider(),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
-                    child: Text(
-                      "Hoặc",
-                      style: TextStyle(
-                        color: Colors.black26,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  Expanded(child: Divider()),
-                ],
-              ),
-               Padding(
-                padding: EdgeInsets.symmetric(vertical: paddingTop1),
-                child: const Center(
-                  child: Text(
-                    "Đăng nhập bằng Gmail",
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ),
-              ),
-              Center(
-                child: IconButton(
-                  onPressed: () {
-                    signinwithGoogle(context);
-                  },
-                  padding: EdgeInsets.zero,
-                  icon: SvgPicture.asset(
-                    "assets/icons/google_box.svg",
-                    height: 64,
-                    width: 64,
-                  ),
+                  label: const Text("Đăng ký"),
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: paddingTop2),
+                padding: EdgeInsets.only(top: paddingTop),
                 child: Center(
                   child: RichText(
                     text: TextSpan(
-                      text: 'Bạn chưa có tài khoản? ',
+                      text: 'Bạn đã có tài khoản? ',
                       style: DefaultTextStyle.of(context).style,
                       children: <TextSpan>[
                         TextSpan(
-                          text: 'Đăng ký tại đây',
+                          text: 'Đăng nhập tại đây',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.pop(context);
-                              showsignUpDialog(
+                              showsignInDialog(
                                 context,
                                 onValue: (_) {},
                               );
@@ -371,7 +322,7 @@ class CustomPositioned extends StatelessWidget {
   }
 }
 
-void showsignInDialog(BuildContext context, {required ValueChanged onValue}) {
+void showsignUpDialog(BuildContext context, {required ValueChanged onValue}) {
   showGeneralDialog(
     context: context,
     barrierLabel: "Barrier",
@@ -381,7 +332,7 @@ void showsignInDialog(BuildContext context, {required ValueChanged onValue}) {
     pageBuilder: (_, __, ___) {
       return Center(
         child: Container(
-          height: 620,
+          height: 600,
           margin: const EdgeInsets.symmetric(horizontal: 16),
           padding: const EdgeInsets.symmetric(vertical: 32, horizontal: 24),
           decoration: BoxDecoration(
@@ -408,7 +359,7 @@ void showsignInDialog(BuildContext context, {required ValueChanged onValue}) {
               child: Column(
                 children: [
                   const Text(
-                    "Đăng nhập",
+                    "Đăng ký",
                     style: TextStyle(
                       fontSize: 34,
                       fontFamily: "Poppins",
@@ -439,7 +390,7 @@ void showsignInDialog(BuildContext context, {required ValueChanged onValue}) {
                       ),
                     ),
                   ),
-                  const SignInForm(),
+                  const SignUpForm(),
                 ],
               ),
             ),

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:giff_dialog/giff_dialog.dart';
-import 'package:rive_animation/main.dart';
 import 'package:rive_animation/screens/listen/screens/welcome_screen.dart';
-import '../constaints/constants.dart';
 import '../controllers/question_controller.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../home/screen/home_page.dart' as NewHomePage;
 
 class ScoreScreen extends StatelessWidget {
+  const ScoreScreen({super.key});
+
   // @override
   // Widget build(BuildContext context) {
   //   QuestionController _qnController = Get.put(QuestionController());
@@ -54,7 +53,7 @@ class ScoreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _qnController = Get.put(QuestionController());
+    QuestionController qnController = Get.put(QuestionController());
     return Scaffold(
       body: Container(
         color: const Color(0xffFFDA2C),
@@ -89,7 +88,7 @@ class ScoreScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Điểm của bạn ${_qnController.numOfCorrectAns * 10}',
+                  'Điểm của bạn ${qnController.numOfCorrectAns * 10}',
                   style: const TextStyle(
                       fontSize: 28,
                       color: Color(0xffFFDA2C),
@@ -116,7 +115,7 @@ class ScoreScreen extends StatelessWidget {
                                     fontWeight: FontWeight.normal),
                               ),
                               Text(
-                                '${_qnController.numOfCorrectAns}',
+                                '${qnController.numOfCorrectAns}',
                                 style: const TextStyle(
                                     color: Colors.green,
                                     fontSize: 18,
@@ -135,7 +134,7 @@ class ScoreScreen extends StatelessWidget {
                                       fontSize: 18,
                                       fontWeight: FontWeight.normal)),
                               Text(
-                                  '${_qnController.questions.length - _qnController.numOfCorrectAns}',
+                                  '${qnController.questions.length - qnController.numOfCorrectAns}',
                                   style: const TextStyle(
                                       color: Colors.red,
                                       fontSize: 18,
@@ -216,7 +215,7 @@ class ScoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => WelcomeScreen(),
+                            builder: (context) => const WelcomeScreen(),
                           ),
                         );
                       },
@@ -257,7 +256,7 @@ class ScoreScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => NewHomePage.HomePage(),
+                            builder: (context) => const NewHomePage.HomePage(),
                           ),
                         );
                       },

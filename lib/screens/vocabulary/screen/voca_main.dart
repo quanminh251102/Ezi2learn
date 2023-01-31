@@ -75,9 +75,7 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
           onTap: () {
             Navigator.push(
               context,
-              MaterialPageRoute(
-                  builder: (context) => const VocaTopicScreen(
-                      )),
+              MaterialPageRoute(builder: (context) => const VocaTopicScreen()),
             ).then((_) => setState(() {}));
           },
           child: const Icon(
@@ -155,22 +153,26 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
                                       return Align(
                                         alignment: Alignment.center,
                                         child: SizedBox(
-                                          height: 430,
+                                          height: MediaQuery.of(context).size.height * 0.6,
                                           child: Swiper(
                                             loop: false,
-                                            pagination: const SwiperPagination(
-                                                margin: EdgeInsets.only(
-                                                    bottom: 40)),
+                                            pagination:
+                                                const SwiperPagination(
+                                                    margin: EdgeInsets.only(
+                                                        bottom: 40)),
                                             viewportFraction: 0.6,
                                             scale: 0.8,
                                             controller: controller,
                                             itemCount: documents.length,
-                                            onIndexChanged: (int index) async {
+                                            onIndexChanged:
+                                                (int index) async {
                                               await db
                                                   .collection('topics')
                                                   .doc(widget.topic.title)
-                                                  .collection('vocabularies')
-                                                  .doc(vocabularies[index].text)
+                                                  .collection(
+                                                      'vocabularies')
+                                                  .doc(vocabularies[index]
+                                                      .text)
                                                   .update({
                                                 'studied': true,
                                               });

@@ -1,25 +1,21 @@
-import 'dart:ui';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:rive_animation/screens/grammar/screen/GrammarMain.dart';
 import './FinishGrammar.dart';
-import '../widgets/TopBar.dart';
 import 'package:group_button/group_button.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:circular_countdown_timer/circular_countdown_timer.dart';
 import 'package:countdown_progress_indicator/countdown_progress_indicator.dart'
     as CountDownIndicator;
-import 'package:linear_progress_bar/linear_progress_bar.dart';
 
 class GrammarQuiz extends StatefulWidget {
   @override
   State<GrammarQuiz> createState() => _GrammarQuizState();
 
   final String step;
-  GrammarQuiz({required this.step});
+  const GrammarQuiz({super.key, required this.step});
 }
 
 class _GrammarQuizState extends State<GrammarQuiz> {
@@ -49,8 +45,9 @@ class _GrammarQuizState extends State<GrammarQuiz> {
 
   bool checkAnwser() {
     bool res = true;
-    for (int i = 0; i < myChoices.length; i++)
+    for (int i = 0; i < myChoices.length; i++) {
       print("${suggests[i]} ${anwsers[i]}");
+    }
     for (int i = 0; i < myChoices.length; i++) {
       if (myChoices[i].compareTo(anwsers[i]) != 0) {
         res = false;
@@ -188,7 +185,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
 
     anwsers = quizs[current_quiz].split(' ');
 
-    suggests = new List.from(anwsers);
+    suggests = List.from(anwsers);
     suggests.sort();
 
     myChoices = List.filled(anwsers.length, '__');
@@ -239,7 +236,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     // LinearProgressBar(
@@ -274,9 +271,9 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                       child: SingleChildScrollView(
                         child: Container(
                           color: Colors.white,
-                          padding: EdgeInsets.all(8),
+                          padding: const EdgeInsets.all(8),
                           child: GroupButton(
-                            options: GroupButtonOptions(
+                            options: const GroupButtonOptions(
                               unselectedColor: Colors.white,
                               unselectedBorderColor: Colors.white,
                               elevation: 0,
@@ -291,7 +288,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                         ),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     SizedBox(
@@ -337,11 +334,11 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                         },
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     GroupButton(
-                      options: GroupButtonOptions(
+                      options: const GroupButtonOptions(
                         unselectedColor: Colors.white,
                         unselectedBorderColor: Colors.white,
                         selectedColor: Colors.black26,
@@ -349,7 +346,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                       ),
                       controller: groupButtonController,
                       isRadio: false,
-                      onSelected: (str_choice, index, isSelected) {
+                      onSelected: (strChoice, index, isSelected) {
                         print('$isSelected ${suggests[index]}');
                         if (isSelected == true) {
                           setState(() {
@@ -372,15 +369,15 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                       },
                       buttons: suggests,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 16,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey,
                         minimumSize: Size(width - 24 - 24, 50),
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
                       onPressed: () {
@@ -388,20 +385,20 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                           init_quiz();
                         });
                       },
-                      child: Text(
+                      child: const Text(
                         'Xóa câu trả lời',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xffFFDA2C),
                         minimumSize: Size(width - 24 - 24, 50),
-                        shape: new RoundedRectangleBorder(
-                          borderRadius: new BorderRadius.circular(30.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30.0),
                         ),
                       ),
                       onPressed: _isDisableCheck
@@ -470,7 +467,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                                 );
                               }
                             },
-                      child: Text(
+                      child: const Text(
                         'Kiểm tra',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -488,13 +485,13 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                 height: MediaQuery.of(context).size.height / 2,
                 ringColor: Colors.grey[300]!,
                 ringGradient: null,
-                fillColor: Color.fromARGB(255, 255, 226, 97),
+                fillColor: const Color.fromARGB(255, 255, 226, 97),
                 fillGradient: null,
-                backgroundColor: const Color(0xffFFDA2C)!,
+                backgroundColor: const Color(0xffFFDA2C),
                 backgroundGradient: null,
                 strokeWidth: 20.0,
                 strokeCap: StrokeCap.round,
-                textStyle: TextStyle(
+                textStyle: const TextStyle(
                     fontSize: 33.0,
                     color: Colors.white,
                     fontWeight: FontWeight.bold),

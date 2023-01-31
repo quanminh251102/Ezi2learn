@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:get/get.dart';
 import '../controllers/question_controller.dart';
 
 import 'components/body.dart';
 
 class QuizScreen extends StatelessWidget {
+  const QuizScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
-    _controller.reset();
+    QuestionController controller = Get.put(QuestionController());
+    controller.reset();
     return Scaffold(
       //extendBodyBehindAppBar: true,
       appBar: AppBar(
@@ -23,17 +24,17 @@ class QuizScreen extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xffFFDA2C),
                 shape: const StadiumBorder(),
-                minimumSize: Size(
+                minimumSize: const Size(
                   70,
                   30,
                 ),
-                maximumSize: Size(
+                maximumSize: const Size(
                   70,
                   30,
                 ),
               ),
-              onPressed: _controller.nextQuestion,
-              child: Text("Skip"),
+              onPressed: controller.nextQuestion,
+              child: const Text("Skip"),
             ),
           ),
           // Padding(
@@ -56,7 +57,7 @@ class QuizScreen extends StatelessWidget {
           // )
         ],
       ),
-      body: Body(),
+      body: const Body(),
     );
   }
 }

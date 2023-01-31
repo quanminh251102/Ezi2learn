@@ -1,16 +1,10 @@
 import 'package:flutter/material.dart';
 import './GrammarQuiz.dart';
-import '../widgets/TopBar.dart';
-import 'package:group_button/group_button.dart';
-import 'package:flutter_custom_cards/flutter_custom_cards.dart';
-import 'package:awesome_snackbar_content/awesome_snackbar_content.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 
 import 'dart:math';
 
-import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:timeline_tile/timeline_tile.dart';
 import '../../home/screen/home_page.dart' as NewHomePage;
 
 class GrammarMainPage extends StatefulWidget {
@@ -112,7 +106,7 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
   Widget build(BuildContext context) {
     Widget _buildBottomCard() {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.blue,
           borderRadius: BorderRadius.only(
               topRight: Radius.elliptical(32.0, 10.0),
@@ -125,7 +119,7 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(Icons.arrow_back),
+              icon: const Icon(Icons.arrow_back),
               color: Colors.white,
             ),
             IconButton(
@@ -135,14 +129,14 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
                 //   MaterialPageRoute(builder: (context) => HomePage()),
                 // );
               },
-              icon: Icon(Icons.home),
+              icon: const Icon(Icons.home),
               color: Colors.white,
             ),
             IconButton(
               onPressed: (() => setState(() {
                     // playmusic = !playmusic;
                   })),
-              icon: Icon(Icons.settings),
+              icon: const Icon(Icons.settings),
               color: Colors.white,
             ),
           ],
@@ -183,7 +177,7 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
       child: Theme(
         data: Theme.of(context).copyWith(
           // accentColor: const Color(0xFFFCB69F).withOpacity(0.2),
-          accentColor: Colors.white,
+          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
         ),
         child: SafeArea(
           child: Scaffold(
@@ -221,14 +215,15 @@ class _TimelineSteps extends StatelessWidget {
     return SliverList(
       delegate: SliverChildBuilderDelegate(
         (BuildContext context, int index) {
-          if (index.isOdd)
+          if (index.isOdd) {
             return const TimelineDivider(
               //color: Color(0xFFCB8421),
-              color: const Color(0xffFFDA2C),
+              color: Color(0xffFFDA2C),
               thickness: 5,
               begin: 0.1,
               end: 0.9,
             );
+          }
 
           final int itemIndex = index ~/ 2;
           final Step step = steps[itemIndex];
@@ -267,7 +262,7 @@ class _TimelineSteps extends StatelessWidget {
             ),
             beforeLineStyle: const LineStyle(
               // color: Color(0xFFCB8421),
-              color: const Color(0xffFFDA2C),
+              color: Color(0xffFFDA2C),
               thickness: 5,
             ),
           );
@@ -296,7 +291,7 @@ class _TimelineStepIndicator extends StatelessWidget {
       child: Container(
         decoration: const BoxDecoration(
           shape: BoxShape.circle,
-          color: const Color(0xffFFDA2C),
+          color: Color(0xffFFDA2C),
         ),
         child: Center(
           child: Text(

@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 
@@ -8,15 +7,13 @@ import './GrammarMain.dart';
 import '../model/TopicVoca.dart';
 //import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import '../widgets/TopBar.dart';
-import 'package:percent_indicator/circular_percent_indicator.dart';
 
 class FinishGrammar extends StatefulWidget {
   @override
   _FinishGrammarState createState() => _FinishGrammarState();
 
   final double sroce;
-  FinishGrammar({required this.sroce});
+  const FinishGrammar({super.key, required this.sroce});
 }
 
 class _FinishGrammarState extends State<FinishGrammar> {
@@ -34,10 +31,10 @@ class _FinishGrammarState extends State<FinishGrammar> {
     return Container(
       width: width,
       height: height / 7,
-      padding: EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 32.0),
+      padding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 32.0),
       decoration: BoxDecoration(
           color: Colors.blue[500],
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topRight: Radius.elliptical(32.0, 10.0),
               topLeft: Radius.elliptical(32.0, 10.0))),
     );
@@ -56,21 +53,21 @@ class _FinishGrammarState extends State<FinishGrammar> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.radio_button_checked),
+                icon: const Icon(Icons.radio_button_checked),
                 color: Colors.white,
               ),
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
                 color: Colors.white,
               ),
               IconButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.settings),
+                icon: const Icon(Icons.settings),
                 color: Colors.white,
               ),
             ],
@@ -90,7 +87,7 @@ class _FinishGrammarState extends State<FinishGrammar> {
       body: Container(
         child: Column(
           children: <Widget>[
-            SizedBox(
+            const SizedBox(
               height: 200,
             ),
             // Container(
@@ -154,9 +151,9 @@ class _FinishGrammarState extends State<FinishGrammar> {
             // SizedBox(
             //   height: 24,
             // ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(24, 0, 24, 0),
-              child: const Image(
+            const Padding(
+              padding: EdgeInsets.fromLTRB(24, 0, 24, 0),
+              child: Image(
                 image: NetworkImage(
                     'https://thumbs.gfycat.com/FarawayTestyChimneyswift-max-1mb.gif'),
               ),
@@ -183,15 +180,15 @@ class _FinishGrammarState extends State<FinishGrammar> {
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xffFFDA2C),
                 minimumSize: Size(width - 24 - 24, 50),
-                shape: new RoundedRectangleBorder(
-                  borderRadius: new BorderRadius.circular(30.0),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
               ),
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GrammarMainPage()));
+                    MaterialPageRoute(builder: (context) => const GrammarMainPage()));
               },
-              child: Text('Bài tiếp theo'),
+              child: const Text('Bài tiếp theo'),
             ),
           ],
         ),

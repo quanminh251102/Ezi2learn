@@ -34,7 +34,7 @@ class _GameListScreenState extends State<GameListScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => GuessWordScreen(),
+                builder: (context) => const GuessWordScreen(),
               ),
             );
           }

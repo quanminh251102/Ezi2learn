@@ -45,7 +45,7 @@ class _NavBarState extends State<NavBar> {
                 );
               } else if (snapshot.connectionState == ConnectionState.done &&
                   detailUserModels_normal!.isEmpty) {
-                return Text("???");
+                return const Text("???");
               } else {
                 return const Center(child: CircularProgressIndicator());
               }
@@ -122,7 +122,7 @@ class _NavBarState extends State<NavBar> {
           title: const Text('Trang cá nhân'),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()));
+                MaterialPageRoute(builder: (context) => const ProfileScreen()));
           },
         ),
         ListTile(

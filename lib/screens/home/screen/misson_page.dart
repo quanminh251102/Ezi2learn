@@ -52,7 +52,7 @@ class _MissonPageState extends State<MissonPage> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => WelcomeScreen(),
+                builder: (context) => const WelcomeScreen(),
               ),
             );
           }

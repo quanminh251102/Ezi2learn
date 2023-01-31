@@ -16,7 +16,7 @@ class ProgressBar extends StatelessWidget {
       width: double.infinity,
       height: 35,
       decoration: BoxDecoration(
-        border: Border.all(color: Color(0xFF3F4768), width: 1),
+        border: Border.all(color: const Color(0xFF3F4768), width: 1),
         borderRadius: BorderRadius.circular(50),
       ),
       child: GetBuilder<QuestionController>(
@@ -31,7 +31,7 @@ class ProgressBar extends StatelessWidget {
                   // from 0 to 1 it takes 60s
                   width: constraints.maxWidth * controller.animation.value,
                   decoration: BoxDecoration(
-                    color: Color(0xffFFDA2C),
+                    color: const Color(0xffFFDA2C),
                     //gradient: kPrimaryGradient,
                     borderRadius: BorderRadius.circular(50),
                   ),

@@ -1,10 +1,9 @@
 import './Colors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class TopBar extends StatelessWidget {
   final String text;
-  TopBar(this.text);
+  const TopBar(this.text, {super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,10 +11,10 @@ class TopBar extends StatelessWidget {
     final height = MediaQuery.of(context).size.height;
     return Stack(children: <Widget>[
       CustomPaint(
+        painter: CurvesPainter(),
         child: Container(
           height: height * 0.2,
         ),
-        painter: CurvesPainter(),
       ),
       Padding(
         padding: EdgeInsets.only(top: height * 0.05),
@@ -24,7 +23,7 @@ class TopBar extends StatelessWidget {
           child: Text(
             text,
             textAlign: TextAlign.center,
-            style: TextStyle(
+            style: const TextStyle(
                 color: Colors.white,
                 fontSize: 23.0,
                 fontWeight: FontWeight.bold),

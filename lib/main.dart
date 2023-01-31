@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:rive_animation/screens/onboding/onboding_screen.dart';
-import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 import 'screens/home/screen/home_page.dart' as NewHomePage;
 
 Future<void> main() async {
@@ -19,25 +19,27 @@ class MyEnglishApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
     return GetMaterialApp(
-      navigatorKey: navigatorKey,
-      title: 'Ezi2learn',
-      theme: ThemeData(
-        scaffoldBackgroundColor: const Color(0xFFEEF1F8),
-        primarySwatch: Colors.blue,
-        fontFamily: "Roboto",
-        inputDecorationTheme: const InputDecorationTheme(
-          filled: true,
-          fillColor: Colors.white,
-          errorStyle: TextStyle(height: 0),
-          border: defaultInputBorder,
-          enabledBorder: defaultInputBorder,
-          focusedBorder: defaultInputBorder,
-          errorBorder: defaultInputBorder,
+        navigatorKey: navigatorKey,
+        title: 'Ezi2learn',
+        theme: ThemeData(
+          scaffoldBackgroundColor: const Color(0xFFEEF1F8),
+          primarySwatch: Colors.blue,
+          textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(
+            bodyMedium: GoogleFonts.openSans(textStyle: textTheme.bodyMedium),
+          ),
+          inputDecorationTheme: const InputDecorationTheme(
+            filled: true,
+            fillColor: Colors.white,
+            errorStyle: TextStyle(height: 0),
+            border: defaultInputBorder,
+            enabledBorder: defaultInputBorder,
+            focusedBorder: defaultInputBorder,
+            errorBorder: defaultInputBorder,
+          ),
         ),
-      ),
-      home: OnbodingScreen(),
-    );
+        home: const MainPage());
   }
 }
 

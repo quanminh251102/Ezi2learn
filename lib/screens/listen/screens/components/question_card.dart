@@ -45,10 +45,10 @@ class _QuestionCardState extends State<QuestionCard> {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController controller = Get.put(QuestionController());
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-      padding: EdgeInsets.all(kDefaultPadding),
+      margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+      padding: const EdgeInsets.all(kDefaultPadding),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(25),
@@ -61,13 +61,13 @@ class _QuestionCardState extends State<QuestionCard> {
             //     .textTheme
             //     .headline6
             //     .copyWith(color: kBlackColor),
-            style: TextStyle(color: kBlackColor),
+            style: const TextStyle(color: kBlackColor),
           ),
           Row(
             children: [
               CustomCard(
                 borderRadius: 130,
-                child: Icon(
+                child: const Icon(
                   Icons.volume_up,
                   color: Colors.black,
                 ),
@@ -75,16 +75,16 @@ class _QuestionCardState extends State<QuestionCard> {
                   listenAgain();
                 },
               ),
-              Text('Listen again'),
+              const Text('Listen again'),
             ],
           ),
-          SizedBox(height: kDefaultPadding / 2),
+          const SizedBox(height: kDefaultPadding / 2),
           ...List.generate(
             widget.question.options.length,
             (index) => Option(
               index: index,
               text: widget.question.options[index],
-              press: () => _controller.checkAns(widget.question, index),
+              press: () => controller.checkAns(widget.question, index),
             ),
           ),
         ],
