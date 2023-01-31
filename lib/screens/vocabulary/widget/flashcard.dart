@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import 'package:rive_animation/screens/vocabulary/model/vocabulary.dart';
@@ -25,15 +24,12 @@ class _FlashCardState extends State<FlashCard> {
     return Material(
       child: Center(
         child: Column(
-          mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: 420,
-              width: 280,
+              height: MediaQuery.of(context).size.height * 0.6,
               decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: const Color(0xffFFDA2C), width: 4)),
+                  border: Border.all(color: const Color(0xffFFDA2C), width: 5)),
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Column(
@@ -80,16 +76,6 @@ class _FlashCardState extends State<FlashCard> {
                       ),
                     ]),
               ),
-            ),
-            Container(
-              width: 230,
-              height: 10,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10)),
-                  border: Border.all(color: const Color(0xffFFDA2C), width: 3)),
             ),
           ],
         ),

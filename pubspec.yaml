@@ -77,6 +77,8 @@ dependencies:
   provider: ^6.0.5
   mask_text_input_formatter: ^2.4.0
   firebase_admin: ^0.2.0
+  google_sign_in: ^5.4.3
+  google_fonts: ^4.0.1
   
 dev_dependencies:
   flutter_test:

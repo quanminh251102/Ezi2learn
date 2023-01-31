@@ -6,6 +6,8 @@ import 'package:rive_animation/screens/vocabulary/screen/voca_main.dart';
 import '../../home/models/achievement_model.dart';
 import '../../home/service/achievenment_service.dart';
 import '../widget/topic_card.dart';
+import '../../home/screen/home_page.dart' as NewHomePage;
+
 
 class VocaTopicScreen extends StatefulWidget {
   const VocaTopicScreen({super.key});
@@ -34,7 +36,8 @@ class _VocaTopicScreenState extends State<VocaTopicScreen>
         achievementModel = valueAchi[0];
         currentPoint = achievementModel!.toltalVocabularyPoint % pointEachLevel;
         processValue = (currentPoint.toDouble() / pointEachLevel) * 100;
-        currentLevel = achievementModel!.toltalVocabularyPoint ~/ pointEachLevel;
+        currentLevel =
+            achievementModel!.toltalVocabularyPoint ~/ pointEachLevel;
         point_need_to_up_level = pointEachLevel -
             (achievementModel!.toltalVocabularyPoint % pointEachLevel);
         isLoading = false;
@@ -58,7 +61,10 @@ class _VocaTopicScreenState extends State<VocaTopicScreen>
               color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
         ),
         leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const NewHomePage.HomePage()),
+          ).then((_) => setState(() {})),
           child: const Icon(
             Icons.arrow_back_ios_rounded,
             color: Colors.black,

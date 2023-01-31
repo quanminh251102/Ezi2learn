@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "939199983088-il1oheklmjit7tej725dl8jgi104t31g.apps.googleusercontent.com",
+          "client_id": "939199983088-enr3cd12js2i8kj4c19r01o1ibko1c36.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rive_animation",
+            "certificate_hash": "83cc68dfbcd1fcbfa496d3dffe699ab70b2a5c4c"
+          }
+        },
+        {
+          "client_id": "939199983088-ac133beilh1m8vf35bsdbirgrhivj0co.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "939199983088-il1oheklmjit7tej725dl8jgi104t31g.apps.googleusercontent.com",
+              "client_id": "939199983088-ac133beilh1m8vf35bsdbirgrhivj0co.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

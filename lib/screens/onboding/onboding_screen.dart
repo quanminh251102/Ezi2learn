@@ -2,9 +2,9 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:rive_animation/screens/onboding/components/sign_in_form.dart';
 
 import 'components/animated_btn.dart';
-import 'components/sign_in_dialog.dart';
 
 class OnbodingScreen extends StatefulWidget {
   const OnbodingScreen({super.key});
@@ -99,7 +99,7 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                             setState(() {
                               isShowSignInDialog = true;
                             });
-                            showCustomDialog(
+                            showsignInDialog(
                               context,
                               onValue: (_) {
                                 setState(() {
