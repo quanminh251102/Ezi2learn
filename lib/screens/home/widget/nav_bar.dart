@@ -15,7 +15,7 @@ class NavBar extends StatefulWidget {
 class _NavBarState extends State<NavBar> {
   Future<List<DetailUserModel>>? detailUserModels;
   List<DetailUserModel>? detailUserModels_normal;
-
+  String name = "user gmail";
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,34 @@ class _NavBarState extends State<NavBar> {
       child: ListView(padding: EdgeInsets.zero, children: <Widget>[
         UserAccountsDrawerHeader(
           accountName: const Text('John Wiston'),
-          accountEmail: const Text('john134@gmail.com'),
+          accountEmail: FutureBuilder(
+            future: detailUserModels,
+            builder: (BuildContext context,
+                AsyncSnapshot<List<DetailUserModel>> snapshot) {
+              if (snapshot.hasData && snapshot.data!.isNotEmpty) {
+                return Text(
+                  (detailUserModels_normal?[0].gmail == '')
+                      ? '???'
+                      : detailUserModels_normal?[0].gmail ?? '???',
+                );
+              } else if (snapshot.connectionState == ConnectionState.done &&
+                  detailUserModels_normal!.isEmpty) {
+                return const Text("???");
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+            // child: CircleAvatar(
+            //   child: ClipOval(
+            //     child: Image.network(
+            //       'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
+            //       width: 90,
+            //       height: 90,
+            //       fit: BoxFit.cover,
+            //     ),
+            //   ),
+            // ),
+          ),
           currentAccountPicture: FutureBuilder(
             future: detailUserModels,
             builder: (BuildContext context,
@@ -95,7 +122,7 @@ class _NavBarState extends State<NavBar> {
           title: const Text('Trang cá nhân'),
           onTap: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => ProfileScreen()));
+                MaterialPageRoute(builder: (context) => const ProfileScreen()));
           },
         ),
         ListTile(

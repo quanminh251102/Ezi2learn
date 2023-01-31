@@ -29,8 +29,8 @@ class _SignInFormState extends State<SignInForm> {
   late SMITrigger reset;
 
   late SMITrigger confetti;
-  double paddingTop1 = 20;
-  double paddingTop2 = 30;
+  double paddingTop1 = 10;
+  double paddingTop2 = 20;
   void _onCheckRiveInit(Artboard artboard) {
     StateMachineController? controller =
         StateMachineController.fromArtboard(artboard, 'State Machine 1');

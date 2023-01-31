@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/game/screen/game_list_screen.dart';
+import 'package:rive_animation/screens/grammar/screen/GrammarMain.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
 
+import '../../listen/screens/welcome_screen.dart';
 import '../../pronunciation/screen/pronunciation_lesson.dart';
 
 class MissonPage extends StatefulWidget {
@@ -37,6 +39,20 @@ class _MissonPageState extends State<MissonPage> {
               context,
               MaterialPageRoute(
                 builder: (context) => const GameListScreen(),
+              ),
+            );
+          } else if (title == "Grammar") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const GrammarMainPage(),
+              ),
+            );
+          } else if (title == "Listening") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const WelcomeScreen(),
               ),
             );
           }

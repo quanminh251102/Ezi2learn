@@ -4,10 +4,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
-import 'package:rive_animation/main.dart';
 import 'package:rive_animation/screens/onboding/components/sign_in_form.dart';
 
-import '../../auth/service/auth_service.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({

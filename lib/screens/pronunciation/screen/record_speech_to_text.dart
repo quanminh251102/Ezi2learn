@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import '../api/speech_api.dart';
 
 class RecordSpeechToText extends StatefulWidget {
+  const RecordSpeechToText({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }

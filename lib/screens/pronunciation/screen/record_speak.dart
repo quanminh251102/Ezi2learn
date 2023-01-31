@@ -58,6 +58,8 @@ const theSource = AudioSource.microphone;
 
 /// Example app.
 class SimpleRecorder extends StatefulWidget {
+  const SimpleRecorder({super.key});
+
   @override
   _SimpleRecorderState createState() => _SimpleRecorderState();
 }
