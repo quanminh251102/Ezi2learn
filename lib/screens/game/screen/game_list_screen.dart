@@ -86,10 +86,6 @@ class _GameListScreenState extends State<GameListScreen> {
                                 style: const TextStyle(
                                     color: Color.fromARGB(226, 255, 255, 255),
                                     fontSize: 25)),
-                            Text(title,
-                                style: const TextStyle(
-                                    color: Color.fromARGB(226, 255, 255, 255),
-                                    fontSize: 25)),
                           ],
                         ),
                         const SizedBox(width: 100),
@@ -103,7 +99,7 @@ class _GameListScreenState extends State<GameListScreen> {
                                 30,
                               )),
                           child: const Text(
-                            'Chơi ngay',
+                            'Play now',
                             style: TextStyle(
                               color: Color.fromARGB(255, 87, 87, 87),
                               fontWeight: FontWeight.w700,
@@ -155,7 +151,7 @@ class _GameListScreenState extends State<GameListScreen> {
               children: <Widget>[
                 const Padding(
                   padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: Text('Hãy chọn game để ôn tập',
+                  child: Text('Please choose a game to study',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 20,
@@ -169,14 +165,14 @@ class _GameListScreenState extends State<GameListScreen> {
                   child: ListView(
                     scrollDirection: Axis.vertical,
                     children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
-                        child: SizedBox(
-                          width: 250,
-                          child: gameCard('assets/images/voca.jpg',
-                              'Vocabulary', Colors.brown),
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
+                      //   child: SizedBox(
+                      //     width: 250,
+                      //     child: gameCard('assets/images/voca.jpg',
+                      //         'Vocabulary', Colors.brown),
+                      //   ),
+                      // ),
                       Padding(
                         padding: const EdgeInsets.fromLTRB(20, 0, 20, 20),
                         child: SizedBox(

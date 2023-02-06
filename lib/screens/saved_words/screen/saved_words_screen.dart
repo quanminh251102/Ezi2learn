@@ -72,7 +72,7 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
                 TextField(
                   decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search),
-                      hintText: "Tìm từ trong danh sách"),
+                      hintText: "Search words in list"),
                   onChanged: (value) {
                     List<String> newWords = [];
                     List<String> newMeanings = [];
@@ -96,7 +96,7 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
                   childPadding: 4,
                   child: (_searchResult_words.isEmpty)
                       ? const Center(
-                          child: Text('Danh sách trống'),
+                          child: Text('List is empty'),
                         )
                       : ListView(children: [
                           for (int i = 0;

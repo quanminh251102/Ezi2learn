@@ -21,75 +21,75 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
     return <Step>[
       const Step(
         step: 1,
-        title: 'Thì hiện tại đơn',
+        title: 'Present simple tense',
         message:
-            'dùng để diễn tả một sự thật hiển nhiên hay một hành động diễn ra lặp đi lặp lại theo thói quen, phong tục, khả năng',
+            'used to express an obvious fact or an action that takes place repeatedly according to habits, customs, abilities',
       ),
       const Step(
         step: 2,
-        title: 'Thì hiện tại tiếp diễn',
+        title: 'The present continuous tense',
         message:
-            'dùng để diễn tả những sự việc xảy ra ngay lúc chúng ta nói hay xung quanh thời điểm chúng ta nói, và hành động đó vẫn chưa chấm dứt (còn tiếp tục diễn ra)',
+            'used to describe things that happen at the moment we speak or around the time we speak, and the action has not ended (continues to happen)',
       ),
       const Step(
         step: 3,
-        title: 'Thì hiện tại hoàn thành',
+        title: 'Present perfect',
         message:
-            'dùng để diễn tả một hành động, sự việc đã bắt đầu từ trong quá khứ, kéo dài đến hiện tại và có thể tiếp tục tiếp diễn trong tương lai',
+            'Used to express an action or event that started in the past, continues to the present, and can continue into the future.',
       ),
       const Step(
         step: 4,
-        title: 'Thì hiện tại hoàn thành tiếp diễn',
+        title: 'Present perfect continuous tense',
         message:
-            'là thì diễn tả sự việc bắt đầu trong quá khứ và tiếp tục ở hiện tại có thể tiếp diễn ở tương lai sự việc đã kết thúc nhưng ảnh hưởng kết quả còn lưu lại hiện tại',
+            'is a tense to describe an event that started in the past and continues in the present. It can continue in the future. The event has ended but the effect remains in the present.',
       ),
       const Step(
         step: 5,
-        title: 'Thì quá khứ đơn',
+        title: 'The past simple',
         message:
-            'dùng để diễn tả một hành động, sự việc diễn ra và kết thúc trong quá khứ',
+            'Used to describe an action or event that started and ended in the past',
       ),
       const Step(
         step: 6,
-        title: 'Thì quá khứ tiếp diễn',
+        title: 'Past continuous tense',
         message:
-            'dùng để diễn tả một hành động, sự việc đang diễn ra xung quanh một thời điểm trong quá khứ',
+            'Used to describe an action or event that was happening around a time in the past',
       ),
       const Step(
         step: 7,
-        title: 'Thì quá khứ hoàn thành',
+        title: 'Past Perfect Tense',
         message:
-            'dùng để diễn tả một hành động xảy ra trước một hành động khác trong quá khứ. Hành động nào xảy ra trước thì dùng thì quá khứ hoàn thành. Hành động xảy ra sau thì dùng thì quá khứ đơn',
+            'Used to describe an action that happened before another action in the past. For the action that happened first, use the past perfect. When the action happens after, use the past simple',
       ),
       const Step(
         step: 8,
-        title: 'Thì quá khứ hoàn thành tiếp diễn',
+        title: 'Past perfect continuous',
         message:
-            'dùng để diễn tả một hành động, sự việc đã đang xảy ra trong quá khứ và kết thúc trước một hành động cũng xảy ra trong quá khứ',
+            'Used to describe an action that was happening in the past and ended before an action that also happened in the past.',
       ),
       const Step(
         step: 9,
-        title: 'Thì tương lai đơn',
+        title: 'Simple future tense',
         message:
-            'được dùng khi không có kế hoạch hay quyết định làm gì nào trước khi chúng ta nói. Chúng ta ra quyết định tự phát tại thời điểm nói',
+            'used when there is no plan or decision to do anything before we speak. We make spontaneous decisions at the moment of speaking',
       ),
       const Step(
         step: 10,
-        title: 'Thì tương lai tiếp diễn',
+        title: 'The future continues',
         message:
-            'dùng để diễn tả một hành động, sự việc sẽ đang diễn ra tại một thời điểm cụ thể trong tương lai',
+            'Used to express an action that will be happening at a specific time in the future',
       ),
       const Step(
         step: 11,
-        title: 'Thì tương lai hoàn thành',
+        title: 'Future perfect tense',
         message:
-            'dùng để diễn tả một hành động hay sự việc hoàn thành trước một thời điểm trong tương lai',
+            'Used to express an action or event completed before a certain time in the future',
       ),
       const Step(
         step: 12,
-        title: 'Thì tương lai hoàn thành tiếp diễn',
+        title: 'Future perfect continuous',
         message:
-            'dùng để diễn tả một hành động, sự việc sẽ xảy ra và xảy ra liên tục trước một thời điểm nào đó trong tương lai',
+            'Used to express an action, the event will happen and will happen continuously before a certain time in the future',
       ),
     ];
   }
@@ -152,7 +152,7 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
       backgroundColor: Colors.white,
       //elevation: 0,
       title: const Text(
-        'Ngữ pháp',
+        'Grammar',
         style: TextStyle(
             color: Colors.black, fontSize: 24, fontWeight: FontWeight.bold),
       ),
@@ -177,7 +177,8 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
       child: Theme(
         data: Theme.of(context).copyWith(
           // accentColor: const Color(0xFFFCB69F).withOpacity(0.2),
-          colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
+          colorScheme:
+              ColorScheme.fromSwatch().copyWith(secondary: Colors.white),
         ),
         child: SafeArea(
           child: Scaffold(
@@ -369,7 +370,7 @@ class _Header extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: Text(
-              '12 Thì Trong Tiếng Anh',
+              '12 Tenses In English',
               textAlign: TextAlign.center,
               style: GoogleFonts.architectsDaughter(
                 fontSize: 26,
