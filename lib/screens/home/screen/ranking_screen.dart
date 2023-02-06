@@ -304,6 +304,6 @@ class _RankingScreenState extends State<RankingScreen> {
         //       return pageBody;
         //     },
         //   );
-        : pageBody;
+        : SingleChildScrollView(child: pageBody);
   }
 }
