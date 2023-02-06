@@ -14,10 +14,11 @@ class VocaCard extends StatefulWidget {
 class _VocaCardState extends State<VocaCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.all(Radius.circular(30)),
-      ),
+    return PhysicalModel(
+      color: Colors.white,
+      elevation: 8,
+      shadowColor: Colors.black,
+      borderRadius: BorderRadius.circular(20),
       child: Container(
         height: 150,
         width: 150,

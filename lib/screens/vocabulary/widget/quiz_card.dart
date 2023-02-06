@@ -27,59 +27,55 @@ class _QuizCardState extends State<QuizCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        top: MediaQuery.of(context).size.height * 0.02,
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-            color: const Color(0xffDBF9F8),
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(width: 2, color: Colors.black)),
-        child: Center(
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Container(
-                      margin: const EdgeInsets.all(10),
-                      child: Text(
-                          'Question ${widget.currentQuestion} / ${widget.amountofQuestion}',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Align(
-                        alignment: Alignment.topRight,
-                        child: SpeakerButton(
-                          text: widget.question.text,
-                        )),
-                  ),
-                ],
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.35,
-                decoration: BoxDecoration(
-                color: const Color(0xffDBF9F8),
-                border:
-                    Border.all(width: 0, color: const Color(0xffDBF9F8))),
-                child: SizedBox(
-              width: 150,
-              height: 150,
-              child: Image.network(widget.question.image)),
-              ),
-            ],
+    return Stack(children: [
+      Container(
+        height: MediaQuery.of(context).size.height * 0.45,
+        width: MediaQuery.of(context).size.width,
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                "assets/images/background_quiz.png"), // <-- BACKGROUND IMAGE
+            fit: BoxFit.contain,
           ),
         ),
       ),
-    );
+      Padding(
+        padding: EdgeInsets.symmetric(
+            vertical: MediaQuery.of(context).size.height * 0.06,
+            horizontal: MediaQuery.of(context).size.width * 0.05),
+        child: Column(
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    margin: const EdgeInsets.all(10),
+                    child: Text(
+                        'Question ${widget.currentQuestion} / ${widget.amountofQuestion}',
+                        style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 22,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  child: SpeakerButton(
+                    text: widget.question.text,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+                width: MediaQuery.of(context).size.height * 0.3,
+                height: MediaQuery.of(context).size.width * 0.35,
+                child: Image.network(widget.question.image)),
+          ],
+        ),
+      ),
+    ]);
     //
   }
 }

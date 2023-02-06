@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:rive_animation/screens/saved_words/model/saved_words_screen_model.dart';
@@ -66,7 +65,7 @@ class _SavedWordsScreenState extends State<SavedWordsScreen> {
             child: CircularProgressIndicator(),
           )
         : Container(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               children: [
                 const SizedBox(height: 8),

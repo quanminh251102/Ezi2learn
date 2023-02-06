@@ -6,7 +6,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
 import 'package:rive_animation/screens/onboding/components/sign_in_form.dart';
 
-
 class SignUpForm extends StatefulWidget {
   const SignUpForm({
     Key? key,
@@ -47,7 +46,6 @@ class _SignUpFormState extends State<SignUpForm> {
 
     confetti = controller.findInput<bool>("Trigger explosion") as SMITrigger;
   }
-
   void signUp(BuildContext context) {
     // confetti.fire();
     setState(() {
@@ -57,20 +55,11 @@ class _SignUpFormState extends State<SignUpForm> {
 
     Future.delayed(
       const Duration(seconds: 1),
-      () async {
+      () {
         if (_formKey.currentState!.validate() &&
             passwordEditingController.text ==
                 passwordconfirmEditingController.text) {
           try {
-            await FirebaseAuth.instance
-                .createUserWithEmailAndPassword(
-                    email: emailEditingController.text,
-                    password: passwordEditingController.text)
-                .then((value) {
-              print("Created New Account");
-            }).onError((error, stackTrace) {
-              print("Error ${error.toString()}");
-            });
             success.fire();
             Future.delayed(
               const Duration(seconds: 2),
@@ -80,14 +69,17 @@ class _SignUpFormState extends State<SignUpForm> {
                 });
                 confetti.fire();
                 // Navigate & hide confetti
-                Future.delayed(const Duration(seconds: 1), () {
-                  // Navigator.pop(context);
-                  showsignInDialog(
-                    context,
-                    onValue: (_) {
-                      setState(() {});
-                    },
-                  );
+                Future.delayed(const Duration(seconds: 1), () async {
+                  Navigator.pop(context);
+                  await FirebaseAuth.instance
+                      .createUserWithEmailAndPassword(
+                          email: emailEditingController.text,
+                          password: passwordEditingController.text)
+                      .then((value) {
+                    print("Created New Account");
+                  }).onError((error, stackTrace) {
+                    print("Error ${error.toString()}");
+                  });
                 });
               },
             );
@@ -173,8 +165,8 @@ class _SignUpFormState extends State<SignUpForm> {
                         paddingTop = 0;
                       });
                       return "Vui lòng nhập mật khẩu";
-                    }
-                    else if(passwordEditingController.text != passwordconfirmEditingController.text){
+                    } else if (passwordEditingController.text !=
+                        passwordconfirmEditingController.text) {
                       return "Mật khẩu không khớp";
                     }
                     return null;
@@ -204,8 +196,8 @@ class _SignUpFormState extends State<SignUpForm> {
                         paddingTop = 0;
                       });
                       return "Vui lòng nhập mật khẩu";
-                    }
-                    else if(passwordEditingController.text != passwordconfirmEditingController.text){
+                    } else if (passwordEditingController.text !=
+                        passwordconfirmEditingController.text) {
                       return "Mật khẩu không khớp";
                     }
                     return null;

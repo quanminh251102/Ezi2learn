@@ -154,6 +154,7 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
                                         alignment: Alignment.center,
                                         child: SizedBox(
                                           height: MediaQuery.of(context).size.height * 0.6,
+                                          width:MediaQuery.of(context).size.width,
                                           child: Swiper(
                                             loop: false,
                                             pagination:

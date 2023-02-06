@@ -54,49 +54,57 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Widget bottomNavigationBar = Container(
-      decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(width: 0.8, color: Colors.grey.shade200),
-        ),
-        color: Colors.white,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.only(
+            topRight: Radius.circular(30), topLeft: Radius.circular(30)),
+        boxShadow: [
+          BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
+        ],
       ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 20),
-        child: GNav(
-            backgroundColor: Colors.white,
-            color: Colors.black,
-            activeColor: Colors.black,
-            tabBackgroundColor: Colors.yellow.shade200,
-            gap: 8,
-            padding: const EdgeInsets.all(16),
-            onTabChange: ((value) {
-              print(value);
-              setState(() {
-                index = value;
-              });
-            }),
-            tabs: const [
-              GButton(
-                icon: Icons.home,
-                text: 'Home',
-              ),
-              GButton(
-                icon: Icons.save_alt_outlined,
-                text: 'Saved Words',
-              ),
-              GButton(
-                icon: Icons.list_alt_rounded,
-                text: 'Ranking',
-              ),
-              GButton(
-                icon: Icons.supervised_user_circle,
-                text: 'Profile',
-              )
-            ]),
+      child: ClipRRect(
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(30.0),
+          topRight: Radius.circular(30.0),
+        ),
+        child: SafeArea(
+          child: GNav(
+              tabMargin: const EdgeInsetsDirectional.all(8),
+              backgroundColor: Colors.white,
+              color: Colors.black,
+              activeColor: Colors.black,
+              tabBackgroundColor: Colors.yellow.shade200,
+              gap: 8,
+              padding: const EdgeInsets.all(15),
+              onTabChange: ((value) {
+                print(value);
+                setState(() {
+                  index = value;
+                });
+              }),
+              tabs: const [
+                GButton(
+                  icon: Icons.home,
+                  text: 'Home',
+                ),
+                GButton(
+                  icon: Icons.save_alt_outlined,
+                  text: 'Saved Words',
+                ),
+                GButton(
+                  icon: Icons.list_alt_rounded,
+                  text: 'Ranking',
+                ),
+                GButton(
+                  icon: Icons.supervised_user_circle,
+                  text: 'Profile',
+                )
+              ]),
+        ),
       ),
     );
 
     AppBar appBar = AppBar(
+        toolbarHeight: MediaQuery.of(context).size.height / 12,
         iconTheme: const IconThemeData(
           //size: 40, //change size on your need
           color: Colors.black, //change color on your need
@@ -109,8 +117,8 @@ class _HomePageState extends State<HomePage> {
             fontWeight: FontWeight.w700,
           ),
         ),
-        backgroundColor: Colors.white,
-        elevation: 0.4,
+        backgroundColor: Colors.yellow.shade200,
+        elevation: 3,
         actions: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
@@ -159,7 +167,7 @@ class _HomePageState extends State<HomePage> {
         ]);
 
     Widget pageBody = (index == 0)
-        ? const MissonPage()
+        ? const SingleChildScrollView(child: MissonPage())
         : (index == 1)
             ? const SavedWordsScreen()
             : (index == 2)
@@ -174,13 +182,11 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar,
       backgroundColor: Colors.white,
       bottomNavigationBar: isKeyboardOpen ? null : bottomNavigationBar,
-      body: SingleChildScrollView(
-        child: isLoading == true
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : pageBody,
-      ),
+      body: isLoading == true
+          ? const Center(
+              child: CircularProgressIndicator(),
+            )
+          : pageBody,
     );
   }
 }

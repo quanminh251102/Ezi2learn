@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
 import 'package:rive_animation/main.dart';
 import 'package:rive_animation/screens/onboding/components/sign_up_form.dart';
+import 'package:rive_animation/screens/onboding/components/verification_form.dart';
 
 import '../../auth/service/auth_service.dart';
 
@@ -29,8 +30,8 @@ class _SignInFormState extends State<SignInForm> {
   late SMITrigger reset;
 
   late SMITrigger confetti;
-  double paddingTop1 = 10;
-  double paddingTop2 = 20;
+  double paddingTop1 = 20;
+  double paddingTop2 = 25;
   void _onCheckRiveInit(Artboard artboard) {
     StateMachineController? controller =
         StateMachineController.fromArtboard(artboard, 'State Machine 1');
@@ -270,7 +271,7 @@ class _SignInFormState extends State<SignInForm> {
                   Expanded(child: Divider()),
                 ],
               ),
-               Padding(
+              Padding(
                 padding: EdgeInsets.symmetric(vertical: paddingTop1),
                 child: const Center(
                   child: Text(

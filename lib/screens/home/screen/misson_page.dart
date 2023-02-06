@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:rive_animation/screens/auth/widget/social_icon.dart';
 import 'package:rive_animation/screens/game/screen/game_list_screen.dart';
 import 'package:rive_animation/screens/grammar/screen/GrammarMain.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';
@@ -16,7 +17,7 @@ class MissonPage extends StatefulWidget {
 class _MissonPageState extends State<MissonPage> {
   @override
   Widget build(BuildContext context) {
-    Widget missionCard(String url, String title, Color iconColor) {
+    Widget missionCard(String url, String title, Color iconColor, String icon) {
       return GestureDetector(
         onTap: () {
           //this.onCardClick!();
@@ -57,137 +58,153 @@ class _MissonPageState extends State<MissonPage> {
             );
           }
         },
-        child: Container(
-            margin: EdgeInsets.zero, //EdgeInsets.fromLTRB(20, 0, 20, 20),
-            height: 200,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: Image.asset(url, fit: BoxFit.cover),
-                  ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  left: 0,
-                  right: 0,
-                  child: Container(
-                    height: 60,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(20),
-                          bottomRight: Radius.circular(20)),
-                      color: Color.fromARGB(96, 0, 0, 0),
-                      // gradient: LinearGradient(
-                      //     begin: Alignment.bottomCenter,
-                      //     end: Alignment.topCenter,
-                      //     colors: [
-                      //       Colors.black.withOpacity(1.0),
-                      //       Colors.transparent
-                      //     ]),
+        child: PhysicalModel(
+            elevation: 6.0,
+            shape: BoxShape.rectangle,
+            shadowColor: Colors.black,
+            color: Colors.white,
+            borderRadius: BorderRadius.all(Radius.circular(20)),
+            child: Container(
+              height: 200,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(20),
+                      child: Image.asset(url, fit: BoxFit.cover),
                     ),
                   ),
-                ),
-                Positioned(
-                  bottom: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        ClipOval(
-                            child: Container(
-                          color: iconColor,
-                          padding: const EdgeInsets.all(8),
-                          child: const Icon(
-                            Icons.add_task,
-                            color: Colors.white,
-                          ),
-                        )),
-                        const SizedBox(width: 10),
-                        Text(title,
-                            style: const TextStyle(
-                                color: Color.fromARGB(226, 255, 255, 255),
-                                fontSize: 20))
-                      ],
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      decoration: BoxDecoration(
+                        borderRadius: const BorderRadius.only(
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20)),
+                        color: const Color.fromARGB(150, 0, 0, 0),
+                        gradient: LinearGradient(
+                            begin: Alignment.bottomCenter,
+                            end: Alignment.topCenter,
+                            colors: [
+                              Colors.black.withOpacity(1),
+                              Colors.black.withOpacity(0.1)
+                            ]),
+                      ),
                     ),
                   ),
-                )
-              ],
+                  Positioned(
+                    bottom: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(6.0),
+                      child: Row(
+                        children: [
+                          ClipOval(
+                              child: Container(
+                                  padding: const EdgeInsets.all(8),
+                                  child: Image(image: AssetImage(icon)))),
+                          Text(title,
+                              style: const TextStyle(
+                                  color: Color.fromARGB(226, 255, 255, 255),
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold))
+                        ],
+                      ),
+                    ),
+                  )
+                ],
+              ),
             )),
       );
     }
 
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(0, 32, 0, 0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                child: Text('Thử Thách Hôm Nay',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold)),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.33,
-                child: Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: ListView(
-                    scrollDirection: Axis.horizontal,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.52,
-                          child: missionCard('assets/images/voca.jpg',
-                              'Vocabulary', Colors.brown),
+    return Container(
+      color: Colors.transparent.withOpacity(0.01),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                const Padding(
+                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                  child: Text("Today's challenge",
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold)),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.33,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.52,
+                            child: missionCard(
+                                'assets/images/voca.jfif',
+                                'Vocabulary',
+                                Colors.brown,
+                                'assets/icons/vocabulary.png'),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.52,
-                          child: missionCard('assets/images/speaking.png',
-                              'Speaking', Colors.grey),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.52,
+                            child: missionCard(
+                                'assets/images/speaking.png',
+                                'Speaking',
+                                Colors.grey,
+                                'assets/icons/speaking.png'),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.52,
-                          child: missionCard('assets/images/dictionary.jpg',
-                              'Listening', Colors.orange),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.52,
+                            child: missionCard(
+                                'assets/images/listening.jfif',
+                                'Listening',
+                                Colors.orange,
+                                'assets/icons/listening.png'),
+                          ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width * 0.52,
-                          child: missionCard('assets/images/dictionary.jpg',
-                              'Gaming', Colors.orange),
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.52,
+                            child: missionCard(
+                                'assets/images/gaming.jfif',
+                                'Gaming',
+                                Colors.orange,
+                                'assets/icons/gaming.png'),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                child: missionCard(
-                    'assets/images/grammar.jpg', 'Grammar', Colors.green),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                  child: missionCard('assets/images/grammar.png', 'Grammar',
+                      Colors.green, 'assets/icons/reading.png'),
+                ),
+              ],
+            ),
           ),
-        ),
-      ],
+        ],
+      ),
     );
   }
 }

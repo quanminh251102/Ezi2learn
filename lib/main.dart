@@ -3,6 +3,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
+import 'package:rive_animation/screens/home/screen/verification_screen.dart';
+import 'package:rive_animation/screens/onboding/components/verification_form.dart';
 import 'package:rive_animation/screens/onboding/onboding_screen.dart';
 import 'screens/home/screen/home_page.dart' as NewHomePage;
 
@@ -27,7 +29,7 @@ class MyEnglishApp extends StatelessWidget {
           scaffoldBackgroundColor: const Color(0xFFEEF1F8),
           primarySwatch: Colors.blue,
           textTheme: GoogleFonts.latoTextTheme(textTheme).copyWith(
-            bodyMedium: GoogleFonts.openSans(textStyle: textTheme.bodyMedium),
+            bodyMedium: GoogleFonts.sourceSansPro(textStyle: textTheme.bodyMedium),
           ),
           inputDecorationTheme: const InputDecorationTheme(
             filled: true,
@@ -67,7 +69,7 @@ class MainPage extends StatelessWidget {
             } else if (snapshot.hasError) {
               return const Center(child: Text('Something went wrong'));
             } else if (snapshot.hasData) {
-              return const NewHomePage.HomePage();
+              return const VerificationScreen();
             } else {
               return const OnbodingScreen();
             }

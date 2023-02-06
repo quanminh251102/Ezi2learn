@@ -21,66 +21,70 @@ class _FlashCardState extends State<FlashCard> {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: Center(
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height * 0.6,
-              decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border.all(color: const Color(0xffFFDA2C), width: 5)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Align(
-                          alignment: Alignment.topRight,
-                          child: SpeakerButton(
-                            text: widget.vocabulary.text,
-                          )),
-                      Padding(
-                        padding: const EdgeInsets.all(30.0),
-                        child: SizedBox(
-                          width: 100,
-                          child: Image.network(widget.vocabulary.image),
-                        ),
-                      ),
-                      Text(
-                        widget.vocabulary.text,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      Text(
-                        widget.vocabulary.spelling,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.normal),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Text(
-                        widget.vocabulary.meaning,
-                        style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                    ]),
-              ),
-            ),
-          ],
+    return Stack(children: [
+      Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage(
+                "assets/images/background.png"), // <-- BACKGROUND IMAGE
+            fit: BoxFit.contain,
+          ),
         ),
       ),
-    );
+      Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.05),
+        child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(right: 10.0),
+                child: Align(
+                    alignment: Alignment.topRight,
+                    child: SpeakerButton(
+                      text: widget.vocabulary.text,
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(30.0),
+                child: SizedBox(
+                  width: 100,
+                  child: Image.network(widget.vocabulary.image),
+                ),
+              ),
+              Text(
+                widget.vocabulary.text,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 5,
+              ),
+              Text(
+                widget.vocabulary.spelling,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal),
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              Text(
+                widget.vocabulary.meaning,
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+            ]),
+      ),
+    ]);
     //
   }
 }
