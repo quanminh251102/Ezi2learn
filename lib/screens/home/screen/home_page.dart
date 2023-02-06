@@ -182,11 +182,11 @@ class _HomePageState extends State<HomePage> {
       appBar: appBar,
       backgroundColor: Colors.white,
       bottomNavigationBar: isKeyboardOpen ? null : bottomNavigationBar,
-      body: isLoading == true
+      body: isLoading
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : pageBody,
+          : SingleChildScrollView(child: pageBody),
     );
   }
 }

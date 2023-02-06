@@ -262,9 +262,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                 ? Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      list.length >= 3
-                                          ? '${list[i].gmail.substring(0, 6)}... (You)'
-                                          : '???',
+                                      '${list[i].gmail.substring(0, 6)}... (You)',
                                       style: const TextStyle(
                                           color: Colors.blue,
                                           fontSize: 18,
@@ -273,7 +271,7 @@ class _RankingScreenState extends State<RankingScreen> {
                                 : Align(
                                     alignment: Alignment.centerLeft,
                                     child: Text(
-                                      list[i].gmail,
+                                      '${list[i].gmail.substring(0, 6)}...',
                                     ),
                                   )
                           ],
