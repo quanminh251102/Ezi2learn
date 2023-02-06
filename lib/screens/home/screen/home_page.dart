@@ -124,12 +124,12 @@ class _HomePageState extends State<HomePage> {
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileScreen(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const ProfileScreen(),
+                //   ),
+                // );
               },
               // child: FutureBuilder(
               //     future: detailUserModels,
@@ -172,7 +172,7 @@ class _HomePageState extends State<HomePage> {
             ? const SavedWordsScreen()
             : (index == 2)
                 ? const RankingScreen()
-                : const Text('text');
+                : const ProfileScreen();
 
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
 

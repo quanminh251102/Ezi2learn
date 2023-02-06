@@ -1,4 +1,3 @@
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
@@ -236,23 +235,8 @@ class _GrammarQuizState extends State<GrammarQuiz> {
               child: Container(
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(
-                      height: 16,
-                    ),
-                    // LinearProgressBar(
-                    //   maxSteps: quizs.length,
-                    //   progressType: LinearProgressBar.progressTypeLinear,
-                    //   currentStep: current_quiz + 1,
-                    //   progressColor: Colors.blue[200]!,
-                    //   backgroundColor: Colors.grey[200]!,
-                    //   valueColor:
-                    //       AlwaysStoppedAnimation<Color>(Colors.blue[200]!),
-                    //   semanticsLabel: "Label",
-                    //   semanticsValue: "Value",
-                    //   minHeight: 20,
-                    // ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(24, 8, 24, 8),
+                      padding: const EdgeInsets.fromLTRB(24, 0, 24, 8),
                       child: FAProgressBar(
                         backgroundColor: const Color(0xffC4C4C4),
                         changeProgressColor: const Color(0xffFFDA2C),
@@ -260,7 +244,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                         currentValue:
                             ((current_quiz).toDouble() / quizs.length) * 100,
                         displayText: '%',
-                        size: 20,
+                        size: 16,
                       ),
                     ),
                     CustomCard(
@@ -386,7 +370,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                         });
                       },
                       child: const Text(
-                        'Xóa câu trả lời',
+                        'Clear anwser',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -452,8 +436,10 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                                                       sroce: (1.0 * scroce) /
                                                           quizs.length,
                                                     )));
+                                      } else {
+                                        init_quiz();
                                       }
-                                      init_quiz();
+
                                       _controller.restart(initialPosition: 0);
                                     }
                                   });
@@ -468,7 +454,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                               }
                             },
                       child: const Text(
-                        'Kiểm tra',
+                        'Check',
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -517,7 +503,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                 },
                 timeFormatterFunction: (defaultFormatterFunction, duration) {
                   if (duration.inSeconds == 0) {
-                    return "Bắt đầu";
+                    return "Start";
                   } else {
                     return Function.apply(defaultFormatterFunction, [duration]);
                   }

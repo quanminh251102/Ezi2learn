@@ -31,7 +31,7 @@ class _LessonDetailState extends State<LessonDetail> {
   int _currentWord = -1;
   bool isCorrect = false;
   String state =
-      "Hãy đọc tất cả các từ để phần mềm\n chấm điểm cho bạn chính xác nhất.";
+      "Please read all the words so that the software\n gives you the most accurate score.";
 
   void reset() async {
     if (_currentWord + 1 == widget.speakLesson.words.length) {
@@ -59,12 +59,12 @@ class _LessonDetailState extends State<LessonDetail> {
         }
         _current = 0;
         _currentWord++;
-        _text = 'Nhấn nút bên dưới và bắt đầu nói';
+        _text = 'Hit the button below and start speaking';
         state = widget.speakLesson.words[_currentWord];
       });
       await speak(widget.speakLesson.words[_currentWord], 0.8);
       setState(() {
-        state = "Đến lượt bạn";
+        state = "Your turn";
       });
     }
   }
@@ -110,7 +110,7 @@ class _LessonDetailState extends State<LessonDetail> {
 
   stt.SpeechToText? _speech;
   bool _isListening = false;
-  String _text = 'Nhấn nút bên dưới và bắt đầu nói';
+  String _text = 'Hit the button below and start speaking';
   double _confidence = 1.0;
 
   final player = AudioPlayer();
@@ -126,7 +126,7 @@ class _LessonDetailState extends State<LessonDetail> {
         //await record();
         setState(() {
           _isListening = true;
-          state = "Mình đang nghe...";
+          state = "I'm listening...";
         });
         _speech!.listen(
           onResult: (val) => setState(() {
@@ -141,17 +141,17 @@ class _LessonDetailState extends State<LessonDetail> {
     } else {
       setState(() {
         _isListening = false;
-        if (state == "Mình đang nghe...") state = "Đến lượt bạn";
+        if (state == "I'm listening...") state = "Your turn";
         if (_text == widget.speakLesson.words[_currentWord]) {
           player.play(AssetSource("audio/right_answer.mp3"));
           setState(() {
             isCorrect = true;
-            state = "Bạn đã phát âm chính xác";
+            state = "You pronounced it correctly.";
           });
         } else {
           player.play(AssetSource("audio/wrong_answer.mp3"));
           setState(() {
-            state = "Bạn đã phát âm sai";
+            state = "You have mispronounced";
             isCorrect = false;
           });
         }
@@ -248,7 +248,7 @@ class _LessonDetailState extends State<LessonDetail> {
 
     const snackBar = SnackBar(
       content: Text(
-        'Đã lưu từ vựng',
+        'Vocabulary saved',
       ),
     );
 
@@ -342,7 +342,7 @@ class _LessonDetailState extends State<LessonDetail> {
                         child: Row(
                           children: const [
                             Icon(Icons.question_answer),
-                            Text('Tra từ'),
+                            Text('Look up words'),
                           ],
                         ),
                       ),
@@ -374,7 +374,8 @@ class _LessonDetailState extends State<LessonDetail> {
                           builder: (BuildContext context) {
                             return Container(
                               width: MediaQuery.of(context).size.width,
-                              margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 5.0),
                               //decoration: BoxDecoration(color: Colors.amber),
                               child: (i == 1)
                                   ? ElevatedButton(
@@ -394,7 +395,7 @@ class _LessonDetailState extends State<LessonDetail> {
                                             50,
                                           )),
                                       child: const Text(
-                                        'Tiếp theo',
+                                        'Next',
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.w700,
@@ -404,7 +405,7 @@ class _LessonDetailState extends State<LessonDetail> {
                                   : Card(
                                       child: Center(
                                           child: Text(
-                                              'Dịch nghĩa : ${widget.speakLesson.meanings[_currentWord]}')),
+                                              'Translate : ${widget.speakLesson.meanings[_currentWord]}')),
                                     ),
                             );
                           },
@@ -439,9 +440,9 @@ class _LessonDetailState extends State<LessonDetail> {
                         Text(
                           widget.speakLesson.words[_currentWord],
                           style: TextStyle(
-                            color: (state == "Bạn đã phát âm chính xác")
+                            color: (state == "You pronounced it correctly.")
                                 ? Colors.lightGreen
-                                : (state == "Bạn đã phát âm sai")
+                                : (state == "You have mispronounced")
                                     ? Colors.red
                                     : Colors.grey,
                             fontSize: 30,
@@ -530,8 +531,9 @@ class _LessonDetailState extends State<LessonDetail> {
                               const Duration(milliseconds: 100),
                           repeat: true,
                           child: FloatingActionButton(
-                            backgroundColor:
-                                (isSpeaking) ? Colors.grey : const Color(0xffFFDA2C),
+                            backgroundColor: (isSpeaking)
+                                ? Colors.grey
+                                : const Color(0xffFFDA2C),
                             onPressed: (() {
                               // if (isRecord == false) {
                               //   record();

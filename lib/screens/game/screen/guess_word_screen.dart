@@ -91,14 +91,14 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
       //Right
       player.play(AssetSource("audio/right_answer.mp3"));
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Câu trả lời của bạn chính xác')),
+        const SnackBar(content: Text('Your answer is correct')),
       );
       return true;
     } else {
       //wrong
       player.play(AssetSource("audio/wrong_answer.mp3"));
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Câu trả lời của bạn sai')),
+        const SnackBar(content: Text('Your answer is wrong')),
       );
       return false;
     }
@@ -228,7 +228,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
                   50,
                 )),
             child: const Text(
-              'Kiểm tra',
+              'Check',
               style: TextStyle(
                 color: Color.fromARGB(255, 87, 87, 87),
                 fontWeight: FontWeight.w700,
@@ -250,7 +250,7 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
                   50,
                 )),
             child: const Text(
-              'Làm lại',
+              'Clear answer',
               style: TextStyle(
                 color: Colors.white,
                 fontWeight: FontWeight.w700,
