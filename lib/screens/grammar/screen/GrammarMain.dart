@@ -150,7 +150,7 @@ class _GrammarMainPageState extends State<GrammarMainPage> {
     final appBar = AppBar(
       centerTitle: true,
       backgroundColor: Colors.white,
-      //elevation: 0,
+      elevation: 0,
       title: const Text(
         'Grammar',
         style: TextStyle(
@@ -360,7 +360,7 @@ class _Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 0),
       margin: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white.withOpacity(0.5),
