@@ -11,6 +11,7 @@ import 'package:rive_animation/screens/home/screen/change_password_screen.dart';
 import 'package:rive_animation/screens/home/service/detail_user_service.dart';
 import 'package:rive_animation/screens/home/service/storge_service.dart';
 import '../../../main.dart';
+import '../../auth/service/auth_service.dart';
 import '../utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -361,16 +362,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //     ],
               //   ),
               // ),
-              Text(
-                'My Profile',
-                style: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                ),
-              ),
+
+              // Text(
+              //   'My Profile',
+              //   style: TextStyle(
+              //     fontWeight: FontWeight.w700,
+              //     fontSize: 24,
+              //   ),
+              // ),
               SizedBox(
                 height: 10,
               ),
+
               CircleAvatar(
                   radius: 50,
                   backgroundImage: NetworkImage(
@@ -474,6 +477,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  await AuthService.LogOut();
+                },
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xffffe482),
+                    shape: const StadiumBorder(),
+                    minimumSize: Size(
+                      MediaQuery.of(context).size.width - 40,
+                      50,
+                    )),
+                child: Text('Log out'),
               ),
             ],
           ),
