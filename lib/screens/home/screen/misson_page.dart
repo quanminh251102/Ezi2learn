@@ -59,13 +59,13 @@ class _MissonPageState extends State<MissonPage> {
           }
         },
         child: PhysicalModel(
-            elevation: 6.0,
+            elevation: 10.0,
             shape: BoxShape.rectangle,
             shadowColor: Colors.black,
             color: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            child: Container(
-              height: 200,
+            borderRadius: const BorderRadius.all(Radius.circular(20)),
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.3,
               child: Stack(
                 children: [
                   Positioned.fill(
@@ -120,91 +120,89 @@ class _MissonPageState extends State<MissonPage> {
       );
     }
 
-    return Container(
-      color: Colors.transparent.withOpacity(0.01),
-      child: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                  child: Text("Today's challenge",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 25,
-                          fontWeight: FontWeight.bold)),
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.33,
-                  child: Padding(
-                    padding: const EdgeInsets.only(right: 20.0),
-                    child: ListView(
-                      scrollDirection: Axis.horizontal,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.52,
-                            child: missionCard(
-                                'assets/images/voca.jfif',
-                                'Vocabulary',
-                                Colors.brown,
-                                'assets/icons/vocabulary.png'),
-                          ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              const Padding(
+                padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+                child: Text("Today's challenge",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold)),
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.33,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 20.0),
+                  child: ListView(
+                    scrollDirection: Axis.horizontal,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.52,
+                          child: missionCard(
+                              'assets/images/voca.jfif',
+                              'Vocabulary',
+                              Colors.brown,
+                              'assets/icons/vocabulary.png'),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.52,
-                            child: missionCard(
-                                'assets/images/speaking.png',
-                                'Speaking',
-                                Colors.grey,
-                                'assets/icons/speaking.png'),
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.52,
+                          child: missionCard(
+                              'assets/images/speaking.png',
+                              'Speaking',
+                              Colors.grey,
+                              'assets/icons/speaking.png'),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.52,
-                            child: missionCard(
-                                'assets/images/listening.jfif',
-                                'Listening',
-                                Colors.orange,
-                                'assets/icons/listening.png'),
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.52,
+                          child: missionCard(
+                              'assets/images/listening.jfif',
+                              'Listening',
+                              Colors.orange,
+                              'assets/icons/listening.png'),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.52,
-                            child: missionCard(
-                                'assets/images/gaming.jfif',
-                                'Gaming',
-                                Colors.orange,
-                                'assets/icons/gaming.png'),
-                          ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(20, 0, 0, 20),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.52,
+                          child: missionCard(
+                              'assets/images/gaming.jfif',
+                              'Gaming',
+                              Colors.orange,
+                              'assets/icons/gaming.png'),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
-                  child: missionCard('assets/images/grammar.png', 'Grammar',
-                      Colors.green, 'assets/icons/reading.png'),
-                ),
-              ],
-            ),
+              ),
+             
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
+                child: missionCard('assets/images/grammar.png', 'Grammar',
+                    Colors.green, 'assets/icons/reading.png'),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

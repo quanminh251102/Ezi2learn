@@ -55,6 +55,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Widget bottomNavigationBar = Container(
       decoration: const BoxDecoration(
+        color: Colors.red,
         borderRadius: BorderRadius.only(
             topRight: Radius.circular(30), topLeft: Radius.circular(30)),
         boxShadow: [
@@ -167,7 +168,7 @@ class _HomePageState extends State<HomePage> {
         ]);
 
     Widget pageBody = (index == 0)
-        ? const SingleChildScrollView(child: MissonPage())
+        ? const MissonPage()
         : (index == 1)
             ? const SavedWordsScreen()
             : (index == 2)
@@ -186,7 +187,7 @@ class _HomePageState extends State<HomePage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : SingleChildScrollView(child: pageBody),
+          : pageBody,
     );
   }
 }
