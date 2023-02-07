@@ -40,7 +40,7 @@ class _GuessWordDoneScreenState extends State<GuessWordDoneScreen> {
             const Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Text(
-                'Chúc mừng bạn đã hoàn thành trò chơi',
+                'Congratulations on completing the game',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -69,7 +69,7 @@ class _GuessWordDoneScreenState extends State<GuessWordDoneScreen> {
                     50,
                   )),
               child: const Text(
-                'Trở lại',
+                'Return',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,

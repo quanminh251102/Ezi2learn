@@ -1,4 +1,3 @@
-
 import 'package:audioplayers/audioplayers.dart';
 
 import '../data/topic_data.dart';
@@ -164,7 +163,7 @@ class _FinishGrammarState extends State<FinishGrammar> {
             const Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Text(
-                'Chúc mừng bạn đã hoàn thành các câu hỏi',
+                'Congratulations on completing the questions',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -185,10 +184,12 @@ class _FinishGrammarState extends State<FinishGrammar> {
                 ),
               ),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const GrammarMainPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const GrammarMainPage()));
               },
-              child: const Text('Bài tiếp theo'),
+              child: const Text('Next lesson'),
             ),
           ],
         ),

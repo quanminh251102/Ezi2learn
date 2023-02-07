@@ -88,7 +88,7 @@ class ScoreScreen extends StatelessWidget {
                   height: 10,
                 ),
                 Text(
-                  'Điểm của bạn ${qnController.numOfCorrectAns * 10}',
+                  'Your score ${qnController.numOfCorrectAns * 10}',
                   style: const TextStyle(
                       fontSize: 28,
                       color: Color(0xffFFDA2C),
@@ -108,7 +108,7 @@ class ScoreScreen extends StatelessWidget {
                           Row(
                             children: [
                               const Text(
-                                'Số câu đúng: ',
+                                'Number of correct sentences: ',
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontSize: 18,
@@ -128,7 +128,7 @@ class ScoreScreen extends StatelessWidget {
                           ),
                           Row(
                             children: [
-                              const Text('Số câu sai: ',
+                              const Text('Number of wrong sentences: ',
                                   style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 18,

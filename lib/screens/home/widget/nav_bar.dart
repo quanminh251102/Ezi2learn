@@ -114,20 +114,12 @@ class _NavBarState extends State<NavBar> {
         ),
         const ListTile(
           leading: Icon(Icons.description),
-          title: Text('Chính sách'),
+          title: Text('Policy'),
           onTap: null,
         ),
         ListTile(
-          leading: const Icon(Icons.account_balance_outlined),
-          title: const Text('Trang cá nhân'),
-          onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const ProfileScreen()));
-          },
-        ),
-        ListTile(
           leading: const Icon(Icons.exit_to_app),
-          title: const Text('Đăng xuất'),
+          title: const Text('Log out'),
           onTap: () async {
             await AuthService.LogOut();
           },

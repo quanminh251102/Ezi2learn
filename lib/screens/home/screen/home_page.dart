@@ -105,32 +105,71 @@ class _HomePageState extends State<HomePage> {
     );
 
     AppBar appBar = AppBar(
-        toolbarHeight: MediaQuery.of(context).size.height / 12,
+        automaticallyImplyLeading: false,
+        toolbarHeight:
+            (index == 0) ? MediaQuery.of(context).size.height / 12 : 0,
         iconTheme: const IconThemeData(
           //size: 40, //change size on your need
           color: Colors.black, //change color on your need
         ),
-        centerTitle: true,
-        title: const Text(
-          'Home',
-          style: TextStyle(
-            color: Colors.black,
-            fontWeight: FontWeight.w700,
+        title: Visibility(
+          visible: (index == 0) ? true : false,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Column(
+                children: [
+                  Text(
+                    'Welcome Home,                       .',
+                    textAlign: TextAlign.left,
+                    style: TextStyle(color: Colors.black, fontSize: 15),
+                  ),
+                  Text(
+                    detailUserModels.isNotEmpty
+                        ? detailUserModels[0].gmail
+                        : "???",
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ],
+              ),
+              // SizedBox(
+              //   height: 30, // Your Height
+              //   width: 200, // Your width
+              //   child: Text(
+              //     'weewwwwwwwwww',
+              //     style: TextStyle(color: Colors.black),
+              //   ),
+              // ),
+              // Your widgets here
+            ],
           ),
         ),
-        backgroundColor: Colors.yellow.shade200,
-        elevation: 3,
+        // centerTitle: true,
+        // title: const Text(
+        //   'Home',
+        //   style: TextStyle(
+        //     color: Colors.black,
+        //     fontWeight: FontWeight.w700,
+        //   ),
+        // ),
+        backgroundColor: Colors.white,
+        elevation: 0,
         actions: [
           Padding(
             padding: const EdgeInsets.fromLTRB(0, 0, 20, 0),
             child: InkWell(
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ProfileScreen(),
-                  ),
-                );
+                // Navigator.push(
+                //   context,
+                //   MaterialPageRoute(
+                //     builder: (context) => const ProfileScreen(),
+                //   ),
+                // );
               },
               // child: FutureBuilder(
               //     future: detailUserModels,
@@ -173,13 +212,13 @@ class _HomePageState extends State<HomePage> {
             ? const SavedWordsScreen()
             : (index == 2)
                 ? const RankingScreen()
-                : const Text('text');
+                : const ProfileScreen();
 
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
 
     return Scaffold(
       //resizeToAvoidBottomInset: false,
-      drawer: const NavBar(),
+      //drawer: const NavBar(),
       appBar: appBar,
       backgroundColor: Colors.white,
       bottomNavigationBar: isKeyboardOpen ? null : bottomNavigationBar,

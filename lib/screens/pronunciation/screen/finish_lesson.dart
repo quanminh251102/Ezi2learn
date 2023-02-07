@@ -40,7 +40,7 @@ class _FinishLessonState extends State<FinishLesson> {
             const Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 0),
               child: Text(
-                'Chúc mừng bạn đã hoàn thành bài học, bấm vào nút bên dưới để đến với bài học tiếp theo',
+                'Congratulations on completing the lesson, click the button below to go to the next lesson',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -69,7 +69,7 @@ class _FinishLessonState extends State<FinishLesson> {
                     50,
                   )),
               child: const Text(
-                'Trở lại',
+                'Return',
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
