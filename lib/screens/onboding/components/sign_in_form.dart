@@ -403,46 +403,43 @@ void showsignInDialog(BuildContext context, {required ValueChanged onValue}) {
           ),
           child: Scaffold(
             //resizeToAvoidBottomInset: false,
+            resizeToAvoidBottomInset: false,
             backgroundColor: Colors.transparent,
-            body: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  const Text(
-                    "Đăng nhập",
-                    style: TextStyle(
-                      fontSize: 34,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w600,
+            body: Column(
+              children: [
+                const Text(
+                  "Đăng nhập",
+                  style: TextStyle(
+                    fontSize: 34,
+                    fontFamily: "Poppins",
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 10),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: const TextSpan(
+                      text: 'Cùng ',
+                      style: TextStyle(
+                          fontWeight: FontWeight.normal, color: Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(
+                            text: 'Ezi2learn',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                        TextSpan(
+                            text: ' bắt đầu hành trình khám phá tiếng Anh nào!',
+                            style: TextStyle(
+                                fontWeight: FontWeight.normal,
+                                color: Colors.black)),
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        text: 'Cùng ',
-                        style: TextStyle(
-                            fontWeight: FontWeight.normal, color: Colors.black),
-                        children: <TextSpan>[
-                          TextSpan(
-                              text: 'Ezi2learn',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)),
-                          TextSpan(
-                              text:
-                                  ' bắt đầu hành trình khám phá tiếng Anh nào!',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.normal,
-                                  color: Colors.black)),
-                        ],
-                      ),
-                    ),
-                  ),
-                  const SignInForm(),
-                ],
-              ),
+                ),
+                const SignInForm(),
+              ],
             ),
           ),
         ),
