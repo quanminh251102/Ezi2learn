@@ -84,7 +84,9 @@ class _SignUpFormState extends State<SignUpForm> {
               },
             );
           } on FirebaseAuthException catch (e) {
-            print(e);
+            ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('$e')),
+          );
             error.fire();
             Future.delayed(
               const Duration(seconds: 2),

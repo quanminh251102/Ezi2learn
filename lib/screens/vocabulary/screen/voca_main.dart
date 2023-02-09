@@ -153,8 +153,13 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
                                       return Align(
                                         alignment: Alignment.center,
                                         child: SizedBox(
-                                          height: MediaQuery.of(context).size.height * 0.6,
-                                          width:MediaQuery.of(context).size.width,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.6,
+                                          width: MediaQuery.of(context)
+                                              .size
+                                              .width,
                                           child: Swiper(
                                             loop: false,
                                             pagination:
@@ -170,8 +175,7 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
                                               await db
                                                   .collection('topics')
                                                   .doc(widget.topic.title)
-                                                  .collection(
-                                                      'vocabularies')
+                                                  .collection('vocabularies')
                                                   .doc(vocabularies[index]
                                                       .text)
                                                   .update({

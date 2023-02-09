@@ -83,7 +83,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Future<void> _initRetrieval() async {
-    user = FirebaseAuth.instance.currentUser!;
+    user = FirebaseAuth.instance.currentUser;
 
     detailUserModels = DetailUserService.Read();
     detailUserModels_normal = await DetailUserService.Read();
@@ -451,7 +451,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       } else {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
-                              content: Text('Thông tin đã điền lổi')),
+                              content: Text('Thông tin đã điền lỗi')),
                         );
                       }
                     } else {
