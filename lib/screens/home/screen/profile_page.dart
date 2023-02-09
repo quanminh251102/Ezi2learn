@@ -484,6 +484,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ElevatedButton(
                 onPressed: () async {
                   await AuthService.LogOut();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MainPage()));
                 },
                 style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xffffe482),

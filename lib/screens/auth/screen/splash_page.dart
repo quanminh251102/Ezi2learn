@@ -1,8 +1,8 @@
-
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:rive_animation/main.dart';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
+import 'package:rive_animation/screens/onboding/onboding_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
         //duration: 4000,
         //splashTransition: SplashTransition.slideTransition,
         backgroundColor: Colors.white,
-        nextScreen: const MainPage(),
+        nextScreen: OnbodingScreen(),
         splash: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       // color: Colors.amber,
                       height: screenSize.height * 0.3,
                       width: screenSize.width * 0.5,
-                      child: Image.asset('assets/images/college.png')),
+                      child: Image.asset('assets/icons/joy.png')),
                 ],
               )
             ]),

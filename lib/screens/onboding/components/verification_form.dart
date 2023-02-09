@@ -64,7 +64,7 @@ class _VerificationFormState extends State<VerificationForm> {
               child: ElevatedButton.icon(
                 onPressed: () => widget.verification,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFF77D8E),
+                  backgroundColor: Colors.yellow.shade100,
                   minimumSize: const Size(double.infinity, 56),
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(
