@@ -32,7 +32,7 @@ class _RankingScreenState extends State<RankingScreen> {
     setState(() {
       isLoading = true;
     });
-    currentUser = FirebaseAuth.instance.currentUser!;
+    currentUser = FirebaseAuth.instance.currentUser;
     List<DetailUserModel> tempList = [];
     List<int> tempListPoint = [];
 

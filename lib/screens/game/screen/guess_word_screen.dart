@@ -114,75 +114,86 @@ class _GuessWordScreenState extends State<GuessWordScreen> {
         mainAxisSize: MainAxisSize.max,
         children: [
           Padding(
-              padding: const EdgeInsets.fromLTRB(24, 16, 24, 16),
-              child: FAProgressBar(
-                backgroundColor: const Color(0xffC4C4C4),
-                changeProgressColor: const Color(0xffFFDA2C),
-                progressColor: const Color(0xffFFDA2C),
-                currentValue: processValue,
-                displayText: '%',
-                size: 20,
-              )),
-          SizedBox(
-            width: 200,
-            height: 200,
-            child: Image.network(
-                (list.isNotEmpty ? list[currentIndex].image : "")),
+            padding:
+                EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.05),
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.4,
+              height: MediaQuery.of(context).size.height * 0.25,
+              child: Image.network(
+                  (list.isNotEmpty ? list[currentIndex].image : "")),
+            ),
           ),
           const SizedBox(
-            height: 16,
+            height: 10,
           ),
           Padding(
-            padding: const EdgeInsets.fromLTRB(100, 0, 100, 0),
-            child: TextField(
-              controller: _controller,
-              //enabled: false,
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.1),
+            child: Material(
+              borderRadius: BorderRadius.circular(15),
+              elevation: 10,
+              shadowColor: Colors.black.withOpacity(0.8),
+              child: TextField(
+                textAlign: TextAlign.center,
+                style: const TextStyle(color: Colors.black, fontSize: 20),
+                controller: _controller,
+                //enabled: false,
+              ),
             ),
           ),
-          const SizedBox(
-            height: 32,
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.05,
           ),
-          GroupButton(
-            controller: controllerGroupButton,
-            options: GroupButtonOptions(
-              selectedShadow: const [],
-              selectedTextStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.pink[900],
+          Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.01),
+            child: GroupButton(
+              controller: controllerGroupButton,
+              options: GroupButtonOptions(
+                selectedShadow: const [
+                  BoxShadow(
+                      color: Colors.black38, spreadRadius: 0, blurRadius: 8),
+                ],
+                selectedTextStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.pink[900],
+                ),
+                selectedColor: Colors.pink[100],
+                unselectedShadow: const [],
+                unselectedColor: Colors.amber[100],
+                unselectedTextStyle: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.amber[900],
+                ),
+                selectedBorderColor: Colors.pink[900],
+                unselectedBorderColor: Colors.amber[900],
+                borderRadius: BorderRadius.circular(100),
+                spacing: 10,
+                runSpacing: 10,
+                groupingType: GroupingType.wrap,
+                direction: Axis.horizontal,
+                buttonHeight: 60,
+                buttonWidth: 60,
+                mainGroupAlignment: MainGroupAlignment.center,
+                crossGroupAlignment: CrossGroupAlignment.start,
+                groupRunAlignment: GroupRunAlignment.start,
+                textAlign: TextAlign.center,
+                textPadding: EdgeInsets.zero,
+                alignment: Alignment.center,
+                elevation: 0,
               ),
-              selectedColor: Colors.pink[100],
-              unselectedShadow: const [],
-              unselectedColor: Colors.amber[100],
-              unselectedTextStyle: TextStyle(
-                fontSize: 20,
-                color: Colors.amber[900],
-              ),
-              selectedBorderColor: Colors.pink[900],
-              unselectedBorderColor: Colors.amber[900],
-              borderRadius: BorderRadius.circular(100),
-              spacing: 10,
-              runSpacing: 10,
-              groupingType: GroupingType.wrap,
-              direction: Axis.horizontal,
-              buttonHeight: 60,
-              buttonWidth: 60,
-              mainGroupAlignment: MainGroupAlignment.start,
-              crossGroupAlignment: CrossGroupAlignment.start,
-              groupRunAlignment: GroupRunAlignment.start,
-              textAlign: TextAlign.center,
-              textPadding: EdgeInsets.zero,
-              alignment: Alignment.center,
-              elevation: 0,
+              isRadio: false,
+              onSelected: (string, index, isSelected) {
+                print('$index  $string button is $isSelected');
+                setState(() {
+                  list_choose.add(string);
+                  _controller.text += string;
+                });
+              },
+              buttons: list_no_order,
             ),
-            isRadio: false,
-            onSelected: (string, index, isSelected) {
-              print('$index  $string button is $isSelected');
-              setState(() {
-                list_choose.add(string);
-                _controller.text += string;
-              });
-            },
-            buttons: list_no_order,
           ),
           const SizedBox(
             height: 32,

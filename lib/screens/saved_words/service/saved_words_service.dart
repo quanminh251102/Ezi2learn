@@ -11,8 +11,8 @@ class SavedWordsService {
   }
 
   static Future<List<SavedWordsModel>> Read() async {
-    User user = FirebaseAuth.instance.currentUser!;
-    String id = user.uid;
+    User? user = FirebaseAuth.instance.currentUser;
+    String id = user!.uid;
 
     QuerySnapshot<Map<String, dynamic>> snapshot =
         await db.collection(name).get();
