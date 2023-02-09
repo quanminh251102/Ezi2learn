@@ -52,32 +52,41 @@ class _FlashCardState extends State<FlashCard> {
                   child: Image.network(widget.vocabulary.image),
                 ),
               ),
-              Text(
-                widget.vocabulary.text,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold),
+              Material(
+                child: Text(
+                  widget.vocabulary.text,
+                  style: const TextStyle(
+                      fontFamily: 'Intel',
+                      color: Colors.black,
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(
                 height: 5,
               ),
-              Text(
-                widget.vocabulary.spelling,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.normal),
+              Material(
+                child: Text(
+                  widget.vocabulary.spelling,
+                  style: const TextStyle(
+                      fontFamily: 'Intel',
+                      color: Colors.black,
+                      fontSize: 18,
+                      fontWeight: FontWeight.normal),
+                ),
               ),
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                widget.vocabulary.meaning,
-                style: const TextStyle(
-                    color: Colors.black,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold),
+              Material(
+                child: Text(
+                  widget.vocabulary.meaning,
+                  style: const TextStyle(
+                      fontFamily: 'Intel',
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
               const SizedBox(
                 height: 30,
