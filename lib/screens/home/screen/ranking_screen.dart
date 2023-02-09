@@ -89,7 +89,7 @@ class _RankingScreenState extends State<RankingScreen> {
               width: MediaQuery.of(context).size.width * 0.7,
             ),
             Positioned(
-              top: 100,
+              top: 150,
               left: 0,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
@@ -120,19 +120,29 @@ class _RankingScreenState extends State<RankingScreen> {
                                     : list[1].avatarUrl)
                                 : 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
                           )),
-                      SizedBox(
+                      const SizedBox(
                         height: 8,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: const Color(0xffDBF9F8),
-                          borderRadius: BorderRadius.circular(15),
+                      Material(
+                        borderRadius: BorderRadius.circular(15),
+                        elevation: 4,
+                        color: Colors.transparent,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.lightBlue.withOpacity(0.8),
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                (list.length >= 2
+                                    ? '${list[1].gmail.substring(0, 6)}...'
+                                    : '???'),
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white),
+                              )),
                         ),
-                        child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Text((list.length >= 2
-                                ? '${list[1].gmail.substring(0, 6)}...'
-                                : '???'))),
                       ),
                       // Text(
                       //   (list.length >= 2
@@ -142,7 +152,7 @@ class _RankingScreenState extends State<RankingScreen> {
                       // ),
                     ],
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 13,
                   ),
                   Column(children: [
@@ -158,19 +168,29 @@ class _RankingScreenState extends State<RankingScreen> {
                                   : list[0].avatarUrl)
                               : 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xffDBF9F8),
-                        borderRadius: BorderRadius.circular(15),
+                    Material(
+                      borderRadius: BorderRadius.circular(15),
+                      elevation: 4,
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.yellow.shade600,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              (list.isNotEmpty
+                                  ? '${list[0].gmail.substring(0, 6)}...'
+                                  : '???'),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            )),
                       ),
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text((list.isNotEmpty
-                              ? '${list[0].gmail.substring(0, 6)}...'
-                              : '???'))),
                     ),
                     // Text(
                     //   (list.isNotEmpty
@@ -179,7 +199,7 @@ class _RankingScreenState extends State<RankingScreen> {
                     //   style: const TextStyle(fontSize: 13),
                     // ),
                   ]),
-                  SizedBox(
+                  const SizedBox(
                     width: 15,
                   ),
                   Column(children: [
@@ -195,19 +215,29 @@ class _RankingScreenState extends State<RankingScreen> {
                                   : list[2].avatarUrl)
                               : 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
                         )),
-                    SizedBox(
+                    const SizedBox(
                       height: 8,
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                        color: const Color(0xffDBF9F8),
-                        borderRadius: BorderRadius.circular(15),
+                    Material(
+                      borderRadius: BorderRadius.circular(15),
+                      elevation: 4,
+                      color: Colors.transparent,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.purple.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              (list.length >= 3
+                                  ? '${list[2].gmail.substring(0, 6)}...'
+                                  : '???'),
+                              style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white),
+                            )),
                       ),
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text((list.length >= 3
-                              ? '${list[2].gmail.substring(0, 6)}...'
-                              : '???'))),
                     ),
                     // Text(
                     //   (list.length >= 3
@@ -233,218 +263,106 @@ class _RankingScreenState extends State<RankingScreen> {
             ),
           ],
         ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.center,
-        //   children: <Widget>[
-        //     // CircleAvatar(
-        //     //               radius: 140,
-        //     //               backgroundImage: NetworkImage(
-        //     //                 (detailUserModels_normal?[0].avatarUrl == '')
-        //     //                     ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-        //     //                     : detailUserModels_normal?[0].avatarUrl ?? '',
-        //     //               )),
-        //     Visibility(
-        //       visible: (list.length >= 2) ? true : false,
-        //       child: Column(
-        //         children: [
-        //           const SizedBox(
-        //             height: 20,
-        //           ),
-        //           CircleAvatar(
-        //               radius: 30,
-        //               backgroundImage: NetworkImage(
-        //                 list.length >= 2
-        //                     ? (list[1].avatarUrl == ''
-        //                         ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-        //                         : list[1].avatarUrl)
-        //                     : 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
-        //               )),
-        //           Text(
-        //             (list.length >= 2
-        //                 ? '${list[1].gmail.substring(0, 6)}...'
-        //                 : '???'),
-        //             style: const TextStyle(fontSize: 13),
-        //           ),
-        //           const SizedBox(
-        //             height: 20,
-        //           ),
-        //           Container(
-        //             width: 60,
-        //             height: 65,
-        //             color: Colors.yellow,
-        //             child: const Center(
-        //                 child: Text(
-        //               '2',
-        //               style: TextStyle(
-        //                   fontSize: 20,
-        //                   color: Colors.white,
-        //                   fontWeight: FontWeight.w700),
-        //             )),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-
-        //     const SizedBox(
-        //       width: 24,
-        //     ),
-        //     Visibility(
-        //       visible: (list.isNotEmpty) ? true : false,
-        //       child: Column(
-        //         children: [
-        //           CircleAvatar(
-        //               radius: 30,
-        //               backgroundImage: NetworkImage(
-        //                 list.isNotEmpty
-        //                     ? (list[0].avatarUrl == ''
-        //                         ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-        //                         : list[0].avatarUrl)
-        //                     : 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
-        //               )),
-        //           Text(
-        //             (list.isNotEmpty
-        //                 ? '${list[0].gmail.substring(0, 6)}...'
-        //                 : '???'),
-        //             style: const TextStyle(fontSize: 13),
-        //           ),
-        //           const SizedBox(
-        //             height: 15,
-        //           ),
-        //           Container(
-        //             width: 64,
-        //             height: 90,
-        //             color: Colors.yellow,
-        //             child: const Center(
-        //                 child: Text(
-        //               '1',
-        //               style: TextStyle(
-        //                   fontSize: 20,
-        //                   color: Colors.white,
-        //                   fontWeight: FontWeight.w900),
-        //             )),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //     const SizedBox(
-        //       width: 24,
-        //     ),
-        //     Visibility(
-        //       visible: (list.length >= 3) ? true : false,
-        //       child: Column(
-        //         children: [
-        //           const SizedBox(
-        //             height: 50,
-        //           ),
-        //           CircleAvatar(
-        //               radius: 30,
-        //               backgroundImage: NetworkImage(
-        //                 list.length >= 3
-        //                     ? (list[2].avatarUrl == ''
-        //                         ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-        //                         : list[2].avatarUrl)
-        //                     : 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528',
-        //               )),
-        //           Text(
-        //             (list.length >= 3
-        //                 ? '${list[2].gmail.substring(0, 6)}...'
-        //                 : '???'),
-        //             style: const TextStyle(fontSize: 13),
-        //           ),
-        //           const SizedBox(
-        //             height: 20,
-        //           ),
-        //           Container(
-        //             width: 60,
-        //             height: 36,
-        //             color: Colors.yellow,
-        //             child: const Center(
-        //                 child: Text(
-        //               '3',
-        //               style: TextStyle(
-        //                   fontSize: 20,
-        //                   color: Colors.white,
-        //                   fontWeight: FontWeight.w700),
-        //             )),
-        //           ),
-        //         ],
-        //       ),
-        //     ),
-        //   ],
-        // ),
-        // const SizedBox(
-        //   height: 24,
-        // ),
         Padding(
-          padding: const EdgeInsets.fromLTRB(10, 0, 10, 10),
-          child: CustomCard(
-            elevation: 15,
-            height: 440,
-            borderRadius: 15,
-            color: Colors.white,
-            child: (list.isEmpty)
-                ? const Center(
-                    child: Text('Danh sách trống'),
-                  )
-                : ListView(children: [
-                    for (int i = 0; i < list.length; i++) ...{
-                      ListTile(
-                        title: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 15.0),
-                              child: Text(
-                                (i + 1).toString(),
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 15.0),
-                              child: CircleAvatar(
-                                radius: 20,
-                                backgroundImage: NetworkImage((list[i]
-                                            .avatarUrl ==
-                                        "")
-                                    ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
-                                    : list[i].avatarUrl),
-                              ),
-                            ),
-                            currentUser?.uid.toString() == list[i].userId
-                                ? Align(
-                                    alignment: Alignment.centerLeft,
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 10),
+          child: (list.isEmpty)
+              ? const Center(
+                  child: Text('Danh sách trống'),
+                )
+              : Expanded(
+                  child: ListView(
+                      scrollDirection: Axis.vertical,
+                      physics: const ScrollPhysics(),
+                      shrinkWrap: true,
+                      children: [
+                        for (int i = 0; i < list.length; i++) ...{
+                          CustomCard(
+                            color: (i == 0)
+                                ? Colors.red
+                                : (i == 1)
+                                    ? Colors.yellow
+                                    : (i == 2)
+                                        ? Colors.blue
+                                        : Colors.white,
+                            borderRadius: 15,
+                            child: ListTile(
+                              title: Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 15.0),
                                     child: Text(
-                                      '${list[i].gmail.substring(0, 6)}... (You)',
-                                      style: const TextStyle(
-                                          color: Colors.blue,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold),
-                                    ))
-                                : Align(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text(
-                                      '${list[i].gmail.substring(0, 6)}...',
+                                      (i + 1).toString(),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 20,
+                                          color:  (i == 0)
+                                ? Colors.red.shade100
+                                : (i == 1)
+                                    ? Colors.yellow.shade100
+                                    : (i == 2)
+                                        ? Colors.blue.shade100
+                                        : Colors.black,
+                                          ),
                                     ),
-                                  )
-                          ],
-                        ),
-                        trailing: Container(
-                          decoration: BoxDecoration(
-                            color: const Color(0xffDBF9F8),
-                            borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 15.0),
+                                    child: CircleAvatar(
+                                      radius: 20,
+                                      backgroundImage: NetworkImage((list[i]
+                                                  .avatarUrl ==
+                                              "")
+                                          ? 'https://i0.wp.com/post.medicalnewstoday.com/wp-content/uploads/sites/3/2020/03/GettyImages-1092658864_hero-1024x575.jpg?w=1155&h=1528'
+                                          : list[i].avatarUrl),
+                                    ),
+                                  ),
+                                  currentUser?.uid.toString() == list[i].userId
+                                      ? Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            '${list[i].gmail.substring(0, 6)}... (You)',
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                            ),
+                                          ))
+                                      : Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text(
+                                            '${list[i].gmail.substring(0, 6)}...',
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 18,
+                                            ),
+                                          ),
+                                        )
+                                ],
+                              ),
+                              trailing: Container(
+                                decoration: BoxDecoration(
+                                  color:  (i == 0)
+                                ? Colors.red.shade100
+                                : (i == 1)
+                                    ? Colors.yellow.shade100
+                                    : (i == 2)
+                                        ? Colors.blue.shade100
+                                        : const Color(0xffDBF9F8),
+                                  
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text('${list_point[i]} points')),
+                              ),
+                            ),
                           ),
-                          child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text('${list_point[i]} points')),
-                        ),
-                      ),
-                      Container(
-                        color: Colors.grey.shade300,
-                        height: 1,
-                      ),
-                    }
-                  ]),
-          ),
+                          Container(
+                            color: Colors.white,
+                            height: 5,
+                          ),
+                        }
+                      ]),
+                ),
         ),
       ]),
     );
