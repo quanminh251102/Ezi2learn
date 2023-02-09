@@ -68,7 +68,7 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                   children: [
                     const Spacer(),
                     SizedBox(
-                      width: 280,
+                      width: 300,
                       child: Column(
                         children: const [
                           Text(
@@ -88,61 +88,29 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                       ),
                     ),
                     const Spacer(flex: 2),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            shape: const StadiumBorder(),
-                            minimumSize: Size(
-                              200,
-                              50,
-                            )),
-                        onPressed: () {
-                          _btnAnimationController.isActive = true;
+                    AnimatedBtn(
+                      btnAnimationController: _btnAnimationController,
+                      press: () {
+                        _btnAnimationController.isActive = true;
 
-                          Future.delayed(
-                            const Duration(milliseconds: 800),
-                            () {
-                              setState(() {
-                                isShowSignInDialog = true;
-                              });
-                              showsignInDialog(
-                                context,
-                                onValue: (_) {
-                                  setState(() {
-                                    isShowSignInDialog = false;
-                                  });
-                                },
-                              );
-                            },
-                          );
-                        },
-                        child: Text(
-                          'Bắt đầu',
-                          style: TextStyle(color: Colors.black),
-                        )),
-                    // AnimatedBtn(
-                    //   btnAnimationController: _btnAnimationController,
-                    //   press: () {
-                    //     _btnAnimationController.isActive = true;
-
-                    //     Future.delayed(
-                    //       const Duration(milliseconds: 800),
-                    //       () {
-                    //         setState(() {
-                    //           isShowSignInDialog = true;
-                    //         });
-                    //         showsignInDialog(
-                    //           context,
-                    //           onValue: (_) {
-                    //             setState(() {
-                    //               isShowSignInDialog = false;
-                    //             });
-                    //           },
-                    //         );
-                    //       },
-                    //     );
-                    //   },
-                    // ),
+                        Future.delayed(
+                          const Duration(milliseconds: 800),
+                          () {
+                            setState(() {
+                              isShowSignInDialog = true;
+                            });
+                            showsignInDialog(
+                              context,
+                              onValue: (_) {
+                                setState(() {
+                                  isShowSignInDialog = false;
+                                });
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 24),
                       child: Text(

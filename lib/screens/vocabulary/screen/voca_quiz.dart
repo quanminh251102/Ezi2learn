@@ -192,14 +192,9 @@ class _VocaQuizState extends State<VocaQuiz> {
       ),
       child: Scaffold(
         appBar: AppBar(
-          flexibleSpace: Container(
-              decoration: const BoxDecoration(
-                  gradient: LinearGradient(
-                      colors: [Color(0xffDBF9F8), Color(0xffFFDA2C)],
-                      begin: Alignment.bottomRight,
-                      end: Alignment.topLeft))),
+          centerTitle: true,
           backgroundColor: Colors.white,
-          elevation: 5,
+          elevation: 0,
           title: const Text(
             'Vocabulary Quiz',
             style: TextStyle(

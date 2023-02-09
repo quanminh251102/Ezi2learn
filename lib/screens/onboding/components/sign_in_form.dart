@@ -193,10 +193,10 @@ class _SignInFormState extends State<SignInForm> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset("assets/icons/email.svg"),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Icon(Icons.email),
                     ),
                   ),
                 ),
@@ -222,10 +222,10 @@ class _SignInFormState extends State<SignInForm> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset("assets/icons/password.svg"),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Icon(Icons.lock),
                     ),
                   ),
                 ),
@@ -237,7 +237,7 @@ class _SignInFormState extends State<SignInForm> {
                     singIn(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow.shade500,
+                    backgroundColor: Color.fromARGB(255, 232, 239, 35),
                     minimumSize: const Size(double.infinity, 56),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -252,7 +252,10 @@ class _SignInFormState extends State<SignInForm> {
                     CupertinoIcons.arrow_right,
                     color: Colors.white,
                   ),
-                  label: const Text("Đăng nhập"),
+                  label: const Text(
+                    "Đăng nhập",
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                  ),
                 ),
               ),
               Row(
@@ -277,7 +280,7 @@ class _SignInFormState extends State<SignInForm> {
                 padding: EdgeInsets.symmetric(vertical: paddingTop1),
                 child: const Center(
                   child: Text(
-                    "Đăng nhập bằng Gmail",
+                    "Đăng nhập với Google",
                     style: TextStyle(color: Colors.black54),
                   ),
                 ),
@@ -287,12 +290,8 @@ class _SignInFormState extends State<SignInForm> {
                   onPressed: () {
                     signinwithGoogle(context);
                   },
-                  padding: EdgeInsets.zero,
-                  icon: SvgPicture.asset(
-                    "assets/icons/google_box.svg",
-                    height: 64,
-                    width: 64,
-                  ),
+                  padding: EdgeInsets.all(8),
+                  icon: Image.asset('assets/icons/google.png')
                 ),
               ),
               Padding(

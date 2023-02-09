@@ -175,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   width: 110,
                   padding: EdgeInsets.fromLTRB(20, 14, 30, 0),
                   child: Text(
-                    'BirthDay',
+                    'Birthday',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
@@ -385,7 +385,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 10),
 
               CustomCard(
-                childPadding: 24,
+                childPadding: 8,
                 borderRadius: 12,
                 color: Color(0xffdbf9f8),
                 child: groupTextField,

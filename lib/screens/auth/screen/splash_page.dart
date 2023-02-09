@@ -41,10 +41,10 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.white,
       body: AnimatedSplashScreen(
         splashIconSize: 250,
-        //duration: 4000,
+        // duration: 100000000,
         //splashTransition: SplashTransition.slideTransition,
         backgroundColor: Colors.white,
-        nextScreen: OnbodingScreen(),
+        nextScreen: const OnbodingScreen(),
         splash: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[

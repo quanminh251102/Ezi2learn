@@ -76,6 +76,7 @@ class MainPage extends StatelessWidget {
               return SplashScreen();
             }
           }),
+      // body: SplashScreen(),
     );
   }
 }

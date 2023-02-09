@@ -143,10 +143,10 @@ class _SignUpFormState extends State<SignUpForm> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset("assets/icons/email.svg"),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Icon(Icons.email),
                     ),
                   ),
                 ),
@@ -174,10 +174,10 @@ class _SignUpFormState extends State<SignUpForm> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset("assets/icons/password.svg"),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Icon(Icons.lock),
                     ),
                   ),
                 ),
@@ -205,10 +205,10 @@ class _SignUpFormState extends State<SignUpForm> {
                     }
                     return null;
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: SvgPicture.asset("assets/icons/password.svg"),
+                      padding: EdgeInsets.symmetric(horizontal: 8),
+                      child: Icon(Icons.lock),
                     ),
                   ),
                 ),
@@ -220,7 +220,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     signUp(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow.shade500,
+                    backgroundColor: Color.fromARGB(255, 232, 239, 35),
                     minimumSize: const Size(double.infinity, 56),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
