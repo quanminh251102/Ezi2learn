@@ -299,7 +299,7 @@ class _TimelineStepIndicator extends StatelessWidget {
             step,
             style: GoogleFonts.architectsDaughter(
               fontSize: 22,
-              color: Colors.white,
+              color: Colors.black,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -347,7 +347,7 @@ class _TimelineStepsChild extends StatelessWidget {
             textAlign: isLeftAlign ? TextAlign.right : TextAlign.left,
             style: GoogleFonts.architectsDaughter(
               fontSize: 16,
-              color: const Color(0xffFFDA2C),
+              color: Colors.black,
             ),
           ),
         ],
@@ -366,20 +366,26 @@ class _Header extends StatelessWidget {
         color: Colors.white.withOpacity(0.5),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
       ),
-      child: Row(
-        children: <Widget>[
-          Expanded(
+      child: FittedBox(
+        fit: BoxFit.contain,
+        child: Container(
+          decoration: BoxDecoration(
+              color: const Color(0xffFFDA2C),
+              borderRadius: BorderRadius.circular(5),
+              border: Border.all(width: 2, color: Colors.black)),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
             child: Text(
               '12 Tenses In English',
               textAlign: TextAlign.center,
               style: GoogleFonts.architectsDaughter(
                 fontSize: 26,
-                color: const Color(0xffFFDA2C),
+                color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
           ),
-        ],
+        ),
       ),
     );
   }
