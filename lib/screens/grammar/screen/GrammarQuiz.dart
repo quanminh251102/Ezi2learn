@@ -175,8 +175,8 @@ class _GrammarQuizState extends State<GrammarQuiz> {
     }
 
     init_quiz();
-    playerBackGround.play(AssetSource("audio/countdown.mp3"));
-    playerBackGround.setReleaseMode(ReleaseMode.loop);
+    // playerBackGround.play(AssetSource("audio/countdown.mp3"));
+    // playerBackGround.setReleaseMode(ReleaseMode.loop);
   }
 
   void init_quiz() {

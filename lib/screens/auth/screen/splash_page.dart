@@ -55,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       // color: Colors.amber,
                       height: screenSize.height * 0.3,
                       width: screenSize.width * 0.5,
-                      child: Image.asset('assets/icons/phuong_icon.jpg')),
+                      child: Image.asset('assets/icons/joy.png')),
                 ],
               )
             ]),

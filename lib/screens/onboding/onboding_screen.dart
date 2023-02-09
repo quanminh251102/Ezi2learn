@@ -72,7 +72,7 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                       child: Column(
                         children: const [
                           Text(
-                            "Ezi2learn is here for you!",
+                            "Joy English is here for you!",
                             style: TextStyle(
                               fontSize: 60,
                               fontWeight: FontWeight.w700,
@@ -88,29 +88,61 @@ class _OnbodingScreenState extends State<OnbodingScreen> {
                       ),
                     ),
                     const Spacer(flex: 2),
-                    AnimatedBtn(
-                      btnAnimationController: _btnAnimationController,
-                      press: () {
-                        _btnAnimationController.isActive = true;
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.white,
+                            shape: const StadiumBorder(),
+                            minimumSize: Size(
+                              200,
+                              50,
+                            )),
+                        onPressed: () {
+                          _btnAnimationController.isActive = true;
 
-                        Future.delayed(
-                          const Duration(milliseconds: 800),
-                          () {
-                            setState(() {
-                              isShowSignInDialog = true;
-                            });
-                            showsignInDialog(
-                              context,
-                              onValue: (_) {
-                                setState(() {
-                                  isShowSignInDialog = false;
-                                });
-                              },
-                            );
-                          },
-                        );
-                      },
-                    ),
+                          Future.delayed(
+                            const Duration(milliseconds: 800),
+                            () {
+                              setState(() {
+                                isShowSignInDialog = true;
+                              });
+                              showsignInDialog(
+                                context,
+                                onValue: (_) {
+                                  setState(() {
+                                    isShowSignInDialog = false;
+                                  });
+                                },
+                              );
+                            },
+                          );
+                        },
+                        child: Text(
+                          'Bắt đầu',
+                          style: TextStyle(color: Colors.black),
+                        )),
+                    // AnimatedBtn(
+                    //   btnAnimationController: _btnAnimationController,
+                    //   press: () {
+                    //     _btnAnimationController.isActive = true;
+
+                    //     Future.delayed(
+                    //       const Duration(milliseconds: 800),
+                    //       () {
+                    //         setState(() {
+                    //           isShowSignInDialog = true;
+                    //         });
+                    //         showsignInDialog(
+                    //           context,
+                    //           onValue: (_) {
+                    //             setState(() {
+                    //               isShowSignInDialog = false;
+                    //             });
+                    //           },
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    // ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 24),
                       child: Text(
