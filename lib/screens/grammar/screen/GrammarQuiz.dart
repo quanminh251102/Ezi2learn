@@ -175,8 +175,8 @@ class _GrammarQuizState extends State<GrammarQuiz> {
     }
 
     init_quiz();
-    playerBackGround.play(AssetSource("audio/countdown.mp3"));
-    playerBackGround.setReleaseMode(ReleaseMode.loop);
+    // playerBackGround.play(AssetSource("audio/countdown.mp3"));
+    // playerBackGround.setReleaseMode(ReleaseMode.loop);
   }
 
   void init_quiz() {
@@ -494,8 +494,7 @@ class _GrammarQuizState extends State<GrammarQuiz> {
                   setState(() {
                     _isStartQuiz = !_isStartQuiz;
                   });
-                  playerBackGround
-                      .play(AssetSource("audio/background_quiz.mp3"));
+                  playerBackGround.play(AssetSource("audio/background.mp3"));
                   playerBackGround.setReleaseMode(ReleaseMode.loop);
                 },
                 onChange: (String timeStamp) {

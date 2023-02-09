@@ -46,6 +46,7 @@ class _SignUpFormState extends State<SignUpForm> {
 
     confetti = controller.findInput<bool>("Trigger explosion") as SMITrigger;
   }
+
   void signUp(BuildContext context) {
     // confetti.fire();
     setState(() {
@@ -85,8 +86,8 @@ class _SignUpFormState extends State<SignUpForm> {
             );
           } on FirebaseAuthException catch (e) {
             ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('$e')),
-          );
+              SnackBar(content: Text('$e')),
+            );
             error.fire();
             Future.delayed(
               const Duration(seconds: 2),
@@ -219,7 +220,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     signUp(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFFF77D8E),
+                    backgroundColor: Colors.yellow.shade500,
                     minimumSize: const Size(double.infinity, 56),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -232,7 +233,7 @@ class _SignUpFormState extends State<SignUpForm> {
                   ),
                   icon: const Icon(
                     CupertinoIcons.arrow_right,
-                    color: Color(0xFFFE0037),
+                    color: Colors.white,
                   ),
                   label: const Text("Đăng ký"),
                 ),
@@ -370,7 +371,7 @@ void showsignUpDialog(BuildContext context, {required ValueChanged onValue}) {
                             fontWeight: FontWeight.normal, color: Colors.black),
                         children: <TextSpan>[
                           TextSpan(
-                              text: 'Ezi2learn',
+                              text: 'JoyEnglish',
                               style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   color: Colors.black)),
