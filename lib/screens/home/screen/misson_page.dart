@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:rive_animation/screens/auth/widget/social_icon.dart';
 import 'package:rive_animation/screens/game/screen/game_list_screen.dart';
 import 'package:rive_animation/screens/grammar/screen/GrammarMain.dart';
 import 'package:rive_animation/screens/vocabulary/screen/voca_topic.dart';

@@ -1,10 +1,6 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
-import 'package:rive_animation/screens/onboding/components/sign_in_form.dart';
 
 class VerificationForm extends StatefulWidget {
   final void verification;
@@ -64,7 +60,7 @@ class _VerificationFormState extends State<VerificationForm> {
               child: ElevatedButton.icon(
                 onPressed: () => widget.verification,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.yellow.shade100,
+                  backgroundColor: const Color.fromARGB(255, 232, 239, 35),
                   minimumSize: const Size(double.infinity, 56),
                   shape: const RoundedRectangleBorder(
                     borderRadius: BorderRadius.only(

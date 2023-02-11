@@ -2,11 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
 import 'package:rive_animation/main.dart';
 import 'package:rive_animation/screens/onboding/components/sign_up_form.dart';
-import 'package:rive_animation/screens/onboding/components/verification_form.dart';
 
 import '../../auth/service/auth_service.dart';
 
@@ -237,7 +235,7 @@ class _SignInFormState extends State<SignInForm> {
                     singIn(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 232, 239, 35),
+                    backgroundColor: const Color.fromARGB(255, 232, 239, 35),
                     minimumSize: const Size(double.infinity, 56),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
@@ -290,7 +288,7 @@ class _SignInFormState extends State<SignInForm> {
                   onPressed: () {
                     signinwithGoogle(context);
                   },
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   icon: Image.asset('assets/icons/google.png')
                 ),
               ),

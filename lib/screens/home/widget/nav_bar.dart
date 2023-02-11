@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:rive_animation/screens/auth/service/auth_service.dart';
-import 'package:rive_animation/screens/home/screen/profile_page.dart';
 
 import '../models/detail_user_model.dart';
 import '../service/detail_user_service.dart';

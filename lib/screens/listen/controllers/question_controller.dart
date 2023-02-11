@@ -126,6 +126,7 @@ class QuestionController extends GetxController
     } else {
       // Get package provide us simple way to naviigate another page
       Get.to(() => const ScoreScreen());
+      Get.reset();
     }
   }
 

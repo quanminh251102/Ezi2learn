@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:rive_animation/screens/auth/screen/splash_page.dart';
 import 'package:rive_animation/screens/home/screen/home_page.dart';
 
 import '../../onboding/components/verification_form.dart';
@@ -80,7 +79,12 @@ class _VerificationScreenState extends State<VerificationScreen> {
             backgroundColor: Colors.white,
             elevation: 0,
             leading: GestureDetector(
-              onTap: () => Navigator.pop(context),
+              onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const SplashScreen(),
+                ),
+              ),
               child: const Icon(
                 Icons.arrow_back_ios_rounded,
                 color: Colors.black,

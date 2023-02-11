@@ -61,7 +61,9 @@ class DetailUserService {
     }
 
     if (allList.length > 1) {
-      for (int i = 1; i < allList.length; i++) await Delete(allList[i].id);
+      for (int i = 1; i < allList.length; i++) {
+        await Delete(allList[i].id);
+      }
     }
     print(allList[0].toJson());
     return allList;

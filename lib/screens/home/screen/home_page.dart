@@ -9,7 +9,6 @@ import 'package:rive_animation/screens/home/screen/ranking_screen.dart';
 import 'package:rive_animation/screens/home/service/achievenment_service.dart';
 import 'package:rive_animation/screens/home/service/detail_user_service.dart';
 import 'package:rive_animation/screens/saved_words/screen/saved_words_screen.dart';
-import '../widget/nav_bar.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -120,7 +119,7 @@ class _HomePageState extends State<HomePage> {
             children: <Widget>[
               Column(
                 children: [
-                  Text(
+                  const Text(
                     'Welcome Home,                       .',
                     textAlign: TextAlign.left,
                     style: TextStyle(color: Colors.black, fontSize: 15),
@@ -129,7 +128,7 @@ class _HomePageState extends State<HomePage> {
                     detailUserModels.isNotEmpty
                         ? detailUserModels[0].gmail
                         : "???",
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.w700,

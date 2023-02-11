@@ -24,7 +24,7 @@ class _GameListScreenState extends State<GameListScreen> {
 
   @override
   Widget build(BuildContext context) {
-    Offset distance = isPressed ? Offset(1, 1) : Offset(4, 4);
+    Offset distance = isPressed ? const Offset(1, 1) : const Offset(4, 4);
     double blur = isPressed ? 5 : 10;
     List<String> url = [
       'assets/images/game1.png',
@@ -74,14 +74,14 @@ class _GameListScreenState extends State<GameListScreen> {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 10.0, right: 0),
+                      padding: const EdgeInsets.only(left: 10.0, right: 0),
                       child: Text(title,
                           style: const TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.bold,
                               fontSize: 25)),
                     ),
-                    Spacer(),
+                    const Spacer(),
                     GestureDetector(
                       onTap: () => setState(() {
                         isPressed = !isPressed;
@@ -194,8 +194,8 @@ class _GameListScreenState extends State<GameListScreen> {
                               fontWeight: FontWeight.bold)),
                     ],
                   ),
-                  Spacer(),
-                  Container(
+                  const Spacer(),
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.15,
                     width: MediaQuery.of(context).size.width * 0.3,
                     child: Image.asset(

@@ -165,7 +165,7 @@ class _VocaMainScreenState extends State<VocaMainScreen> {
                                             pagination:
                                                 const SwiperPagination(
                                                     margin: EdgeInsets.only(
-                                                        bottom: 40)),
+                                                        bottom: 10)),
                                             viewportFraction: 0.6,
                                             scale: 0.8,
                                             controller: controller,

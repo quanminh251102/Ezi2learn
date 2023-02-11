@@ -1,8 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 
 class ChangePassWordScreen extends StatefulWidget {
   const ChangePassWordScreen({super.key});
@@ -29,7 +26,7 @@ class _ChangePassWordScreenState extends State<ChangePassWordScreen> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Change password',
           style: TextStyle(
               fontWeight: FontWeight.w700, fontSize: 24, color: Colors.black),
@@ -45,12 +42,12 @@ class _ChangePassWordScreenState extends State<ChangePassWordScreen> {
         ),
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
+        padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             SizedBox(
@@ -83,7 +80,7 @@ class _ChangePassWordScreenState extends State<ChangePassWordScreen> {
                     )),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             SizedBox(
@@ -116,7 +113,7 @@ class _ChangePassWordScreenState extends State<ChangePassWordScreen> {
                     )),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 16,
             ),
             SizedBox(
@@ -149,7 +146,7 @@ class _ChangePassWordScreenState extends State<ChangePassWordScreen> {
                     )),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 32,
             ),
             ElevatedButton(
@@ -165,7 +162,7 @@ class _ChangePassWordScreenState extends State<ChangePassWordScreen> {
                   //     MaterialPageRoute(
                   //         builder: (context) => const MainPage()));
 
-                  var currentUser = await FirebaseAuth.instance.currentUser;
+                  var currentUser = FirebaseAuth.instance.currentUser;
                   await currentUser!
                       .updatePassword(newPassController.text.trim());
 
@@ -192,7 +189,7 @@ class _ChangePassWordScreenState extends State<ChangePassWordScreen> {
                     MediaQuery.of(context).size.width - 40,
                     50,
                   )),
-              child: Text(
+              child: const Text(
                 'Complete',
                 style: TextStyle(
                   color: Color.fromARGB(255, 87, 87, 87),

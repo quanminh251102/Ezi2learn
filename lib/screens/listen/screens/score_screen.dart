@@ -8,49 +8,7 @@ import '../../home/screen/home_page.dart' as NewHomePage;
 class ScoreScreen extends StatelessWidget {
   const ScoreScreen({super.key});
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   QuestionController _qnController = Get.put(QuestionController());
-  //   return Scaffold(
-  //     body: Center(
-  //       child: Column(
-  //         children: [
-  //           Spacer(flex: 3),
-  //           Text(
-  //             "Score",
-  //             // style: Theme.of(context)
-  //             //     .textTheme
-  //             //     .headline3
-  //             //     .copyWith(color: kSecondaryColor),
-  //             style: TextStyle(color: kSecondaryColor),
-  //           ),
-  //           Spacer(),
-  //           Text(
-  //             "${_qnController.numOfCorrectAns * 10}/${_qnController.questions.length * 10}",
-  //             // style: Theme.of(context)
-  //             //     .textTheme
-  //             //     .headline4
-  //             //     .copyWith(color: kSecondaryColor),
-  //             style: TextStyle(color: kSecondaryColor),
-  //           ),
-  //           Spacer(flex: 3),
-  //           ElevatedButton(
-  //             onPressed: () {
-  //               Navigator.push(
-  //                 context,
-  //                 MaterialPageRoute(
-  //                   builder: (context) => WelcomeScreen(),
-  //                 ),
-  //               );
-  //             },
-  //             child: Text('Trở về'),
-  //           )
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
-
+ 
   @override
   Widget build(BuildContext context) {
     QuestionController qnController = Get.put(QuestionController());

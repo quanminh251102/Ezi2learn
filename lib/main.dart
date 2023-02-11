@@ -5,9 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:rive_animation/screens/auth/screen/splash_page.dart';
 import 'package:rive_animation/screens/home/screen/verification_screen.dart';
-import 'package:rive_animation/screens/onboding/components/verification_form.dart';
-import 'package:rive_animation/screens/onboding/onboding_screen.dart';
-import 'screens/home/screen/home_page.dart' as NewHomePage;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -73,7 +70,7 @@ class MainPage extends StatelessWidget {
             } else if (snapshot.hasData) {
               return const VerificationScreen();
             } else {
-              return SplashScreen();
+              return const SplashScreen();
             }
           }),
       // body: SplashScreen(),

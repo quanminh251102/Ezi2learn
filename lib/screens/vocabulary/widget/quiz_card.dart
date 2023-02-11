@@ -61,7 +61,7 @@ class _QuizCardState extends State<QuizCard> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 10.0),
+                  padding: const EdgeInsets.symmetric(vertical: 25.0),
                   child: SpeakerButton(
                     text: widget.question.text,
                   ),

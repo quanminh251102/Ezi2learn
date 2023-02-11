@@ -2,9 +2,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:rive/rive.dart';
 import 'package:rive_animation/screens/onboding/components/sign_in_form.dart';
+
+import '../../../main.dart';
 
 class SignUpForm extends StatefulWidget {
   const SignUpForm({
@@ -56,11 +57,20 @@ class _SignUpFormState extends State<SignUpForm> {
 
     Future.delayed(
       const Duration(seconds: 1),
-      () {
+      () async {
         if (_formKey.currentState!.validate() &&
             passwordEditingController.text ==
                 passwordconfirmEditingController.text) {
           try {
+            await FirebaseAuth.instance
+                .createUserWithEmailAndPassword(
+                    email: emailEditingController.text,
+                    password: passwordEditingController.text)
+                .then((value) {
+              print("Created New Account");
+            }).onError((error, stackTrace) {
+              print("Error ${error.toString()}");
+            });
             success.fire();
             Future.delayed(
               const Duration(seconds: 2),
@@ -71,16 +81,12 @@ class _SignUpFormState extends State<SignUpForm> {
                 confetti.fire();
                 // Navigate & hide confetti
                 Future.delayed(const Duration(seconds: 1), () async {
-                  Navigator.pop(context);
-                  await FirebaseAuth.instance
-                      .createUserWithEmailAndPassword(
-                          email: emailEditingController.text,
-                          password: passwordEditingController.text)
-                      .then((value) {
-                    print("Created New Account");
-                  }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
-                  });
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const MainPage(),
+                    ),
+                  );
                 });
               },
             );
@@ -220,7 +226,7 @@ class _SignUpFormState extends State<SignUpForm> {
                     signUp(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromARGB(255, 232, 239, 35),
+                    backgroundColor: const Color.fromARGB(255, 232, 239, 35),
                     minimumSize: const Size(double.infinity, 56),
                     shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(

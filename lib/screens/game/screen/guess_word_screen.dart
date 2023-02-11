@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:group_button/group_button.dart';
 import 'package:rive_animation/screens/game/screen/game_list_screen.dart';
 import 'package:audioplayers/audioplayers.dart';

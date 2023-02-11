@@ -4,7 +4,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_cards/flutter_custom_cards.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:rive_animation/screens/home/models/detail_user_model.dart';
 import 'package:rive_animation/screens/home/screen/change_password_screen.dart';
@@ -12,7 +11,6 @@ import 'package:rive_animation/screens/home/service/detail_user_service.dart';
 import 'package:rive_animation/screens/home/service/storge_service.dart';
 import '../../../main.dart';
 import '../../auth/service/auth_service.dart';
-import '../utils/constants.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -144,7 +142,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       children: [
         Text(
           emailController.text,
-          style: TextStyle(
+          style: const TextStyle(
             fontWeight: FontWeight.w700,
             fontSize: 15,
           ),
@@ -173,17 +171,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 //prefixText: "text ",
                 prefixIcon: Container(
                   width: 110,
-                  padding: EdgeInsets.fromLTRB(20, 14, 30, 0),
-                  child: Text(
+                  padding: const EdgeInsets.fromLTRB(20, 14, 30, 0),
+                  child: const Text(
                     'Birthday',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
                 suffixIcon: Padding(
-                  padding: EdgeInsets.fromLTRB(12, 0, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(12, 0, 20, 0),
                   child: CustomCard(
                     borderRadius: 100,
-                    child: Icon(
+                    child: const Icon(
                       Icons.edit,
                       color: Colors.yellow,
                     ),
@@ -212,17 +210,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             decoration: InputDecoration(
                 prefixIcon: Container(
                   width: 110,
-                  padding: EdgeInsets.fromLTRB(20, 14, 30, 0),
-                  child: Text(
+                  padding: const EdgeInsets.fromLTRB(20, 14, 30, 0),
+                  child: const Text(
                     'Address',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
                 suffixIcon: Padding(
-                  padding: EdgeInsets.fromLTRB(12, 0, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(12, 0, 20, 0),
                   child: CustomCard(
                     borderRadius: 100,
-                    child: Icon(
+                    child: const Icon(
                       Icons.edit,
                       color: Colors.yellow,
                     ),
@@ -252,17 +250,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             decoration: InputDecoration(
                 prefixIcon: Container(
                   width: 110,
-                  padding: EdgeInsets.fromLTRB(20, 14, 30, 0),
-                  child: Text(
+                  padding: const EdgeInsets.fromLTRB(20, 14, 30, 0),
+                  child: const Text(
                     'Phone number',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
                 suffixIcon: Padding(
-                  padding: EdgeInsets.fromLTRB(12, 0, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(12, 0, 20, 0),
                   child: CustomCard(
                     borderRadius: 100,
-                    child: Icon(
+                    child: const Icon(
                       Icons.edit,
                       color: Colors.yellow,
                     ),
@@ -291,17 +289,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
             decoration: InputDecoration(
                 prefixIcon: Container(
                   width: 110,
-                  padding: EdgeInsets.fromLTRB(20, 14, 30, 0),
-                  child: Text(
+                  padding: const EdgeInsets.fromLTRB(20, 14, 30, 0),
+                  child: const Text(
                     'Gender',
                     style: TextStyle(color: Colors.blue),
                   ),
                 ),
                 suffixIcon: Padding(
-                  padding: EdgeInsets.fromLTRB(12, 0, 20, 0),
+                  padding: const EdgeInsets.fromLTRB(12, 0, 20, 0),
                   child: CustomCard(
                     borderRadius: 100,
-                    child: Icon(
+                    child: const Icon(
                       Icons.edit,
                       color: Colors.yellow,
                     ),
@@ -370,7 +368,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               //     fontSize: 24,
               //   ),
               // ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
 
@@ -385,9 +383,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 10),
 
               CustomCard(
-                childPadding: 8,
+                childPadding: 24,
                 borderRadius: 12,
-                color: Color(0xffdbf9f8),
+                color: const Color(0xffdbf9f8),
                 child: groupTextField,
               ),
               const SizedBox(
@@ -395,7 +393,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
               Visibility(
                   visible: isLoading,
-                  child: Center(
+                  child: const Center(
                     child: CircularProgressIndicator(),
                   )),
               Visibility(
@@ -471,14 +469,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       )),
                   child: Text(
                     isEdditing ? 'Save' : 'Change Password',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 87, 87, 87),
                       fontWeight: FontWeight.w700,
                     ),
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 16,
               ),
               ElevatedButton(
@@ -496,7 +494,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       MediaQuery.of(context).size.width - 40,
                       50,
                     )),
-                child: Text('Log out'),
+                child: const Text('Log out'),
               ),
             ],
           ),
