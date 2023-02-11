@@ -1,18 +1,22 @@
-# Animated App with Rive and Flutter
+<h1 align="center">Welcome to Joy English App 👋</h1>
+<p>
+</p>
 
-**Fonts**
+> Joy English App là một nền tảng học tiếng anh thông qua các hình thức gần gũi và dễ tiếp cận như học từ vựng qua FlashCard, luyện nói, luyện nghe, kiểm tra kiến thức thông qua các bài quiz và các trò chơi thú vị. 
 
-- Poppins [link](https://fonts.google.com/specimen/Poppins)
+### 🏠 [Homepage](https://github.com/quanminh251102/Ezi2learn)
 
-## [Watch it on YouTube](https://youtu.be/Td3xEWwRAQA)
+### ✨ [Demo](https://www.youtube.com/watch?v=sLYl3OGAEMA)
 
-Hello, welcome to my new Flutter series focused entirely on animation. This is the app we are planning to build. As you can see a beautiful background animation using shapes and blur. As well as a cool button animation. Once we tap on the sign-in button a loading animation shows. If there is any error it shows an error animation. It will load and have a success animation with confetti if everything is okay.
-Also on the bottom navigation bar, we have animated icons that really make your app design stand out more.
+## Author
 
-So, what is really surprising about this is that we're using animated assets, which means that these icon animations are not made in code. Instead, they're made in Rive which is a really cool animation tool that lets you create animated assets for your website, iOS, Android, and most importantly Flutter.
+👤 **Le Minh Quan, Nguyen Hoang Kiet**
 
-### Animated App with Rive and Flutter
+* Github: [@quanminh251102, kiet-kun](https://github.com/quanminh251102, kiet-kun)
 
-![Preview](/gif.gif)
+## Show your support
 
-![App UI](/ui.png)
+Give a ⭐️ if this project helped you!
+
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
