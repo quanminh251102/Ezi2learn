@@ -1,18 +1,33 @@
-# Animated App with Rive and Flutter
 
-**Fonts**
 
-- Poppins [link](https://fonts.google.com/specimen/Poppins)
+# Project Title : Ezi2learn
 
-## [Watch it on YouTube](https://youtu.be/Td3xEWwRAQA)
+English learning application for children.
 
-Hello, welcome to my new Flutter series focused entirely on animation. This is the app we are planning to build. As you can see a beautiful background animation using shapes and blur. As well as a cool button animation. Once we tap on the sign-in button a loading animation shows. If there is any error it shows an error animation. It will load and have a success animation with confetti if everything is okay.
-Also on the bottom navigation bar, we have animated icons that really make your app design stand out more.
+## Table of Contents
 
-So, what is really surprising about this is that we're using animated assets, which means that these icon animations are not made in code. Instead, they're made in Rive which is a really cool animation tool that lets you create animated assets for your website, iOS, Android, and most importantly Flutter.
+- [Project Title](#project-title)
+  - [Table of Contents](#table-of-contents)
+  - [Project Description](#project-description)
+  - [Member](#member)
+  - [Technology](#technology)
+  - [Features](#features)
 
-### Animated App with Rive and Flutter
+## Project Description
 
-![Preview](/gif.gif)
+Ezi2learn is an interactive and engaging mobile application designed to help young learners improve their English language skills. The application aims to make the language learning process fun, enjoyable, and accessible for children between the ages of 6 and 12.
 
-![App UI](/ui.png)
+## Member
+
+| Number | Name |
+| ------- | ----------- |
+| 1 | Le Minh Quan |
+| 2 | Nguyen Hoang Kiet |
+
+## Technology
+
+Flutter, Firebase
+
+## Features
+
+login, sign up, partice English (vocabulary, pronounce, listening, grammar),... 
